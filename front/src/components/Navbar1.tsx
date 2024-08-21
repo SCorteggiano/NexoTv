@@ -11,13 +11,14 @@ import {
 const Navbar1 = () => {
   return (
     <Navbar fluid className="bg-[#0e0e11]">
-      <NavbarBrand href="https://flowbite-react.com">
+      <NavbarBrand href="/">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           NexoTV
         </span>
       </NavbarBrand>
       <div className="flex md:order-2">
-        <Dropdown className="bg-[#0e0e11]"
+        <Dropdown
+          className="bg-[#0e0e11]"
           arrowIcon={false}
           inline
           label={<Avatar alt="User settings" rounded />}
