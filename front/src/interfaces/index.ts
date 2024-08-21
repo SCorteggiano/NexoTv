@@ -31,6 +31,20 @@ interface IMovie {
     rating: string,
 }
 
+interface IMovieCard {
+    img: string
+    title: string
+    description: string
+    duration: string
+}
+
+interface ISeriesCard {
+    img: string
+    title: string
+    description: string
+    duration: string
+}
+
 interface ISeries {
     id: number,
     categoryId: number,
@@ -47,5 +61,7 @@ export type {
     ILoginUser,
     IUser,
     IMovie,
-    ISeries
+    ISeries,
+    IMovieCard,
+    ISeriesCard
 }
