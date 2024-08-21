@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-
-import Navbar1 from "@/components/Navbar1";
-import Navbar2 from "@/components/Navbar2";
+import { Provider } from 'react-redux'
+import { store } from "@/redux/store";
+import Navbar1 from "@/components/Navbar1/Navbar1";
+import Navbar2 from "@/components/Navbar2/Navbar2";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -20,11 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-
+        <Provider store={store}>
         <Navbar1 />
         <Navbar2 />
         {children}
-
+        </Provider>
       </body>
     </html>
   );
