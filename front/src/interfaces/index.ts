@@ -42,7 +42,7 @@ interface ISeriesCard {
     img: string
     title: string
     description: string
-    duration: string
+    episodes: string
 }
 
 interface ISeries {
