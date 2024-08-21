@@ -11,7 +11,7 @@ const About = () => {
       <div id="wholeContainer" className="m-6 md:m-24">
         <div id="frontContainer" className="m-6 md:m-12 h-fit">
           <div id="frontTitle" className="text-center">
-            <h1 className="text-4xl">Team Front</h1>
+            <h1 className="text-4xl font-extrabold">Team Front</h1>
           </div>
 
           <div
@@ -115,7 +115,7 @@ const About = () => {
 
         <div id="backContainer" className="m-6 md:m-12">
           <div id="backTitle" className="text-center mt-24">
-            <h1 className="text-4xl">Team Back</h1>
+            <h1 className="text-4xl font-extrabold">Team Back</h1>
           </div>
 
           <div
