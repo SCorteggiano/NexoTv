@@ -1,8 +1,7 @@
+
 import Navbar1 from "@/components/Navbar1";
 import Navbar2 from "@/components/Navbar2";
 import { Carousel } from "flowbite-react";
-
-
 
 export default function Home() {
   return (
