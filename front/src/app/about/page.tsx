@@ -6,7 +6,7 @@ import "../globals.css";
 const About = () => {
   return (
     <div>
-      <div className="border h-12">NAVBAR</div>
+      <div className="border h-12">FAKE NAVBAR</div>
 
       <div id="wholeContainer" className="m-6 md:m-24">
         <div id="frontContainer" className="m-6 md:m-12 h-fit">
