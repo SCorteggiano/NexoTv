@@ -28,7 +28,6 @@ interface IMovie {
     duration: string,
     description: string,
     img: string,
-    rating: string,
 }
 
 interface IMovieCard {
@@ -49,11 +48,9 @@ interface ISeries {
     id: number,
     categoryId: number,
     title: string,
-    duration: string,
-    cap: string,
+    episodes: string,
     description: string,
     img: string,
-    rating: string,
 }
 
 export type {

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link"; 
 import {
   Avatar,
   Dropdown,
@@ -23,7 +24,7 @@ const Navbar1 = () => {
           inline
           label={<Avatar alt="User settings" rounded />}
         >
-          <DropdownItem className="text-[#efefef]">Dashboard</DropdownItem>
+          <DropdownItem as={Link} href="/dashboard/user" className="text-[#efefef]">Dashboard</DropdownItem>
           <DropdownItem className="text-[#efefef]">Settings</DropdownItem>
         </Dropdown>
         <NavbarToggle />

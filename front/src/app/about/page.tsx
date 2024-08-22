@@ -9,7 +9,7 @@ const About = () => {
       <div id="wholeContainer" className="m-6 md:m-24">
         <div id="frontContainer" className="m-6 md:m-12 h-fit">
           <div id="frontTitle" className="text-center">
-            <h1 className="text-4xl font-extrabold">Team Front</h1>
+            <h1 className="text-6xl font-extrabold">Team Front</h1>
           </div>
 
           <div
@@ -34,14 +34,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
@@ -65,14 +65,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
@@ -96,14 +96,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
@@ -113,7 +113,7 @@ const About = () => {
 
         <div id="backContainer" className="m-6 md:m-12">
           <div id="backTitle" className="text-center mt-24">
-            <h1 className="text-4xl font-extrabold">Team Back</h1>
+            <h1 className="text-6xl font-extrabold">Team Back</h1>
           </div>
 
           <div
@@ -138,14 +138,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
@@ -169,14 +169,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
@@ -200,14 +200,14 @@ const About = () => {
                   <img
                     src="/img/githubLogo.png"
                     alt="github"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
                 <Link target="_blank" href="https://linkedin.com/" className="h-20">
                   <img
                     src="/img/linkedingLogo.png"
                     alt="linkedin"
-                    className="h-16 rounded-2xl hover:h-20 transition-all duration-250"
+                    className="h-12 rounded-2xl hover:h-14 transition-all duration-250"
                   />
                 </Link>
               </div>
