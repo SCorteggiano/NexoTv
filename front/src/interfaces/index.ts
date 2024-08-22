@@ -18,7 +18,7 @@ interface IUser {
     address: string,
     phone: string,
     password: string,
-    suscribtion: boolean,
+    subscription: boolean,
 }
 
 interface IMovie {
@@ -53,6 +53,22 @@ interface ISeries {
     img: string,
 }
 
+interface IUserContext {
+    user:  Partial <ILoginUserResponse> | null,
+    setUser: React.Dispatch<React.SetStateAction<Partial<ILoginUserResponse> | null>>,
+    isLogged: boolean,
+    setIsLogged: (isLogged: boolean) => void,
+    login:  (credentials: ILoginUser) => Promise<boolean>;
+    register:  (user: Omit <IUser, "id">) => Promise<boolean>,
+    logout: () => void, 
+}
+
+interface ILoginUserResponse{
+    login: boolean,
+    user: Partial <IUser> | null,
+    token: string,
+}
+
 export type {
     IRegisterUser,
     ILoginUser,
@@ -60,5 +76,7 @@ export type {
     IMovie,
     ISeries,
     IMovieCard,
-    ISeriesCard
+    ISeriesCard,
+    ILoginUserResponse,
+    IUserContext
 }
