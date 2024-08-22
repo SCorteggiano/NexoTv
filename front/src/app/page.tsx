@@ -8,9 +8,7 @@ import { IMovieCard, ISeriesCard } from "@/interfaces";
 import { Carousel } from "flowbite-react";
 
 export default function Home() {
-  const [selectedItem, setSelectedItem] = useState<
-    IMovieCard | ISeriesCard | null
-  >(null);
+  const [selectedItem, setSelectedItem] = useState<IMovieCard | ISeriesCard | null>(null);
 
   const handleCardClick = (item: IMovieCard | ISeriesCard) => {
     setSelectedItem(item);
@@ -51,17 +49,17 @@ export default function Home() {
           <ContentCard onCardClick={handleCardClick} />
         </div>
       </div>
-
-      {selectedItem && (
-        <MovieDetail movie={selectedItem as IMovieCard} onClose={closeModal} />
-      )}
-
-      {selectedItem && (
+      {selectedItem && 'episodes' in selectedItem ? (
         <SeriesDetail
           serie={selectedItem as ISeriesCard}
           onClose={closeModal}
         />
-      )}
+      ) : selectedItem && 'duration' in selectedItem ? (
+        <MovieDetail
+          movie={selectedItem as IMovieCard}
+          onClose={closeModal}
+        />
+      ) : null}
     </div>
   );
 }
