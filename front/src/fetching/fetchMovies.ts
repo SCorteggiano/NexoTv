@@ -2,7 +2,7 @@ import { IMovie, ISeries } from "@/interfaces";
 
 export const fetchMovies = async (movie: IMovie[]) => {
     const response = await fetch("http://localhost:3000/movies", {
-        method: "POST",
+        method: "GET",
         headers: {
             "Content-Type": "application/json"
         },
@@ -14,7 +14,7 @@ export const fetchMovies = async (movie: IMovie[]) => {
 
 export const fetchSeries = async (serie: ISeries[]) => {
     const response = await fetch("http://localhost:3000/movies", {
-        method: "POST",
+        method: "GET",
         headers: {
             "Content-Type": "application/json"
         },

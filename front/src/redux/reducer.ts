@@ -37,7 +37,7 @@ const authSlice = createSlice({
     },
     setSubscription(state, action: PayloadAction<boolean>) {
       if (state.user) {
-        state.user.suscribtion = action.payload;
+        state.user.subscription = action.payload;
       }
     },
     checkIsLogged(state) {
