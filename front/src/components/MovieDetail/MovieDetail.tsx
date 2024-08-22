@@ -31,7 +31,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
         <p className="mb-4 font-semibold">Duration: {movie.duration}</p>
         <div className="flex justify-between">
           {/* Agregar Funcionalidades / Cambiar por Link */}
-          <button className="bg-violet hover:bg-darkviolet transition-all text-white w-40 px-4 py-2 rounded">
+          <button className="bg-violet hover:bg-darkviolet transition-all text-white w-96 px-4 py-2 rounded">
             Play
           </button>
           <button className="bg-red-500 hover:bg-red-700 transition-all text-white px-4 py-2 rounded">
