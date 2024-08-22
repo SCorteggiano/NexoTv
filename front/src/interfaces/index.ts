@@ -13,12 +13,11 @@ interface ILoginUser {
 
 interface IUser {
     id: number,
-    name: string,
+    first_name: string,
+    last_name: string,
     email: string,
-    address: string,
-    phone: string,
     password: string,
-    subscription: boolean,
+    subscription?: boolean,
 }
 
 interface IMovie {
@@ -69,6 +68,18 @@ interface ILoginUserResponse{
     token: string,
 }
 
+interface ILoginValidate {
+    email: string;
+    password: string;
+  }
+  
+  interface IRegisterValidate {
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
+  }
+
 export type {
     IRegisterUser,
     ILoginUser,
@@ -78,5 +89,7 @@ export type {
     IMovieCard,
     ISeriesCard,
     ILoginUserResponse,
-    IUserContext
+    IUserContext,
+    ILoginValidate,
+    IRegisterValidate
 }

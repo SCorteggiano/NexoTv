@@ -1,9 +1,48 @@
-import React from "react";
+"use client";
+
+import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
+import { validateRegister } from "@/helpers/validations";
 
 const RegisterForm: React.FC = () => {
+  const { register } = useContext(UserContext);
+  const router = useRouter();
+
+  const [registerValues, setRegisterValues] = useState({
+    email: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+  });
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setRegisterValues({ ...registerValues, [name]: value });
+    setErrors(validateRegister({ ...registerValues, [name]: value }));
+  };
+
+  const handeSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const user = {
+      email: registerValues.email,
+      password: registerValues.password,
+      first_name: registerValues.first_name,
+      last_name: registerValues.last_name,
+    };
+
+    // const success = await register(user);
+    // if (success) router.push("/home");
+    // if (!success) alert("Invalid credentials"); //Agregar manejo de errores
+    console.log(user); //log de prueba
+  };
+
   return (
-    <form className="max-w-md mx-auto mt-20 mb-36">
+    <form onSubmit={handeSubmit} className="max-w-md mx-auto mt-20 mb-36">
       {/* Email */}
       <div className="relative z-0 w-full mb-5 group">
         <input
@@ -12,6 +51,7 @@ const RegisterForm: React.FC = () => {
           id="email"
           className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
           required
+          onChange={handleChange}
         />
         <label
           htmlFor="email"
@@ -19,6 +59,9 @@ const RegisterForm: React.FC = () => {
         >
           Email
         </label>
+        {errors.email && (
+          <span className="text-red-500 text-xs mt-1">{errors.email}</span>
+        )}
       </div>
       {/* Password */}
       <div className="relative z-0 w-full mb-5 group">
@@ -27,6 +70,8 @@ const RegisterForm: React.FC = () => {
           name="password"
           id="password"
           className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
+          required
+          onChange={handleChange}
         />
         <label
           htmlFor="password"
@@ -34,23 +79,9 @@ const RegisterForm: React.FC = () => {
         >
           Password
         </label>
-      </div>
-
-      {/* Phone */}
-      <div className="relative z-0 w-full mb-5 group">
-        <input
-          type="number"
-          name="phone"
-          id="phone"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
-          required
-        />
-        <label
-          htmlFor="phone"
-          className="peer-focus:font-medium absolute text-lg text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Phone Number
-        </label>
+        {errors.password && (
+          <span className="text-red-500 text-xs mt-1">{errors.password}</span>
+        )}
       </div>
 
       {/* First Name */}
@@ -62,6 +93,7 @@ const RegisterForm: React.FC = () => {
             id="first_name"
             className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
             required
+            onChange={handleChange}
           />
           <label
             htmlFor="first_name"
@@ -69,6 +101,11 @@ const RegisterForm: React.FC = () => {
           >
             First Name
           </label>
+          {errors.first_name && (
+            <span className="text-red-500 text-xs mt-1">
+              {errors.first_name}
+            </span>
+          )}
         </div>
 
         {/* Last Name */}
@@ -79,6 +116,7 @@ const RegisterForm: React.FC = () => {
             id="last_name"
             className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
             required
+            onChange={handleChange}
           />
           <label
             htmlFor="last_name"
@@ -86,12 +124,18 @@ const RegisterForm: React.FC = () => {
           >
             Last Name
           </label>
+          {errors.last_name && (
+            <span className="text-red-500 text-xs mt-1">
+              {errors.last_name}
+            </span>
+          )}
         </div>
       </div>
 
       <div className="flex justify-between items-center">
         <button
           type="submit"
+          disabled={Object.keys(errors).length > 0}
           className="text-white bg-violet hover:bg-darkviolet focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
           Register
