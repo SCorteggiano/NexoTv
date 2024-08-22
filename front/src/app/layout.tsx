@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import Navbar2 from "@/components/Navbar2/Navbar2";
 
@@ -20,11 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Providers>
           <Navbar1 />
           <Navbar2 />
           {children}
-        </Providers>
       </body>
     </html>
   );
