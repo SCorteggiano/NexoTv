@@ -1,23 +1,42 @@
-import React from 'react';
-import MovieCard from '@/components/MovieCard/MovieCard';
-import movies from '@/helpers/movies.helper';
+"use client";
+import React, { useState } from "react";
+import MovieCard from "@/components/MovieCard/MovieCard";
+import CategoryNavbar from "@/components/CategoryNavbar/CategoryNavbar";
+import movies from "@/helpers/movies.helper";
 
 const Movies = () => {
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
+  const categories = [
+    { id: 1, name: "Action" },
+    { id: 2, name: "Sci-Fi" },
+    { id: 3, name: "Drama" },
+    { id: 4, name: "Horror" },
+  ];
+
+  const filteredMovies = selectedCategory
+    ? movies.filter((movie) => movie.categoryId === selectedCategory)
+    : movies;
+
   return (
     <div>
-      <div className='border h-12 flex items-center justify-around'>
-        <h1>CATEGORY1</h1>
-        <h1>CATEGORY2</h1>
-        <h1>CATEGORY3</h1>
-        <h1>CATEGORY4</h1>
-        <h1>CATEGORY5</h1>
+      <div className="text-center">
+        <h1 className="text-4xl font-extrabold">MOVIES</h1>
       </div>
+      <CategoryNavbar
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
+      />
 
-      <div id='wholeContainer' className='m-6'>
-        <div id='movieContainer' className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6'>
-          {movies.map((movie, id) => (
+      <div id="wholeContainer" className="m-6">
+        <div
+          id="movieContainer"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+        >
+          {filteredMovies.map((movie) => (
             <MovieCard
-              key={id}
+              key={movie.id}
               img={movie.img}
               title={movie.title}
               description={movie.description}
@@ -28,6 +47,6 @@ const Movies = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Movies;
