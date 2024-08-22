@@ -1,18 +1,67 @@
-import Navbar1 from "@/components/Navbar1";
-import Navbar2 from "@/components/Navbar2";
-
+/* eslint-disable @next/next/no-img-element */
+"use client";
+import React, { useState } from "react";
+import ContentCard from "@/components/ContentCard/ContentCard";
+import MovieDetail from "@/components/MovieDetail/MovieDetail";
+import SeriesDetail from "@/components/SeriesDetail/SeriesDetail";
+import { IMovieCard, ISeriesCard } from "@/interfaces";
 import { Carousel } from "flowbite-react";
 
 export default function Home() {
+  const [selectedItem, setSelectedItem] = useState<
+    IMovieCard | ISeriesCard | null
+  >(null);
+
+  const handleCardClick = (item: IMovieCard | ISeriesCard) => {
+    setSelectedItem(item);
+  };
+
+  const closeModal = () => {
+    setSelectedItem(null);
+  };
+
   return (
-    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-    <Carousel>
-      <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="Texto alternativo" />
-      <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="Texto alternativo" />
-      <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="Texto alternativo" />
-      <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="Texto alternativo" />
-      <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="Texto alternativo" />
-    </Carousel>
-  </div>
+    <div>
+      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <Carousel>
+          <img
+            src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
+            alt="Texto alternativo"
+          />
+          <img
+            src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
+            alt="Texto alternativo"
+          />
+          <img
+            src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
+            alt="Texto alternativo"
+          />
+          <img
+            src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
+            alt="Texto alternativo"
+          />
+          <img
+            src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
+            alt="Texto alternativo"
+          />
+        </Carousel>
+      </div>
+      <div id="allContentContainer">
+        <div id="contentCardsContainer">
+          <ContentCard onCardClick={handleCardClick} />
+        </div>
+      </div>
+
+      {selectedItem && (
+        <MovieDetail movie={selectedItem as IMovieCard} onClose={closeModal} />
+      )}
+
+      {selectedItem && (
+        <SeriesDetail
+          serie={selectedItem as ISeriesCard}
+          onClose={closeModal}
+        />
+      )}
+    </div>
   );
 }

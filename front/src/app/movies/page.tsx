@@ -1,11 +1,14 @@
-"use client";
+'use client'
 import React, { useState } from "react";
 import MovieCard from "@/components/MovieCard/MovieCard";
 import CategoryNavbar from "@/components/CategoryNavbar/CategoryNavbar";
+import MovieDetail from "@/components/MovieDetail/MovieDetail";
 import movies from "@/helpers/movies.helper";
+import { IMovieCard } from "@/interfaces";
 
 const Movies = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<IMovieCard | null>(null);
 
   const categories = [
     { id: 1, name: "Action" },
@@ -17,6 +20,14 @@ const Movies = () => {
   const filteredMovies = selectedCategory
     ? movies.filter((movie) => movie.categoryId === selectedCategory)
     : movies;
+
+  const handleCardClick = (movie: IMovieCard) => {
+    setSelectedMovie(movie);
+  };
+
+  const closeModal = () => {
+    setSelectedMovie(null);
+  };
 
   return (
     <div>
@@ -41,10 +52,13 @@ const Movies = () => {
               title={movie.title}
               description={movie.description}
               duration={movie.duration}
+              onClick={() => handleCardClick(movie)}
             />
           ))}
         </div>
       </div>
+
+      {selectedMovie && <MovieDetail movie={selectedMovie} onClose={closeModal} />}
     </div>
   );
 };

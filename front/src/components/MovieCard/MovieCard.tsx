@@ -2,14 +2,15 @@
 import React from "react";
 import { IMovieCard } from "@/interfaces";
 
-const MovieCard: React.FC<IMovieCard> = ({
+const MovieCard: React.FC<IMovieCard & { onClick: () => void }> = ({
   img,
   title,
   description,
   duration,
+  onClick,
 }) => {
   return (
-    <div className="w-full max-w-xs m-5 text-center">
+    <div className="w-full max-w-xs m-5 text-center cursor-pointer" onClick={onClick}>
       <div className="relative overflow-hidden rounded-lg">
         <img
           className="w-full h-64 object-cover transition-transform duration-300 ease-in-out transform hover:blur-sm"
