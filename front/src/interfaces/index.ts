@@ -13,12 +13,11 @@ interface ILoginUser {
 
 interface IUser {
     id: number,
-    name: string,
+    firstName: string,
+    lastName: string,
     email: string,
-    address: string,
-    phone: string,
     password: string,
-    subscription: boolean,
+    subscription?: boolean,
 }
 
 interface IMovie {
