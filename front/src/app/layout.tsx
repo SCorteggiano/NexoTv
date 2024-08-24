@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import Navbar2 from "@/components/Navbar2/Navbar2";
+import LogRegButtons from "@/components/LogRegButtons/LogRegButtons";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <Providers>
-          <Navbar1 />
+          <LogRegButtons/>
           <Navbar2 />
           {children}
         </Providers>

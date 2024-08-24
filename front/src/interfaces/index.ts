@@ -68,6 +68,18 @@ interface ILoginUserResponse{
     token: string,
 }
 
+interface ILoginValidate {
+    email: string;
+    password: string;
+  }
+  
+  interface IRegisterValidate {
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
+  }
+
 export type {
     IRegisterUser,
     ILoginUser,
@@ -77,5 +89,7 @@ export type {
     IMovieCard,
     ISeriesCard,
     ILoginUserResponse,
-    IUserContext
+    IUserContext,
+    ILoginValidate,
+    IRegisterValidate
 }
