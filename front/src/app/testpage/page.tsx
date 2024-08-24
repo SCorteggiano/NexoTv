@@ -1,10 +1,10 @@
 //* Pagina para realizar pruebas
-import ContentCard from '@/components/ContentCard/ContentCard'
+import LogRegButtons from '@/components/LogRegButtons/LogRegButtons'
 import React from 'react'
 const Testpage = () => {
   return (
     <div id='wholeContainer m-6'>
-      <ContentCard/>
+      <LogRegButtons/>
     </div>
   )
 }
