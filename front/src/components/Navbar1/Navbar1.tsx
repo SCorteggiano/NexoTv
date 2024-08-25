@@ -25,7 +25,7 @@ const Navbar1 = () => {
           label={<Avatar alt="User settings" rounded />}
         >
           <DropdownItem as={Link} href="/dashboard/user" className="text-[#efefef]">Dashboard</DropdownItem>
-          <DropdownItem className="text-[#efefef]">Settings</DropdownItem>
+          <DropdownItem className="text-[#efefef]">Logout</DropdownItem>
         </Dropdown>
         <NavbarToggle />
       </div>

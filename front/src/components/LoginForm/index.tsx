@@ -5,9 +5,25 @@ import Link from "next/link";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import { validateLogin } from "@/helpers/validations";
+import { gql, useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
+
+// En caso de error chekear que LOGIN_USER reciba el parametro de password
+const LOGIN_USER = gql`
+  mutation LoginUser($loginUserInput: LoginUserInput!) {
+    loginUser(loginUserInput: $loginUserInput) {
+      token
+      user {
+        firstName
+        lastName
+        email
+      }
+    }
+  }
+`;
 
 const LoginForm: React.FC = () => {
-  const { login } = useContext(UserContext);
+  const { setIsLogged } = useContext(UserContext);
   const router = useRouter();
 
   const [loginValues, setLoginValues] = React.useState({
@@ -17,20 +33,38 @@ const LoginForm: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setLoginValues({ ...loginValues, [name]: value });
     setErrors(validateLogin({ ...loginValues, [name]: value }));
+    setLoginValues({ ...loginValues, [name]: value });
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // const success = await login(loginValues);
-    // if (success) {
-    //   router.push("/home");
-    // } else {
-    //   alert("Invalid credentials");} //Agregar manejo de errores
-    console.log(loginValues); // log de prueba
+    try {
+      const result = await loginUser({
+        variables: {
+          loginUserInput: loginValues,
+        },
+      });
+
+      if (result && result.data) {
+        // Guarda el token en el contexto global o localStorage
+        localStorage.setItem("token", result.data.loginUser.token);
+        // localStorage.setItem("user", JSON.stringify(data));
+        setIsLogged(true);
+        router.push("/");
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid credentials!",
+      });
+      return false;
+    }
   };
 
   return (

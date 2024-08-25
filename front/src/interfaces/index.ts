@@ -33,7 +33,7 @@ interface IMovieCard {
     img: string
     title: string
     description: string
-    duration: string
+    duration: string 
 }
 
 interface ISeriesCard {
@@ -76,8 +76,8 @@ interface ILoginValidate {
   interface IRegisterValidate {
     email: string;
     password: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
   }
 
 export type {

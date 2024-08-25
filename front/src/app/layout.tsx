@@ -5,6 +5,8 @@ import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import Navbar2 from "@/components/Navbar2/Navbar2";
 import LogRegButtons from "@/components/LogRegButtons/LogRegButtons";
+import { ApolloProvider } from "@apollo/client";
+import client from "@/queries/apolloClient";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,11 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
+        <ApolloProvider client={client}>
         <Providers>
           <LogRegButtons/>
           <Navbar2 />
           {children}
         </Providers>
+        </ApolloProvider>
       </body>
     </html>
   );
