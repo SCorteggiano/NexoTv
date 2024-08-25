@@ -9,11 +9,14 @@ import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 
 const CREATE_USER = gql`
-  mutation CreateUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
-      firstName
-      lastName
-      email
+  mutation Signup($signupInput: SignupInput!) {
+    signup(signupInput: $signupInput) {
+      token
+      user {
+        firstName
+        lastName
+        email
+      }
     }
   }
 `;
@@ -44,7 +47,7 @@ const RegisterForm: React.FC = () => {
     try {
       const result = await createUser({
         variables: {
-          createUserInput: registerValues,
+          signupInput: registerValues,
         },
       });
       if (result) router.push("/");
@@ -137,9 +140,7 @@ const RegisterForm: React.FC = () => {
             Last Name
           </label>
           {errors.lastName && (
-            <span className="text-red-500 text-xs mt-1">
-              {errors.lastName}
-            </span>
+            <span className="text-red-500 text-xs mt-1">{errors.lastName}</span>
           )}
         </div>
       </div>

@@ -22,15 +22,16 @@ interface IUser {
 
 interface IMovie {
     id: number,
-    categoryId: number,
+    category: number,
     title: string,
     duration: string,
     description: string,
-    img: string,
+    image: string,
+    contentUrl: string[]
 }
 
 interface IMovieCard {
-    img: string
+    image: string
     title: string
     description: string
     duration: string 

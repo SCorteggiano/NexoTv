@@ -23,7 +23,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
         </div>
         <img
           className="w-full h-64 object-cover mb-4 rounded-xl"
-          src={movie.img}
+          src={movie.image}
           alt={movie.title}
         />
         <h2 className="text-2xl font-bold mb-2">{movie.title}</h2>

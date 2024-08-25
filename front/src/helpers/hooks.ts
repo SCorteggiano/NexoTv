@@ -1,24 +1,31 @@
 import { gql, useQuery } from "@apollo/client";
-import { IMovieCard } from "@/interfaces";
 
 const GET_MOVIES = gql`
-  query GetMovies {
-    movies {
+  query ContentAll($paginationContentArgs: PaginationContentArgs!) {
+    contentAll(paginationContentArgs: $paginationContentArgs) {
       id
       title
       description
-      img
+      image
       duration
-      categoryId
+      category
+      contentUrl
     }
   }
 `;
 
 const useMovies = () => {
-  const { data, loading, error } = useQuery(GET_MOVIES);
+  const { data, loading, error } = useQuery(GET_MOVIES, {
+    variables: {
+      paginationContentArgs: {
+        limit: 12,
+        offset: 0,
+      },
+    },
+  });
 
   return {
-    movies: data?.movies || [],
+    movies: data?.contentAll || [],
     loading,
     error,
   };

@@ -3,7 +3,7 @@ import React from "react";
 import { IMovieCard } from "@/interfaces";
 
 const MovieCard: React.FC<IMovieCard & { onClick: () => void }> = ({
-  img,
+  image,
   title,
   description,
   duration,
@@ -14,7 +14,7 @@ const MovieCard: React.FC<IMovieCard & { onClick: () => void }> = ({
       <div className="relative overflow-hidden rounded-lg">
         <img
           className="w-full h-64 object-cover transition-transform duration-300 ease-in-out transform hover:blur-sm"
-          src={img}
+          src={image}
           alt={title}
         />
         <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 transition-opacity duration-300 ease-in-out hover:opacity-100">

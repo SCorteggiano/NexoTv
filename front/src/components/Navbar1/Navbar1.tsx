@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext } from "react";
 import Link from "next/link";
 import {
@@ -5,7 +6,6 @@ import {
   Dropdown,
   DropdownItem,
   Navbar,
-  NavbarBrand,
   NavbarToggle,
   Button,
 } from "flowbite-react";
@@ -23,11 +23,11 @@ const Navbar1 = () => {
 
   return (
     <Navbar fluid className="bg-[#0e0e11]">
-      <NavbarBrand href="/">
+      <Link href='/'>
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           NexoTV
         </span>
-      </NavbarBrand>
+      </Link>
       <div>
         <Link href="/" className="m-6 hover:border-b-2">
           Home

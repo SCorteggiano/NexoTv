@@ -4,7 +4,6 @@ import "./globals.css";
 import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import Navbar2 from "@/components/Navbar2/Navbar2";
-import LogRegButtons from "@/components/LogRegButtons/LogRegButtons";
 import ApolloProvider from '@/queries/apolloProvider'
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
@@ -27,7 +26,7 @@ export default function RootLayout({
         <UserProvider>
         <ApolloProvider client={client}>
         <Providers>
-          <LogRegButtons/>
+          <Navbar1/>
           <Navbar2 />
           {children}
         </Providers>

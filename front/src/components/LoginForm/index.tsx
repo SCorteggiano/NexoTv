@@ -10,12 +10,10 @@ import Swal from "sweetalert2";
 
 // En caso de error chekear que LOGIN_USER reciba el parametro de password
 const LOGIN_USER = gql`
-  mutation LoginUser($loginUserInput: LoginUserInput!) {
-    loginUser(loginUserInput: $loginUserInput) {
+  mutation Login($loginInput: LoginInput!) {
+    login(loginInput: $loginInput) {
       token
       user {
-        firstName
-        lastName
         email
       }
     }
@@ -46,14 +44,13 @@ const LoginForm: React.FC = () => {
     try {
       const result = await loginUser({
         variables: {
-          loginUserInput: loginValues,
+          loginInput: loginValues,
         },
       });
 
       if (result && result.data) {
         // Guarda el token en el contexto global o localStorage
-        localStorage.setItem("token", result.data.loginUser.token);
-        // localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("token", result.data.login.token);
         setIsLogged(true);
         router.push("/");
       }
@@ -63,7 +60,6 @@ const LoginForm: React.FC = () => {
         title: "Oops...",
         text: "Invalid credentials!",
       });
-      return false;
     }
   };
 
@@ -85,7 +81,9 @@ const LoginForm: React.FC = () => {
         >
           Email
         </label>
-        {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+        {errors.email && (
+          <span className="text-red-500 text-sm">{errors.email}</span>
+        )}
       </div>
 
       {/* Password */}
@@ -104,7 +102,9 @@ const LoginForm: React.FC = () => {
         >
           Password
         </label>
-        {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+        {errors.password && (
+          <span className="text-red-500 text-sm">{errors.password}</span>
+        )}
       </div>
 
       <div className="flex justify-between items-center">
