@@ -9,13 +9,15 @@ const LogRegButtons = () => {
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           NexoTV
         </span>
-        <h1 className="ml-6">Home</h1>
       </NavbarBrand>
       <div>
-        <Link href="/pricings" className="m-6 hover:border-b-4">
+        <Link href="/" className="m-6 hover:border-b-2">
+          Home
+        </Link>
+        <Link href="/pricings" className="m-6 hover:border-b-2">
           Pricings
         </Link>
-        <Link href="/about" className="m-6 hover:border-b-4">
+        <Link href="/about" className="m-6 hover:border-b-2">
           About
         </Link>
       </div>

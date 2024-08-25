@@ -17,7 +17,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
   onSelectCategory,
 }) => {
   return (
-    <div className="h-12 flex items-center justify-around">
+    <div className="h-12 flex items-center justify-around mt-4">
       <h1
         className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
           selectedCategory === null ? "text-blue-500" : ""
