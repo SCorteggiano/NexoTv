@@ -8,14 +8,12 @@ import { validateRegister } from "@/helpers/validations";
 import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 
-
 const CREATE_USER = gql`
   mutation CreateUser($createUserInput: CreateUserInput!) {
     createUser(createUserInput: $createUserInput) {
       firstName
       lastName
       email
-      password
     }
   }
 `;
@@ -41,28 +39,26 @@ const RegisterForm: React.FC = () => {
     setRegisterValues({ ...registerValues, [name]: value });
   };
 
-  const handeSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-        const result = await createUser({
-            variables: {
-                createUserInput: registerValues
-            }
-        });
-        if (result) router.push("/");
+      const result = await createUser({
+        variables: {
+          createUserInput: registerValues,
+        },
+      });
+      if (result) router.push("/");
     } catch (error) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Invalid credentials!",
-          });
-          return false;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid credentials!",
+      });
     }
-  }
+  };
 
   return (
-    <form onSubmit={handeSubmit} className="max-w-md mx-auto mt-20 mb-36">
-      {/* Email */}
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
@@ -82,7 +78,6 @@ const RegisterForm: React.FC = () => {
           <span className="text-red-500 text-xs mt-1">{errors.email}</span>
         )}
       </div>
-      {/* Password */}
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="password"
@@ -103,7 +98,6 @@ const RegisterForm: React.FC = () => {
         )}
       </div>
 
-      {/* First Name */}
       <div className="grid md:grid-cols-2 md:gap-6">
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -120,14 +114,13 @@ const RegisterForm: React.FC = () => {
           >
             First Name
           </label>
-          {errors.first_name && (
+          {errors.firstName && (
             <span className="text-red-500 text-xs mt-1">
-              {errors.first_name}
+              {errors.firstName}
             </span>
           )}
         </div>
 
-        {/* Last Name */}
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
@@ -143,9 +136,9 @@ const RegisterForm: React.FC = () => {
           >
             Last Name
           </label>
-          {errors.last_name && (
+          {errors.lastName && (
             <span className="text-red-500 text-xs mt-1">
-              {errors.last_name}
+              {errors.lastName}
             </span>
           )}
         </div>

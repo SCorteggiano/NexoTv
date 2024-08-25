@@ -5,7 +5,7 @@ import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import Navbar2 from "@/components/Navbar2/Navbar2";
 import LogRegButtons from "@/components/LogRegButtons/LogRegButtons";
-import { ApolloProvider } from "@apollo/client";
+import ApolloProvider from '@/queries/apolloProvider'
 import client from "@/queries/apolloClient";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
