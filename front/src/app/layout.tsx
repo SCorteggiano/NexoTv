@@ -7,6 +7,7 @@ import Navbar2 from "@/components/Navbar2/Navbar2";
 import LogRegButtons from "@/components/LogRegButtons/LogRegButtons";
 import ApolloProvider from '@/queries/apolloProvider'
 import client from "@/queries/apolloClient";
+import { UserProvider } from "@/context/userContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
+        <UserProvider>
         <ApolloProvider client={client}>
         <Providers>
           <LogRegButtons/>
@@ -30,6 +32,7 @@ export default function RootLayout({
           {children}
         </Providers>
         </ApolloProvider>
+        </UserProvider>
       </body>
     </html>
   );
