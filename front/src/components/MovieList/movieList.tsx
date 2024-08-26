@@ -7,6 +7,7 @@ import { IMovie } from "@/interfaces";
 
 const MoviesList: React.FC = () => {
   const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
   const { movies } = useMovies();
 
@@ -18,8 +19,25 @@ const MoviesList: React.FC = () => {
     setSelectedMovie(null);
   };
 
+  const filteredMovies = categoryFilter
+    ? movies.filter((movie: IMovie) => movie.category === categoryFilter)
+    : movies;
+
   return (
     <div>
+      <div className="mb-4 text-center">
+        <select
+          className="border p-2"
+          value={categoryFilter || ""}
+          onChange={(e) => setCategoryFilter(e.target.value || null)}
+        >
+          <option value="">All Categories</option>
+          <option value="Action">Action</option>
+          <option value="Drama">Drama</option>
+          <option value="Comedy">Comedy</option>
+        </select>
+      </div>
+
       <div id="wholeContainer" className="m-6">
         <div
           id="movieContainer"

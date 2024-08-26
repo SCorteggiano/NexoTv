@@ -22,7 +22,7 @@ interface IUser {
 
 interface IMovie {
     id: number,
-    category: number,
+    category: string,
     title: string,
     duration: string,
     description: string,
@@ -47,7 +47,7 @@ interface ISeriesCard {
 
 interface ISeries {
     id: number,
-    categoryId: number,
+    category: string,
     title: string,
     episodes: string,
     description: string,

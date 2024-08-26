@@ -8,6 +8,7 @@ import { ISeries } from "@/interfaces";
 
 const SeriesList: React.FC = () => {
   const [selectedSerie, setSelectedSerie] = useState<ISeriesCard | null>(null);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
   const { series } = useSeries();
 
@@ -19,8 +20,24 @@ const SeriesList: React.FC = () => {
     setSelectedSerie(null);
   };
 
+  const filteredSeries = categoryFilter
+  ? series.filter((serie: ISeries) => serie.category === categoryFilter)
+  : series;
+
   return (
     <div>
+         <div className="mb-4 text-center">
+        <select
+          className="border p-2"
+          value={categoryFilter || ""}
+          onChange={(e) => setCategoryFilter(e.target.value || null)}
+        >
+          <option value="">All Categories</option>
+          <option value="Action">Action</option>
+          <option value="Drama">Drama</option>
+          <option value="Comedy">Comedy</option>
+        </select>
+      </div>
       <div id="wholeContainer" className="m-6">
         <div
           id="movieContainer"
