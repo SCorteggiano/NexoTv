@@ -28,6 +28,7 @@ const MoviesList: React.FC = () => {
           {movies.map((movie: IMovie) => (
             <MovieCard
               key={movie.id}
+              id={movie.id}
               image={movie.image}
               title={movie.title}
               description={movie.description}
