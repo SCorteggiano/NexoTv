@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
+import { useRouter } from 'next/navigation';
 import { IMovieCard } from "@/interfaces";
 
 interface MovieDetailProps {
@@ -8,7 +9,13 @@ interface MovieDetailProps {
 }
 
 const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
+  const router = useRouter();
+
   if (!movie) return null;
+
+  const handlePlay = () => {
+    router.push(`/movie/${movie.id}`);
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
@@ -30,8 +37,10 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
         <p className="mb-4">{movie.description}</p>
         <p className="mb-4 font-semibold">Duration: {movie.duration}</p>
         <div className="flex justify-between">
-          {/* Agregar Funcionalidades / Cambiar por Link */}
-          <button className="bg-violet hover:bg-darkviolet transition-all text-white w-96 px-4 py-2 rounded">
+          <button
+            onClick={handlePlay}
+            className="bg-violet hover:bg-darkviolet transition-all text-white w-96 px-4 py-2 rounded"
+          >
             Play
           </button>
           <button className="bg-red-500 hover:bg-red-700 transition-all text-white px-4 py-2 rounded">

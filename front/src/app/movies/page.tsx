@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from "react";
 import MovieCard from "@/components/MovieCard/MovieCard";
-import CategoryNavbar from "@/components/CategoryNavbar/CategoryNavbar";
 import MovieDetail from "@/components/MovieDetail/MovieDetail";
 import useMovies from "@/helpers/hooks";
 import { IMovie } from "@/interfaces";
@@ -10,11 +9,7 @@ const Movies: React.FC = () => {
 
   const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null);
 
-
-
   const { movies } = useMovies();
-
-  console.log(movies)
 
   const handleCardClick = (movie: IMovie) => {
     setSelectedMovie(movie);
@@ -38,6 +33,7 @@ const Movies: React.FC = () => {
           {movies.map((movie: IMovie) => (
             <MovieCard
               key={movie.id}
+              id={movie.id}
               image={movie.image}
               title={movie.title}
               description={movie.description}

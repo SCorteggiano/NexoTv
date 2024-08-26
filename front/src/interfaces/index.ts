@@ -31,6 +31,7 @@ interface IMovie {
 }
 
 interface IMovieCard {
+    id: number
     image: string
     title: string
     description: string
