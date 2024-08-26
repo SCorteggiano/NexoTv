@@ -14,7 +14,32 @@ const GET_MOVIES = gql`
   }
 `;
 
-const useMovies = () => {
+const GET_SERIES = gql`
+  query SeriesAll($paginationSeriesArgs: PaginationSeriesArgs!) {
+    seriesAll(paginationSeriesArgs: $paginationSeriesArgs) {
+      id
+      title
+      description
+      image
+      caps
+      category
+    }
+  }
+`;
+
+const GET_USER_DATA = gql`
+  query GetUser {
+    user {
+      name
+      email
+      phone
+      suscription
+    }
+  }
+`;
+
+
+export const useMovies = () => {
   const { data, loading, error } = useQuery(GET_MOVIES, {
     variables: {
       paginationContentArgs: {
@@ -23,7 +48,6 @@ const useMovies = () => {
       },
     },
   });
-
   return {
     movies: data?.contentAll || [],
     loading,
@@ -31,4 +55,30 @@ const useMovies = () => {
   };
 };
 
-export default useMovies;
+export const useSeries = () => {
+  const { data, loading, error } = useQuery(GET_SERIES, {
+    variables: {
+      paginationSeriesArgs: {
+        limit: 12,
+        offset: 0,
+      },
+    },
+  });
+
+  return {
+    series: data?.seriesAll || [],
+    loading,
+    error,
+  };
+};
+
+
+export const useUserData = () => {
+  const { data, loading, error } = useQuery(GET_USER_DATA);
+
+  return {
+    user: data?.user || null,
+    loading,
+    error,
+  };
+};

@@ -1,5 +1,5 @@
 "use client";
-import useMovies from "@/helpers/hooks";
+import { useMovies } from "@/helpers/hooks";
 import { useEffect, useState } from "react";
 
 const Movie = ({ params }: any) => {
