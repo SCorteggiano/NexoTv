@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 'use client'
 import React, { useState } from "react";
 import MovieCard from "@/components/MovieCard/MovieCard";
 import MovieDetail from "@/components/MovieDetail/MovieDetail";
-import useMovies from "@/helpers/hooks";
+import { useMovies } from "@/helpers/hooks";
 import { IMovie } from "@/interfaces";
 
 const Movies: React.FC = () => {
@@ -19,18 +18,12 @@ const Movies: React.FC = () => {
   const closeModal = () => {
     setSelectedMovie(null);
   };
-=======
-import React from "react";
-import MoviesList from "@/components/MovieList/movieList";
->>>>>>> 21813ac4ebf4fadd7ff91796ddf101c9b8757c72
 
-const Movies = () => {
   return (
-    <>
+    <div>
       <div className="text-center">
         <h1 className="text-4xl font-extrabold">MOVIES</h1>
       </div>
-<<<<<<< HEAD
 
       <div id="wholeContainer" className="m-6">
         <div
@@ -53,10 +46,6 @@ const Movies = () => {
 
       {selectedMovie && <MovieDetail movie={selectedMovie} onClose={closeModal} />}
     </div>
-=======
-      <MoviesList />
-    </>
->>>>>>> 21813ac4ebf4fadd7ff91796ddf101c9b8757c72
   );
 };
 
