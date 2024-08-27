@@ -1,6 +1,6 @@
 import { ISeries } from "@/interfaces";
 
-const movies: ISeries[] = [
+const movies = [
   {
     id: 1,
     img: "https://mb.cision.com/Public/14247/2902071/856b720fb81856ec_org.jpg",
