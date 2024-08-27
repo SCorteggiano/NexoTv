@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
+
 const GET_MOVIES = gql`
   query ContentAll($paginationContentArgs: PaginationContentArgs!) {
     contentAll(paginationContentArgs: $paginationContentArgs) {
@@ -28,16 +29,16 @@ const GET_SERIES = gql`
 `;
 
 const GET_USER_DATA = gql`
-  query GetUser {
-    user {
-      name
+  query User($userId: String!) {
+    user(id: $userId) {
+      id
       email
-      phone
-      suscription
+      firstName
+      lastName
+      isActive
     }
   }
 `;
-
 
 export const useMovies = () => {
   const { data, loading, error } = useQuery(GET_MOVIES, {
@@ -72,9 +73,10 @@ export const useSeries = () => {
   };
 };
 
-
-export const useUserData = () => {
-  const { data, loading, error } = useQuery(GET_USER_DATA);
+export const useUserData = (userId: string) => {
+  const { data, loading, error } = useQuery(GET_USER_DATA, {
+    variables: { userId },
+  });
 
   return {
     user: data?.user || null,

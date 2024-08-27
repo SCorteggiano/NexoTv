@@ -14,14 +14,17 @@ const LOGIN_USER = gql`
     login(loginInput: $loginInput) {
       token
       user {
+        id
         email
+        firstName
+        lastName
       }
     }
   }
 `;
 
 const LoginForm: React.FC = () => {
-  const { setIsLogged } = useContext(UserContext);
+  const { setIsLogged, setUser } = useContext(UserContext);
   const router = useRouter();
 
   const [loginValues, setLoginValues] = React.useState({
@@ -32,6 +35,8 @@ const LoginForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+
+  console.log(data)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -49,8 +54,11 @@ const LoginForm: React.FC = () => {
       });
 
       if (result && result.data) {
+        const userData = result.data.login
+        setUser(userData)
+        localStorage.setItem("user", JSON.stringify(userData));
         // Guarda el token en el contexto global o localStorage
-        localStorage.setItem("token", result.data.login.token);
+        localStorage.setItem("token", userData.token);
         setIsLogged(true);
         router.push("/");
       }

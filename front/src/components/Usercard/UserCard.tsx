@@ -1,27 +1,19 @@
+'use client'
 import React from "react";
-import { useUserData } from "@/helpers/hooks";
-import { Button } from "flowbite-react";
-import Link from "next/link";
+// import { useUserData } from "@/helpers/hooks";
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext";
+
 
 const UserCard = () => {
-  const { user, loading, error } = useUserData();
+  // const { user, loading, error } = useUserData();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading user data.</p>;
+  const { user } = useContext(UserContext)
 
-  if (!user)
-    return (
-      <>
-        <p>Need to be Logged!</p>
-        <Button
-          as={Link}
-          href="/login"
-          className="bg-transparent border-violet hover:bg-darkviolet text-center mr-3"
-        >
-          Login
-        </Button>
-      </>
-    );
+  console.log(user?.user)
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error loading user data.</p>;
 
   return (
     <div
@@ -33,21 +25,21 @@ const UserCard = () => {
         <div id="userCardInfo" className="w-full">
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Name:</p>
-            <p className="text-xl text-white">{user.firstName} {user.lastName}</p>
+            <p className="text-xl text-white">{user?.user?.firstName} {user?.user?.lastName}</p>
           </div>
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Email:</p>
-            <p className="text-xl text-white">{user.email}</p>
+            <p className="text-xl text-white">{user?.user?.email}</p>
           </div>
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Subscription:</p>
-            <p
+            {/* <p
               className={`text-xl ${
-                user.suscription === "Free" ? "text-green-400" : "text-blue-400"
+                user. === "Free" ? "text-green-400" : "text-blue-400"
               }`}
             >
               {user.suscription}
-            </p>
+            </p> */}
           </div>
           <div className="flex justify-center">
             <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

@@ -6,7 +6,7 @@ import {
   ILoginUser,
   IUser,
 } from "@/interfaces/index";
-import { postLogin, postRegister } from "@/fetching/fetchUsers";
+import { postLogin, postRegister  } from "@/fetching/fetchUsers";
 import Swal from "sweetalert2";
 
 export const UserContext = createContext<IUserContext>({

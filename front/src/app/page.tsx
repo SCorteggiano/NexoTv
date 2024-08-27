@@ -48,11 +48,10 @@ export default function Home() {
           />
         </Carousel>
         <MoviesList />
-        <SeriesList />
       </div>
       <div id="allContentContainer">
         <div id="contentCardsContainer">
-          <ContentCard onCardClick={handleCardClick} />
+          {/* <ContentCard onCardClick={handleCardClick} /> */}
         </div>
       </div>
       {selectedItem && "episodes" in selectedItem ? (

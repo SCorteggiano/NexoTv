@@ -28,7 +28,7 @@ const Movie = ({ params }: any) => {
   if (!movie) return <p>Loading...</p>;
 
   return (
-    <div style={{ margin: "10px" }}>
+    <div style={{ margin: "auto" }} className="h-auto w-10/12">
       {movie.contentUrl && movie.contentUrl.length > 0 && (
         <div dangerouslySetInnerHTML={{ __html: movie.contentUrl[0] }} />
       )}
