@@ -6,10 +6,15 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "select_account", // Fuerza la selección de cuenta
+        },
+      },
     }),
   ],
   pages: {
-    signIn: '/auth/signin',
-    error: '/auth/error',
+    error: "/auth/error",
+    signIn: "/auth/signin"
   },
 });

@@ -1,21 +1,21 @@
-// components/LoginButton.tsx
-import { signIn, signOut, useSession } from "next-auth/react";
+/* eslint-disable @next/next/no-img-element */
+'use client';
+import { signIn } from 'next-auth/react';
 
 const GoogleLoginButton = () => {
-  const { data: session } = useSession();
-
-  if (session) {
-    return (
-      <div>
-        <p>Hello, {session.user?.name}</p>
-        <button onClick={() => signOut()}>Log Out</button>
-      </div>
-    );
-  }
+  const handleSignIn = () => {
+    signIn('google', { callbackUrl: '/' }); // Redirigir al dashboard tras el login
+  };
 
   return (
-    <div className="border w-fit h-fit p-2">
-      <button onClick={() => signIn("google")}>Log In with Google</button>
+    <div className="w-fit h-fit p-2 flex border rounded-2xl max-w-md mx-auto mt-2">
+      <img
+        className="w-6 h-6 m-2"
+        src="https://www.svgrepo.com/show/475656/google-color.svg"
+        loading="lazy"
+        alt="google logo"
+      />
+      <button onClick={handleSignIn}>Continue with Google</button>
     </div>
   );
 };
