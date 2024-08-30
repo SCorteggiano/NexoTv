@@ -1,16 +1,17 @@
-'use client'
+"use client";
 import React from "react";
 // import { useUserData } from "@/helpers/hooks";
 import { useContext } from "react";
 import { UserContext } from "@/context/userContext";
-
+import { useSession } from "next-auth/react";
 
 const UserCard = () => {
   // const { user, loading, error } = useUserData();
+  const { data: session } = useSession();
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
-  console.log(user?.user)
+  console.log(user?.user);
 
   // if (loading) return <p>Loading...</p>;
   // if (error) return <p>Error loading user data.</p>;
@@ -25,11 +26,13 @@ const UserCard = () => {
         <div id="userCardInfo" className="w-full">
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Name:</p>
-            <p className="text-xl text-white">{user?.user?.firstName} {user?.user?.lastName}</p>
+            <p className="text-xl text-white">
+              {user?.user?.firstName} {user?.user?.lastName} {session?.user?.name}
+            </p>
           </div>
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Email:</p>
-            <p className="text-xl text-white">{user?.user?.email}</p>
+            <p className="text-xl text-white">{user?.user?.email} {session?.user?.email}</p>
           </div>
           <div className="mb-4">
             <p className="text-gray-300 font-semibold">Subscription:</p>

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "flowbite-react";
 
-const Succes = () => {
+const Success = () => {
   return (
     <div className="flex flex-col items-center justify-center pt-16 ">
       <h1 className="text-4xl font-bold text-green-500 ">Payment Successful!</h1>
@@ -21,4 +21,4 @@ const Succes = () => {
   );
 };
 
-export default Succes;
+export default Success;
