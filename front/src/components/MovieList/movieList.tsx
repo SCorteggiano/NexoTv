@@ -4,7 +4,7 @@ import MovieDetail from "@/components/MovieDetail/MovieDetail";
 import { useMovies } from "@/helpers/hooks";
 import { IMovie, ICategory } from "@/interfaces";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
-import { usePagination } from "@/context/pageContext"; // Importa el contexto de paginación
+import { usePagination } from "@/context/pageContext";
 import { Pagination } from "flowbite-react";
 
 const MoviesList: React.FC = () => {
@@ -13,8 +13,8 @@ const MoviesList: React.FC = () => {
   const [searchTitle, setSearchTitle] = useState<string>("");
 
   const { movies, categories } = useMovies();
-  const { currentPage, handlePageChange } = usePagination(); // Accede a la paginación
-  const itemsPerPage = 20; // Cantidad de películas por página
+  const { currentPage, handlePageChange } = usePagination();
+  const itemsPerPage = 20;
 
   const handleCardClick = (movie: IMovie) => {
     setSelectedMovie(movie);
@@ -24,10 +24,9 @@ const MoviesList: React.FC = () => {
     setSelectedMovie(null);
   };
 
-  // Lógica para manejar la selección de múltiples categorías
   const handleSelectCategory = (id: number | null) => {
     if (id === null) {
-      setSelectedCategories([]); // Limpiar todas las categorías seleccionadas si se hace clic en "All"
+      setSelectedCategories([]);
     } else {
       setSelectedCategories((prevSelectedCategories) =>
         prevSelectedCategories.includes(id)
@@ -37,34 +36,34 @@ const MoviesList: React.FC = () => {
     }
   };
 
-  // Filtrar las películas basadas en las categorías seleccionadas y el título
   const filteredMovies = movies.filter((movie: IMovie) => {
     const matchesCategory =
       selectedCategories.length === 0 ||
-      selectedCategories.some((categoryId) =>
-        categories.find((cat: ICategory) => cat.id === categoryId)?.name === movie.category
+      selectedCategories.some(
+        (categoryId) =>
+          categories.find((cat: ICategory) => cat.id === categoryId)?.name ===
+          movie.category
       );
 
-    const matchesTitle = searchTitle === "" || movie.title.toLowerCase().includes(searchTitle.toLowerCase());
+    const matchesTitle =
+      searchTitle === "" ||
+      movie.title.toLowerCase().includes(searchTitle.toLowerCase());
 
     return matchesCategory && matchesTitle;
   });
 
-  // Calcular los índices de las películas que se mostrarán en la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedMovies = filteredMovies.slice(startIndex, endIndex);
 
   return (
     <div>
-      {/* Navbar de categorías para seleccionar múltiples categorías */}
       <CategoryNavbar
         categories={categories}
         selectedCategories={selectedCategories}
         onSelectCategory={handleSelectCategory}
       />
 
-      {/* Filtro por título */}
       <div className="flex justify-center my-4">
         <input
           type="text"
@@ -75,7 +74,6 @@ const MoviesList: React.FC = () => {
         />
       </div>
 
-      {/* Mostrar películas paginadas y filtradas */}
       <div id="wholeContainer" className="m-6">
         <div
           id="movieContainer"
@@ -99,11 +97,10 @@ const MoviesList: React.FC = () => {
         <MovieDetail movie={selectedMovie} onClose={closeModal} />
       )}
 
-      {/* Paginación */}
       <div className="flex justify-center my-6">
         <Pagination
           currentPage={currentPage}
-          totalPages={Math.ceil(filteredMovies.length / itemsPerPage)} // Calcula el total de páginas
+          totalPages={Math.ceil(filteredMovies.length / itemsPerPage)}
           onPageChange={handlePageChange}
         />
       </div>

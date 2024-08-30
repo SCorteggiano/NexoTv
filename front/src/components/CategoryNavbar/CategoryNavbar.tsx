@@ -7,8 +7,8 @@ interface Category {
 
 interface CategoryNavbarProps {
   categories: Category[];
-  selectedCategories: number[]; // Cambiado a array
-  onSelectCategory: (id: number | null) => void; // Permitir que reciba null
+  selectedCategories: number[];
+  onSelectCategory: (id: number | null) => void;
 }
 
 const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
@@ -22,7 +22,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
         className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
           selectedCategories.length === 0 ? "text-blue-500" : ""
         }`}
-        onClick={() => onSelectCategory(null)} // Se pasa null para indicar "All"
+        onClick={() => onSelectCategory(null)}
       >
         All
       </h1>
