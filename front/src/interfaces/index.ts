@@ -82,6 +82,10 @@ interface ILoginValidate {
     lastName: string;
   }
 
+  interface IPrice {
+    priceId: string;
+  }
+
 export type {
     IRegisterUser,
     ILoginUser,
@@ -93,5 +97,6 @@ export type {
     ILoginUserResponse,
     IUserContext,
     ILoginValidate,
-    IRegisterValidate
+    IRegisterValidate,
+    IPrice
 }
