@@ -1,6 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
 
-
 const GET_MOVIES = gql`
   query ContentAll($paginationContentArgs: PaginationContentArgs!) {
     contentAll(paginationContentArgs: $paginationContentArgs) {
@@ -51,7 +50,7 @@ export const useMovies = () => {
   });
   return {
     movies: data?.contentAll || [],
-    categories: data?.categories || [],
+    categories: data?.category || [],
     loading,
     error,
   };

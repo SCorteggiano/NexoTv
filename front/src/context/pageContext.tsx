@@ -1,19 +1,18 @@
+"use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import {
+  IPaginationContextProps,
+  IPaginationProviderProps,
+} from "@/interfaces";
 
-interface PaginationContextProps {
-  currentPage: number;
-  totalPages: number;
-  handlePageChange: (page: number) => void;
-}
+const PaginationContext = createContext<IPaginationContextProps | undefined>(
+  undefined
+);
 
-interface PaginationProviderProps {
-  totalPages: number;
-  children: ReactNode; // Declaramos que children es un ReactNode
-}
-
-const PaginationContext = createContext<PaginationContextProps | undefined>(undefined);
-
-export const PaginationProvider: React.FC<PaginationProviderProps> = ({ totalPages, children }) => {
+export const PaginationProvider: React.FC<IPaginationProviderProps> = ({
+  totalPages,
+  children,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page: number) => {
@@ -21,7 +20,9 @@ export const PaginationProvider: React.FC<PaginationProviderProps> = ({ totalPag
   };
 
   return (
-    <PaginationContext.Provider value={{ currentPage, totalPages, handlePageChange }}>
+    <PaginationContext.Provider
+      value={{ currentPage, totalPages, handlePageChange }}
+    >
       {children}
     </PaginationContext.Provider>
   );
