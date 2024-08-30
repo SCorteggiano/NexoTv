@@ -7,22 +7,22 @@ interface Category {
 
 interface CategoryNavbarProps {
   categories: Category[];
-  selectedCategory: number | null;
-  onSelectCategory: (id: number | null) => void;
+  selectedCategories: number[]; // Cambiado a array
+  onSelectCategory: (id: number | null) => void; // Permitir que reciba null
 }
 
 const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
   categories,
-  selectedCategory,
+  selectedCategories,
   onSelectCategory,
 }) => {
   return (
     <div className="h-12 flex items-center justify-around mt-4">
       <h1
         className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
-          selectedCategory === null ? "text-blue-500" : ""
+          selectedCategories.length === 0 ? "text-blue-500" : ""
         }`}
-        onClick={() => onSelectCategory(null)}
+        onClick={() => onSelectCategory(null)} // Se pasa null para indicar "All"
       >
         All
       </h1>
@@ -30,7 +30,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
         <h1
           key={category.id}
           className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
-            selectedCategory === category.id ? "text-blue-500" : ""
+            selectedCategories.includes(category.id) ? "text-blue-500" : ""
           }`}
           onClick={() => onSelectCategory(category.id)}
         >

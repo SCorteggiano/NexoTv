@@ -7,6 +7,7 @@ import Navbar2 from "@/components/Navbar2/Navbar2";
 import ApolloProvider from '@/queries/apolloProvider'
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
+import { PaginationProvider } from "@/context/pageContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -28,7 +29,9 @@ export default function RootLayout({
         <Providers>
           <Navbar1/>
           <Navbar2 />
+          <PaginationProvider totalPages={10}>
           {children}
+          </PaginationProvider>
         </Providers>
         </ApolloProvider>
         </UserProvider>

@@ -3,7 +3,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql", 
+  uri: "https://nexotv.onrender.com/graphql/",
   credentials: "include"
 });
 

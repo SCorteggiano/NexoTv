@@ -51,6 +51,7 @@ export const useMovies = () => {
   });
   return {
     movies: data?.contentAll || [],
+    categories: data?.categories || [],
     loading,
     error,
   };

@@ -82,6 +82,12 @@ interface ILoginValidate {
     lastName: string;
   }
 
+  interface ICategory {
+    id: number;
+    name: string;
+  }
+  
+
 export type {
     IRegisterUser,
     ILoginUser,
@@ -93,5 +99,6 @@ export type {
     ILoginUserResponse,
     IUserContext,
     ILoginValidate,
-    IRegisterValidate
+    IRegisterValidate,
+    ICategory
 }
