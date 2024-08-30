@@ -1,3 +1,4 @@
+import GoogleLoginButton from "@/components/GoogleLoginButton/GoogleLoginButton";
 import LoginForm from "@/components/LoginForm";
 import React from "react";
 
@@ -12,6 +13,7 @@ const Login = () => {
           Welcome, please sign in to your account to enjoy all our services
         </p>
       </div>
+      <GoogleLoginButton/>
       <LoginForm />
     </main>
   );

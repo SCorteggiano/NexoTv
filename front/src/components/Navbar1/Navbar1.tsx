@@ -11,13 +11,16 @@ import {
 } from "flowbite-react";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar1 = () => {
   const { isLogged, logout } = useContext(UserContext);
   const router = useRouter();
+  const { data: session } = useSession();
 
   function handleLogout() {
     logout();
+    signOut()
     router.push("/");
   }
 
@@ -40,7 +43,7 @@ const Navbar1 = () => {
         </Link>
       </div>
 
-      {isLogged ? (
+      {isLogged || session ? (
         <div className="flex md:order-2">
           <Dropdown
             className="bg-[#0e0e11]"

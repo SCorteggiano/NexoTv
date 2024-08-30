@@ -1,3 +1,4 @@
+import GoogleLoginButton from "@/components/GoogleLoginButton/GoogleLoginButton";
 import RegisterForm from "@/components/RegisterForm";
 
 const Signup: React.FC = () => {
@@ -11,6 +12,7 @@ const Signup: React.FC = () => {
           Register to enjoy all our movies and series
         </p>
       </div>
+      <GoogleLoginButton/>
       <RegisterForm />
     </main>
   );
