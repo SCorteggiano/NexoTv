@@ -20,7 +20,7 @@ const Navbar1 = () => {
 
   function handleLogout() {
     logout();
-    signOut()
+    signOut({ callbackUrl: "/" })
     router.push("/");
   }
 

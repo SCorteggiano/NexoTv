@@ -9,6 +9,7 @@ import ApolloProvider from "@/queries/apolloProvider";
 import SessionProvider from "@/queries/sessionProvider"
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
+import { PaginationProvider } from "@/context/pageContext";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,14 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <SessionProvider> {/* Añade SessionProvider aquí */}
+        <SessionProvider>
           <UserProvider>
             <ApolloProvider client={client}>
               <Providers>
                 <Navbar1 />
                 <Navbar2 />
-                {children}
-              </Providers>
+                <PaginationProvider totalPages={10}>
+          {children}
+                </PaginationProvider>
+        </Providers>
             </ApolloProvider>
           </UserProvider>
         </SessionProvider>
