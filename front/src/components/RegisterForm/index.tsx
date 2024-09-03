@@ -21,8 +21,22 @@ const CREATE_USER = gql`
   }
 `;
 
+const LOGIN_USER = gql`
+  mutation Login($loginInput: LoginInput!) {
+    login(loginInput: $loginInput) {
+      token
+      user {
+        id
+        email
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
 const RegisterForm: React.FC = () => {
-  const { setIsLogged } = useContext(UserContext);
+  const { setIsLogged, login } = useContext(UserContext);
   const router = useRouter();
 
   const [registerValues, setRegisterValues] = useState({
@@ -35,6 +49,7 @@ const RegisterForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,7 +65,23 @@ const RegisterForm: React.FC = () => {
           signupInput: registerValues,
         },
       });
-      if (result) router.push("/");
+
+      if (result.data?.signup?.token) {
+        const loginResult = await loginUser({
+          variables: {
+            loginInput: {
+              email: registerValues.email,
+              password: registerValues.password,
+            },
+          },
+        });
+        if (loginResult.data?.login?.token) {
+          setIsLogged(true);
+          localStorage.setItem("token", loginResult.data.login.token);
+          localStorage.setItem("user", JSON.stringify(loginResult.data.login.user));
+          router.push("/thanks");
+        }
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
