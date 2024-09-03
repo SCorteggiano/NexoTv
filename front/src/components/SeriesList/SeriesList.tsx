@@ -26,7 +26,7 @@ const SeriesList: React.FC = () => {
 
   return (
     <div>
-         {/* <div className="mb-4 text-center">
+         <div className="mb-4 text-center">
         <select
           className="border p-2"
           value={categoryFilter || ""}
@@ -37,7 +37,7 @@ const SeriesList: React.FC = () => {
           <option value="Drama">Drama</option>
           <option value="Comedy">Comedy</option>
         </select>
-      </div> */}
+      </div>
       <div id="wholeContainer" className="m-6">
         <div
           id="movieContainer"

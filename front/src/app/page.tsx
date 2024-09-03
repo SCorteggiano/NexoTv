@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
-import ContentCard from "@/components/ContentCard/ContentCard";
 import MovieDetail from "@/components/MovieDetail/MovieDetail";
 import SeriesDetail from "@/components/SeriesDetail/SeriesDetail";
 import { IMovieCard, ISeriesCard } from "@/interfaces";
@@ -13,10 +12,6 @@ export default function Home() {
   const [selectedItem, setSelectedItem] = useState<
     IMovieCard | ISeriesCard | null
   >(null);
-
-  const handleCardClick = (item: IMovieCard | ISeriesCard) => {
-    setSelectedItem(item);
-  };
 
   const closeModal = () => {
     setSelectedItem(null);
@@ -51,7 +46,6 @@ export default function Home() {
       </div>
       <div id="allContentContainer">
         <div id="contentCardsContainer">
-          {/* <ContentCard onCardClick={handleCardClick} /> */}
         </div>
       </div>
       {selectedItem && "episodes" in selectedItem ? (

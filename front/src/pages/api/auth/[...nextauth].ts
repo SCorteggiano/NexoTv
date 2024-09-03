@@ -8,7 +8,7 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       authorization: {
         params: {
-          prompt: "select_account", // Fuerza la selección de cuenta
+          prompt: "select_account",
         },
       },
     }),
