@@ -101,13 +101,6 @@ interface IPaginationProviderProps {
   totalPages: number;
   children: ReactNode;
 }
-<<<<<<< HEAD
-
-  interface IPrice {
-    priceId: string;
-  }
-=======
->>>>>>> mauricio
 
 export type {
   IRegisterUser,
@@ -121,10 +114,6 @@ export type {
   IUserContext,
   ILoginValidate,
   IRegisterValidate,
-<<<<<<< HEAD
-    IPrice,
-=======
->>>>>>> mauricio
   ICategory,
   IPaginationContextProps,
   IPaginationProviderProps,

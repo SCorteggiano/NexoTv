@@ -10,6 +10,7 @@ import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
 import ConditionalNavbar from "@/components/Pricings";
 import { PaginationProvider } from "@/context/pageContext";
+import Footer from "@/components/Footer/Footer";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({
                 <PaginationProvider totalPages={10}>
                   <Navbar1 />
                   <ConditionalNavbar>{children}</ConditionalNavbar>
+                  <Footer/>
                 </PaginationProvider>
               </Providers>
             </ApolloProvider>
