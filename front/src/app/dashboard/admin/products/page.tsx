@@ -1,17 +1,18 @@
+import React from 'react';
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
-import React from "react";
 
-const AdminDashboard = () => {
+const Products = () => {
   return (
+
     <>
       <section>
         <AdminNavbar />
       </section>
       <section>
-        <h1>DASHBOARD DE ADMIN</h1>
+        <h1>DASHBOARD DE ADMIN / FUNCIONALIDAD PARA PRODUCTOS</h1>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default AdminDashboard;
+export default Products;
