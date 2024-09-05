@@ -1,5 +1,6 @@
 "use client";
 import Chatbot from "@/components/Chatbot/Chatbot";
+import ChatButton from "@/components/ChatButton/ChatButton";
 import Rating from "@/components/Rating/Rating";
 import RatingButton from "@/components/RatingButton/RatingButton";
 import React from "react";
@@ -20,6 +21,7 @@ const Testpage = () => {
       <div className="border p-4">
         <h1>Chatbot</h1>
         <Chatbot/>
+        <ChatButton/>
       </div>
     </div>
   );

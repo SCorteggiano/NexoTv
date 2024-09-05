@@ -10,6 +10,7 @@ import { UserProvider } from "@/context/userContext";
 import ConditionalNavbar from "@/components/Pricings";
 import { PaginationProvider } from "@/context/pageContext";
 import Footer from "@/components/Footer/Footer";
+import ChatButton from "@/components/ChatButton/ChatButton";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout({
                 <PaginationProvider totalPages={10}>
                   <Navbar1 />
                   <ConditionalNavbar>{children}</ConditionalNavbar>
+                  <ChatButton/>
                   <Footer />
                 </PaginationProvider>
               </Providers>
