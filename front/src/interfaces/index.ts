@@ -112,6 +112,11 @@ interface ISubscriptionModalProps {
   onClose: () => void;
 }
 
+interface IEditContentModalProps {
+  contentId: string;
+  onClose: () => void;
+}
+
 export type {
   IRegisterUser,
   ILoginUser,
@@ -128,5 +133,6 @@ export type {
   IPaginationContextProps,
   IPaginationProviderProps,
   IEditUserModalProps,
-  ISubscriptionModalProps
+  ISubscriptionModalProps,
+  IEditContentModalProps
 };
