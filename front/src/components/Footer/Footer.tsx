@@ -11,11 +11,17 @@ const Footer = () => {
   };
 
   return (
-    <div id="footerContainer" className="border-t p-4">
+    <div
+      id="footerContainer"
+      className="border-t p-4 w-full mt-auto"
+    >
       <div>
         <p className="text-center text-xl">NexoTV 2024</p>
         <div>
-          <p onClick={scrollToTop} className="text-end cursor-pointer">
+          <p
+            onClick={scrollToTop}
+            className="text-end cursor-pointer text-blue-600"
+          >
             Back To Top
           </p>
         </div>

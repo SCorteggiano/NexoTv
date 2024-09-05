@@ -1,12 +1,17 @@
 'use client';
-import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
+import Rating from '@/components/Rating/Rating';
+import RatingButton from '@/components/RatingButton/RatingButton';
 import React from 'react';
 
 const Testpage = () => {
+
+  const movieRating = 3
+
   return (
     <div id='wholeContainer' className='m-6'>
       <h1 className='m-4 text-5xl text-center'>Test Page</h1>
-      <FavoriteButton/>
+      <RatingButton/>
+      <Rating rating={movieRating}/>
     </div>
   );
 };
