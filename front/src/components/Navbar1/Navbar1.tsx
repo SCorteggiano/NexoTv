@@ -12,6 +12,7 @@ import {
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const Navbar1 = () => {
   const { isLogged, logout } = useContext(UserContext);
@@ -45,6 +46,7 @@ const Navbar1 = () => {
 
       {isLogged || session ? (
         <div className="flex md:order-2">
+          <FavoriteButton/>
           <Dropdown
             className="bg-[#0e0e11]"
             arrowIcon={false}

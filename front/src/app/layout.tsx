@@ -1,4 +1,3 @@
-// layout.tsx
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -25,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={`${montserrat.className} flex flex-col min-h-screen`}>
         <SessionProvider>
           <UserProvider>
             <ApolloProvider client={client}>
@@ -33,7 +32,7 @@ export default function RootLayout({
                 <PaginationProvider totalPages={10}>
                   <Navbar1 />
                   <ConditionalNavbar>{children}</ConditionalNavbar>
-                  <Footer/>
+                  <Footer />
                 </PaginationProvider>
               </Providers>
             </ApolloProvider>

@@ -102,6 +102,21 @@ interface IPaginationProviderProps {
   children: ReactNode;
 }
 
+interface IEditUserModalProps {
+  userId: string;
+  onClose: () => void;
+}
+
+interface ISubscriptionModalProps {
+  userId: string;
+  onClose: () => void;
+}
+
+interface IEditContentModalProps {
+  contentId: string;
+  onClose: () => void;
+}
+
 export type {
   IRegisterUser,
   ILoginUser,
@@ -117,4 +132,7 @@ export type {
   ICategory,
   IPaginationContextProps,
   IPaginationProviderProps,
+  IEditUserModalProps,
+  ISubscriptionModalProps,
+  IEditContentModalProps
 };
