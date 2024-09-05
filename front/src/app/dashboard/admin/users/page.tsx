@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import Swal from "sweetalert2";
 import EditUserModal from "@/components/EditUserModal/EditUserModal";
+import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
 import { Button } from "flowbite-react";
 
 const GET_USERS = gql`
@@ -26,6 +26,7 @@ const GET_USERS = gql`
 
 const Users: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
+  const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null); // Nuevo estado para manejar la suscripción
   const { data, loading, error } = useQuery(GET_USERS, {
     variables: {
       paginationArgs: { limit: 10, offset: 0 },
@@ -53,29 +54,39 @@ const Users: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data.users.map((user: any) => (
-                <tr key={user.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {user.firstName} {user.lastName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {user.roles.join(", ")}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {user.subscription?.tipo || "No Subscription"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <Button
-                      pill
-                      className="bg-violet hover:bg-darkviolet text-center mr-3 px-6 py-2 ml-4"
-                      onClick={() => setSelectedUser(user.id)}
-                    >
-                      Edit
-                    </Button>
+              {data?.users?.length > 0 ? (
+                data.users.map((user: any) => (
+                  <tr key={user.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {user.firstName} {user.lastName}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {user.email}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {user.roles.join(", ")}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {user.subscription?.tipo || "No Subscription"}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <Button
+                        pill
+                        className="bg-violet hover:bg-darkviolet text-center mr-3 px-6 py-2 ml-4"
+                        onClick={() => setSelectedUser(user.id)}
+                      >
+                        Edit
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="text-center py-4">
+                    No users found.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -84,6 +95,13 @@ const Users: React.FC = () => {
           <EditUserModal
             userId={selectedUser}
             onClose={() => setSelectedUser(null)}
+          />
+        )}
+
+        {selectedSubscriptionUser && (
+          <ManageSubscriptionModal
+            userId={selectedSubscriptionUser}
+            onClose={() => setSelectedSubscriptionUser(null)}
           />
         )}
       </div>
