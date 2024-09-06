@@ -17,7 +17,7 @@ const faq = [
   {
     question: "I need more help, how can I contact support?",
     answer:
-      " If you need additional assistance or have any questions, you can contact our support team in several ways. You can use the contact form available in the Help section on our website to send your inquiry directly. You can also email us at nexotv@mail.com, and one of our representatives will get back to you as soon as possible. Our support team is available to help with any issues or questions you may have about NexoTV.",
+      " If you need additional assistance or have any questions, you can contact our support team in several ways. You can use the contact form available in the Help section on our website to send your inquiry directly. You can also email us at nexotvn@gmail.com, and one of our representatives will get back to you as soon as possible. Our support team is available to help with any issues or questions you may have about NexoTV.",
   },
 ];
 
