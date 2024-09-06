@@ -11,6 +11,8 @@ import ConditionalNavbar from "@/components/Pricings";
 import { PaginationProvider } from "@/context/pageContext";
 import Footer from "@/components/Footer/Footer";
 import ChatButton from "@/components/ChatButton/ChatButton";
+import { SearchProvider } from "@/context/searchContext";
+
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,16 +30,18 @@ export default function RootLayout({
       <body className={`${montserrat.className} flex flex-col min-h-screen`}>
         <SessionProvider>
           <UserProvider>
-            <ApolloProvider client={client}>
-              <Providers>
-                <PaginationProvider totalPages={10}>
-                  <Navbar1 />
-                  <ConditionalNavbar>{children}</ConditionalNavbar>
-                  <ChatButton/>
-                  <Footer />
-                </PaginationProvider>
-              </Providers>
-            </ApolloProvider>
+            <SearchProvider>
+              <ApolloProvider client={client}>
+                <Providers>
+                  <PaginationProvider totalPages={10}>
+                    <Navbar1 />
+                    <ConditionalNavbar>{children}</ConditionalNavbar>
+                    <ChatButton />
+                    <Footer />
+                  </PaginationProvider>
+                </Providers>
+              </ApolloProvider>
+            </SearchProvider>
           </UserProvider>
         </SessionProvider>
       </body>

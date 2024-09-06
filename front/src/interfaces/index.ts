@@ -41,19 +41,20 @@ interface IMovieCard {
 }
 
 interface ISeriesCard {
-  img: string;
+  id: number,
   title: string;
+  image: string,
   description: string;
-  episodes: string;
+  episodes?: string;
 }
 
 interface ISeries {
   id: number;
-  category: string;
+  category: string[];
   title: string;
   episodes: string;
   description: string;
-  img: string;
+  image: string;
 }
 
 interface IUserContext {

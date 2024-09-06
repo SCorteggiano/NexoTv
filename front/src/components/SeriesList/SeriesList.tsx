@@ -1,64 +1,118 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import SeriesCard from "@/components/SeriesCard/SeriesCard";
 import SeriesDetail from "@/components/SeriesDetail/SeriesDetail";
 import { useSeries } from "@/helpers/hooks";
-import { ISeriesCard } from "@/interfaces";
-import { ISeries } from "@/interfaces";
+import { ISeries, ICategory } from "@/interfaces";
+import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
+import { usePagination } from "@/context/pageContext";
+import { Pagination } from "flowbite-react";
+import { useSearch } from "@/context/searchContext"; // Importar el contexto
 
-const SeriesList: React.FC = () => {
-  const [selectedSerie, setSelectedSerie] = useState<ISeriesCard | null>(null);
-  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
-
+const SeriesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering }) => {
+  const [selectedSeries, setSelectedSeries] = useState<ISeries | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const { series } = useSeries();
+  const { currentPage, handlePageChange } = usePagination();
+  const itemsPerPage = 20;
+  const { searchQuery } = useSearch(); // Obtener la búsqueda global
 
-  const handleCardClick = (serie: ISeriesCard) => {
-    setSelectedSerie(serie);
+  const handleCardClick = (series: ISeries) => {
+    setSelectedSeries(series);
   };
 
   const closeModal = () => {
-    setSelectedSerie(null);
+    setSelectedSeries(null);
   };
 
-  const filteredSeries = categoryFilter
-  ? series.filter((serie: ISeries) => serie.category === categoryFilter)
-  : series;
+  const handleSelectCategory = (id: number | null) => {
+    if (id === null) {
+      setSelectedCategories([]);
+    } else {
+      setSelectedCategories((prevSelectedCategories) =>
+        prevSelectedCategories.includes(id)
+          ? prevSelectedCategories.filter((catId) => catId !== id)
+          : [...prevSelectedCategories, id]
+      );
+    }
+  };
+
+  // Extrae y construye una lista única de categorías
+  const categories: ICategory[] = useMemo(() => {
+    const allCategories: ICategory[] = [];
+
+    series.forEach((serie: ISeries) => {
+      serie.category.forEach((cat: string) => {
+        if (!allCategories.find((c) => c.name === cat)) {
+          allCategories.push({ id: allCategories.length + 1, name: cat });
+        }
+      });
+    });
+
+    return allCategories;
+  }, [series]);
+
+  const filteredSeries = series.filter((serie: ISeries) => {
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      selectedCategories.some((categoryId) =>
+        serie.category.includes(
+          categories.find((cat) => cat.id === categoryId)?.name || ""
+        )
+      );
+
+    const matchesTitle =
+      searchQuery === "" ||
+      serie.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesTitle;
+  });
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedSeries = filteredSeries.slice(startIndex, endIndex);
 
   return (
     <div>
-         <div className="mb-4 text-center">
-        <select
-          className="border p-2"
-          value={categoryFilter || ""}
-          onChange={(e) => setCategoryFilter(e.target.value || null)}
-        >
-          <option value="">All Categories</option>
-          <option value="Action">Action</option>
-          <option value="Drama">Drama</option>
-          <option value="Comedy">Comedy</option>
-        </select>
-      </div>
+      {enableFiltering && (
+        <>
+          <CategoryNavbar
+            categories={categories}
+            selectedCategories={selectedCategories}
+            onSelectCategory={handleSelectCategory}
+          />
+        </>
+      )}
+
       <div id="wholeContainer" className="m-6">
         <div
-          id="movieContainer"
+          id="seriesContainer"
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
         >
-          {series.map((series: ISeries) => (
+          {paginatedSeries.map((serie: ISeries) => (
             <SeriesCard
-              key={series.id}
-              img={series.img}
-              title={series.title}
-              description={series.description}
-              episodes={series.episodes}
-              onClick={() => handleCardClick(series)}
+              key={serie.id}
+              id={serie.id}
+              image={serie.image}
+              title={serie.title}
+              description={serie.description}
+              onClick={() => handleCardClick(serie)}
             />
           ))}
         </div>
       </div>
 
-      {selectedSerie && (
-        <SeriesDetail serie={selectedSerie} onClose={closeModal} />
+      {selectedSeries && (
+        <SeriesDetail serie={selectedSeries} onClose={closeModal} />
       )}
+
+      <div className="flex justify-center my-6">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredSeries.length / itemsPerPage)}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };
