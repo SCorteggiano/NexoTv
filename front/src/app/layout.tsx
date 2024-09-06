@@ -3,11 +3,12 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
-import ApolloProvider from '@/queries/apolloProvider';
+import ApolloProvider from "@/queries/apolloProvider";
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
 import { PaginationProvider } from "@/context/pageContext";
 import ConditionalNavbar from "@/components/Pricings";
+import { SearchProvider } from "@/context/searchContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -25,16 +26,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <UserProvider>
-          <ApolloProvider client={client}>
-            <Providers>
-              <PaginationProvider totalPages={10}>
-              <Navbar1 />
-              <ConditionalNavbar>
-                {children}
-                </ConditionalNavbar>
-              </PaginationProvider>
-            </Providers>
-          </ApolloProvider>
+          <SearchProvider>
+            <ApolloProvider client={client}>
+              <Providers>
+                <PaginationProvider totalPages={10}>
+                  <Navbar1 />
+                  <ConditionalNavbar>{children}</ConditionalNavbar>
+                </PaginationProvider>
+              </Providers>
+            </ApolloProvider>
+          </SearchProvider>
         </UserProvider>
       </body>
     </html>

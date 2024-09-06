@@ -47,7 +47,8 @@ export default function Home() {
             alt="Texto alternativo"
           />
         </Carousel>
-        <MoviesList />
+        <MoviesList enableFiltering={false} />
+        {/* <SeriesList enableFiltering={false}/> */}
       </div>
       <div id="allContentContainer">
         <div id="contentCardsContainer">

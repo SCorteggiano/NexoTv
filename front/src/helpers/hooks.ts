@@ -68,6 +68,7 @@ export const useSeries = () => {
 
   return {
     series: data?.seriesAll || [],
+    categories: data?.category || [],
     loading,
     error,
   };
