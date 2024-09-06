@@ -4,13 +4,21 @@ import "./globals.css";
 import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import ApolloProvider from "@/queries/apolloProvider";
+<<<<<<< HEAD
 import SessionProvider from "@/queries/sessionProvider";
+=======
+>>>>>>> mauricio
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
 import ConditionalNavbar from "@/components/Pricings";
+<<<<<<< HEAD
 import { PaginationProvider } from "@/context/pageContext";
 import Footer from "@/components/Footer/Footer";
 import ChatButton from "@/components/ChatButton/ChatButton";
+=======
+import { SearchProvider } from "@/context/searchContext";
+
+>>>>>>> mauricio
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,14 +33,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+<<<<<<< HEAD
       <body className={`${montserrat.className} flex flex-col min-h-screen`}>
         <SessionProvider>
           <UserProvider>
+=======
+      <body className={montserrat.className}>
+        <UserProvider>
+          <SearchProvider>
+>>>>>>> mauricio
             <ApolloProvider client={client}>
               <Providers>
                 <PaginationProvider totalPages={10}>
                   <Navbar1 />
                   <ConditionalNavbar>{children}</ConditionalNavbar>
+<<<<<<< HEAD
                   <ChatButton/>
                   <Footer />
                 </PaginationProvider>
@@ -40,6 +55,13 @@ export default function RootLayout({
             </ApolloProvider>
           </UserProvider>
         </SessionProvider>
+=======
+                </PaginationProvider>
+              </Providers>
+            </ApolloProvider>
+          </SearchProvider>
+        </UserProvider>
+>>>>>>> mauricio
       </body>
     </html>
   );
