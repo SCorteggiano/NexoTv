@@ -118,6 +118,9 @@ interface IEditContentModalProps {
   onClose: () => void;
 }
 
+interface IPrice {
+  	priceId: string;
+}
 export type {
   IRegisterUser,
   ILoginUser,
@@ -135,5 +138,6 @@ export type {
   IPaginationProviderProps,
   IEditUserModalProps,
   ISubscriptionModalProps,
-  IEditContentModalProps
+  IEditContentModalProps,
+  IPrice
 };

@@ -45,7 +45,7 @@ const Pricings = () => {
         <div className="bg-opacity-80 border border-white rounded-2xl text-center p-8 w-80 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h1 className="font-bold text-4xl text-white">Annual</h1>
           <hr className="my-4 border-gray-300" />
-          <h2 className="mt-8 mb-8 text-5xl text-white">$100/m</h2>
+          <h2 className="mt-8 mb-8 text-5xl text-white">$100/y</h2>
           <ul className="text-lg text-gray-200">
             <li className="p-4">Ad-free</li>
             <li className="p-4">Save up to $20</li>

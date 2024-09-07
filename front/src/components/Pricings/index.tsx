@@ -10,7 +10,7 @@ export default function ConditionalNavbar({
 }) {
   const pathname = usePathname();
 
-  const showNavbar2 = ["/", "/movies", "/series"].includes(pathname);
+  const showNavbar2 = pathname && ["/", "/movies", "/series"].includes(pathname);
 
   return (
     <>

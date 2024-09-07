@@ -20,7 +20,7 @@ const SeriesDetail: React.FC<SeriesDetailProps> = ({ serie, onClose }) => {
         </div>
         <img
           className="w-full h-64 object-cover mb-4 rounded-xl"
-          src={serie.img}
+          src={serie.image}
           alt={serie.title}
         />
         <h2 className="text-2xl font-bold mb-2">{serie.title}</h2>
