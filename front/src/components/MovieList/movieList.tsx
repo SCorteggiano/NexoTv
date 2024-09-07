@@ -7,15 +7,16 @@ import { IMovie, ICategory } from "@/interfaces";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import { usePagination } from "@/context/pageContext";
 import { Pagination } from "flowbite-react";
+import { useSearch } from "@/context/searchContext"; // Importar el contexto
 
-const MoviesList: React.FC = () => {
+const MoviesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering }) => {
   const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-  const [searchTitle, setSearchTitle] = useState<string>("");
 
   const { movies } = useMovies();
   const { currentPage, handlePageChange } = usePagination();
   const itemsPerPage = 20;
+  const { searchQuery } = useSearch(); // Obtener la búsqueda global
 
   const handleCardClick = (movie: IMovie) => {
     setSelectedMovie(movie);
@@ -62,8 +63,8 @@ const MoviesList: React.FC = () => {
       );
 
     const matchesTitle =
-      searchTitle === "" ||
-      movie.title.toLowerCase().includes(searchTitle.toLowerCase());
+      searchQuery === "" ||
+      movie.title.toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchesCategory && matchesTitle;
   });
@@ -74,52 +75,15 @@ const MoviesList: React.FC = () => {
 
   return (
     <div>
-      <CategoryNavbar
-        categories={categories}
-        selectedCategories={selectedCategories}
-        onSelectCategory={handleSelectCategory}
-      />
-
-      <label
-        htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-      >
-        Search
-      </label>
-      <div className="relative m-5">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg
-            className="w-4 h-4 text-gray-500"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-        </div>
-        <input
-          onChange={(e) => setSearchTitle(e.target.value)}
-          value={searchTitle}
-          type="search"
-          id="default-search"
-          className="block w-full p-4 ps-10 text-sm border border-gray-300 rounded-lg bg-black focus:ring-violet focus:border-darkviolet"
-          placeholder="Search Movies"
-          required
-        />
-        <button
-          type="submit"
-          className="absolute end-2.5 bottom-2.5 bg-violet hover:bg-darkviolet focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
-        >
-          Search
-        </button>
-      </div>
+      {enableFiltering && (
+        <>
+          <CategoryNavbar
+            categories={categories}
+            selectedCategories={selectedCategories}
+            onSelectCategory={handleSelectCategory}
+          />
+        </>
+      )}
 
       <div id="wholeContainer" className="m-6">
         <div
@@ -156,3 +120,4 @@ const MoviesList: React.FC = () => {
 };
 
 export default MoviesList;
+

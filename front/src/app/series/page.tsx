@@ -7,7 +7,7 @@ const Series = () => {
       <div className="text-center">
         <h1 className="text-4xl font-extrabold">SERIES</h1>
       </div>
-      <SeriesList />
+      <SeriesList enableFiltering={true} />
     </>
   );
 };

@@ -13,6 +13,7 @@ const StarRatingMenu = () => {
 
   const thanksMessage = () => {
     Swal.fire("Thanks for your review!")
+    setRating(0)
   }
 
   return (

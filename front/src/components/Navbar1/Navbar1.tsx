@@ -39,9 +39,6 @@ const Navbar1 = () => {
         <Link href="/pricings" className="m-6 hover:border-b-2">
           Pricings
         </Link>
-        <Link href="/about" className="m-6 hover:border-b-2">
-          About
-        </Link>
       </div>
 
       {isLogged || session ? (

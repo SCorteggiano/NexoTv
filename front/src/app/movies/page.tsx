@@ -7,7 +7,7 @@ const Movies = () => {
       <div className="text-center">
         <h1 className="text-4xl font-extrabold">MOVIES</h1>
       </div>
-      <MoviesList />
+      <MoviesList enableFiltering={true}/>
     </>
   );
 };
