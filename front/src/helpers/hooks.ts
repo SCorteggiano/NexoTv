@@ -54,6 +54,7 @@ export const useMovies = () => {
     loading,
     error,
   };
+
 };
 
 export const useSeries = () => {

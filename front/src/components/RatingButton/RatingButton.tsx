@@ -1,8 +1,6 @@
-'use client'
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import StarRatingMenu from '../StarRatingMenu/StarRatingMenu';
+"use client";
+import React, { useState } from "react";
+import StarRatingMenu from "../StarRatingMenu/StarRatingMenu";
 
 const RatingButton = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -12,13 +10,11 @@ const RatingButton = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <button
-        className="flex items-center justify-center rounded-full cursor-pointer border p-2"
-        onClick={toggleMenu}
-      >
-        <FontAwesomeIcon icon={faStar} size="xl" className="text-yellow-400" />
-        <p className="ml-2 text-2xl font-bold">Rate</p>
+    <div>
+      <button className="cursor-pointer" onClick={toggleMenu}>
+        <p className="bg-yellow-400 hover:bg-yellow-600 transition-all text-white px-4 py-2 rounded">
+          Rate
+        </p>
       </button>
 
       {showMenu && <StarRatingMenu />}

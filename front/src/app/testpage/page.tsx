@@ -1,4 +1,6 @@
 "use client";
+import Rating from "@/components/Rating/Rating";
+import RatingButton from "@/components/RatingButton/RatingButton";
 import React from "react";
 
 const Testpage = () => {
@@ -8,6 +10,8 @@ const Testpage = () => {
       <h1 className="m-4 text-5xl text-center">Test Page</h1>
       <div>
         <h1>Hello</h1>
+        <Rating rating={"5"}/>
+        <RatingButton/>
       </div>
     </div>
   );

@@ -43,7 +43,6 @@ const Navbar1 = () => {
 
       {isLogged || session ? (
         <div className="flex md:order-2">
-          <FavoriteButton/>
           <Dropdown
             className="bg-[#0e0e11]"
             arrowIcon={false}
