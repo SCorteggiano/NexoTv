@@ -15,7 +15,7 @@ const MoviesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering })
 
   const { movies } = useMovies();
   const { currentPage, handlePageChange } = usePagination();
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
   const { searchQuery } = useSearch(); // Obtener la búsqueda global
 
   const handleCardClick = (movie: IMovie) => {
