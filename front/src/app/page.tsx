@@ -42,12 +42,11 @@ export default function Home() {
             alt="Texto alternativo"
           />
         </Carousel>
-        <MoviesList enableFiltering={false} />
+        <div></div>
         {/* <SeriesList enableFiltering={false}/> */}
       </div>
       <div id="allContentContainer">
-        <div id="contentCardsContainer">
-        </div>
+        <MoviesList enableFiltering={false} />
       </div>
       {selectedItem && "episodes" in selectedItem ? (
         <SeriesDetail
