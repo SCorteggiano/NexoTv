@@ -18,6 +18,8 @@ const GET_USERS = gql`
       lastName
       roles
       subscription {
+        id
+        price
         tipo
       }
     }
@@ -33,6 +35,7 @@ const Users: React.FC = () => {
       validRolesArgs: { roles: ["admin", "user"] },
     },
   });
+  console.log("Users data:", data);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading users</p>;

@@ -2,17 +2,19 @@
 import React from "react";
 import stripePromise from "@/helpers/stripeClient";
 import Router from "next/router";
-import { IPrice } from "@/interfaces";
 import { gql, useMutation } from "@apollo/client";
+import { ICheckoutSessionDto } from "@/interfaces";
 
-// Definir la mutación de GraphQL
+// Definir la mutación de GraphQL con el DTO completo
 const CREATE_CHECKOUT_SESSION = gql`
-  mutation CreateCheckoutSession($priceId: String!) {
-    createCheckoutSession(priceId: $priceId)
+  mutation CreateCheckoutSession($createCheckoutSessionDto: CreateCheckoutSessionDto!) {
+    createCheckoutSession(createCheckoutSessionDto: $createCheckoutSessionDto)
   }
 `;
 
-const CheckoutButton: React.FC<IPrice> = ({ priceId }) => {
+
+const CheckoutButton: React.FC<ICheckoutSessionDto> = ({ priceId, price, tipo, userId }) => {
+
   // Usar el hook de mutación
   const [createCheckoutSession] = useMutation(CREATE_CHECKOUT_SESSION);
 
@@ -23,13 +25,24 @@ const CheckoutButton: React.FC<IPrice> = ({ priceId }) => {
     try {
       // Llamar a la mutación para crear la sesión de checkout
       const { data } = await createCheckoutSession({
-        variables: { priceId },
+        variables: {
+          createCheckoutSessionDto: {
+            priceId,
+            tipo,
+            price,
+            userId,
+          } as ICheckoutSessionDto,
+        },
       });
 
       // Redirigir al checkout de Stripe usando el sessionId retornado por la mutación
       const result = await stripe?.redirectToCheckout({
         sessionId: data.createCheckoutSession,
       });
+
+      if (result?.error) {
+        console.error("Error in Stripe checkout:", result.error.message);
+      }
     } catch (error) {
       console.error("Error creating checkout session:", error);
     }

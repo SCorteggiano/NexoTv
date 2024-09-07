@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { IEditContentModalProps } from "@/interfaces";
 import { Button } from "flowbite-react";
+import Swal from "sweetalert2";
 
 const GET_CONTENT = gql`
   query Content($id: String!) {
@@ -52,24 +53,35 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
   useEffect(() => {
     if (data) {
       setFormData({
-        title: data.content.title,
-        description: data.content.description,
-        image: data.content.image,
-        duration: data.content.duration,
-        category: data.content.category,
+        title: data.content.title || "",
+        description: data.content.description || "",
+        image: data.content.image || "",
+        duration: data.content.duration || "",
+        category: data.content.category || "",
       });
     }
   }, [data]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Validación de los datos antes de enviar la mutation
+    if (!formData.title || !formData.description || !formData.image) {
+      Swal.fire("Error", "Please fill in all the required fields", "error");
+      return;
+    }
+
     try {
-      await updateContent({
+      const result = await updateContent({
         variables: { updateContentInput: { ...formData, id: contentId } },
       });
-      onClose();
+
+      if (result.data) {
+        Swal.fire("Success", "Content updated successfully", "success");
+        onClose();
+      }
     } catch (error) {
       console.error("Error updating content:", error);
+      Swal.fire("Error", "There was an error updating the content", "error");
     }
   };
 
@@ -127,19 +139,10 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             className="mb-2"
           />
           <div className="flex justify-between">
-            <Button pill
-              type="submit"
-              className="px-4 py-2 rounded-lg"
-              color={"green"}
-            >
+            <Button pill type="submit" className="px-4 py-2 rounded-lg">
               Save Changes
             </Button>
-            <Button pill
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-lg"
-              color={"red"}
-            >
+            <Button pill type="button" onClick={onClose} className="px-4 py-2 rounded-lg">
               Cancel
             </Button>
           </div>
@@ -150,3 +153,4 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
 };
 
 export default EditContentModal;
+

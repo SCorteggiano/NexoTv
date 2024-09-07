@@ -19,7 +19,11 @@ interface IUser {
   lastName: string;
   email: string;
   password: string;
-  subscription?: boolean;
+  subscription?: {
+    tipo: string;
+    id: string;
+    price?: number;
+  };
 }
 
 interface IMovie {
@@ -121,6 +125,20 @@ interface IEditContentModalProps {
 interface IPrice {
   	priceId: string;
 }
+
+interface ICheckoutSessionDto {
+  priceId: string;
+  price: number;
+  tipo: string;
+  userId: string | null;
+}
+
+export enum tipo {
+  Monthly= "Monthly",
+  Annual= "Annual",
+  Free= "Free",
+}
+
 export type {
   IRegisterUser,
   ILoginUser,
@@ -139,5 +157,6 @@ export type {
   IEditUserModalProps,
   ISubscriptionModalProps,
   IEditContentModalProps,
-  IPrice
+  IPrice,
+  ICheckoutSessionDto
 };
