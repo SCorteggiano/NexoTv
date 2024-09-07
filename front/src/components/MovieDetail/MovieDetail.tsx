@@ -2,6 +2,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { IMovieCard } from "@/interfaces";
+import RatingButton from "../RatingButton/RatingButton";
+import Rating from "../Rating/Rating";
 
 interface MovieDetailProps {
   movie: IMovieCard | null;
@@ -10,6 +12,10 @@ interface MovieDetailProps {
 
 const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
   const router = useRouter();
+  
+  const handleRate = () => {
+    alert("Button Clicked")
+  }
 
   if (!movie) return null;
 
@@ -33,9 +39,8 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
           src={movie.image}
           alt={movie.title}
         />
-        <h2 className="text-2xl font-bold mb-2">
-          {movie.title}
-        </h2>
+        <h2 className="text-2xl font-bold">{movie.title}</h2>
+        <Rating rating={"5"}/>
         <p className="mb-4">{movie.description}</p>
         <p className="mb-4 font-semibold">
           Duration: {movie.duration}
@@ -47,9 +52,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
           >
             Play
           </button>
-          <button className="bg-red-500 hover:bg-red-700 transition-all px-4 py-2 rounded">
-            Save
-          </button>
+          <RatingButton/>
         </div>
       </div>
     </div>

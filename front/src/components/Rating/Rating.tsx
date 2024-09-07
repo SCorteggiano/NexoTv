@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface RatingProps {
-  rating: number;
+  rating: string;
 }
 
 const Rating: React.FC<RatingProps> = ({ rating }) => {
+  const numericRating = parseFloat(rating);
+
   return (
     <div className="flex items-center space-x-1">
       {[1, 2, 3, 4, 5].map((star) => (
@@ -15,7 +17,7 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
           key={star}
           icon={faStar}
           size="lg"
-          className={`${star <= rating ? "text-yellow-400" : "text-gray-800"}`}
+          className={`${star <= numericRating ? "text-yellow-400" : "text-gray-800"}`}
         />
       ))}
     </div>

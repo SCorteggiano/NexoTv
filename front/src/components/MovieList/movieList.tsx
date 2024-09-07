@@ -14,6 +14,8 @@ const MoviesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering })
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
   const { movies } = useMovies();
+
+  console.log(movies)
   const { currentPage, handlePageChange } = usePagination();
   const itemsPerPage = 10;
   const { searchQuery } = useSearch(); // Obtener la búsqueda global

@@ -45,7 +45,6 @@ const Navbar1 = () => {
       {isLogged || session ? (
         <div className="flex md:order-2 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
           <ThemeButton />
-          <FavoriteButton />
           <Dropdown
             className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
             arrowIcon={false}
