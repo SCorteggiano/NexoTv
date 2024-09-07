@@ -1,54 +1,67 @@
-'use client'
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 
 const HelpForm = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    message: ''
+    email: "",
+    message: "",
   });
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
+    console.log("Form data submitted:", formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 rounded-lg shadow-md bg-lightBackground dark:bg-darkBackground"
+    >
       <div className="mb-4">
-        <label htmlFor="email" className="block text-lg font-medium mb-2">Email</label>
+        <label
+          htmlFor="email"
+          className="block text-lg font-medium mb-2 text-lightText dark:text-darkText"
+        >
+          Email
+        </label>
         <input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-black"
+          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
           required
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="message" className="block text-lg font-medium mb-2">Message</label>
+        <label
+          htmlFor="message"
+          className="block text-lg font-medium mb-2 text-lightText dark:text-darkText"
+        >
+          Message
+        </label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
           rows="4"
           required
         ></textarea>
       </div>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
       >
         Send Message
       </button>

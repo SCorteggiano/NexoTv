@@ -78,7 +78,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
+      <div className="bg-lightBackground dark:bg-darkBackground p-8 rounded-lg shadow-lg text-lightText dark:text-darkText">
         <h2 className="text-2xl mb-4">Edit Content</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -88,7 +88,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -97,7 +97,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) =>
               setFormData({ ...formData, description: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -106,7 +106,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) =>
               setFormData({ ...formData, image: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -115,7 +115,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) =>
               setFormData({ ...formData, duration: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -124,21 +124,21 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <div className="flex justify-between">
-            <Button pill
+            <Button
+              pill
               type="submit"
-              className="px-4 py-2 rounded-lg"
-              color={"green"}
+              className="px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white"
             >
               Save Changes
             </Button>
-            <Button pill
+            <Button
+              pill
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-lg"
-              color={"red"}
+              className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white"
             >
               Cancel
             </Button>

@@ -92,6 +92,12 @@ interface ICategory {
   name: string;
 }
 
+interface ICategoryNavbarProps {
+  categories: ICategory[];
+  selectedCategories: number[];
+  onSelectCategory: (id: number | null) => void;
+}
+
 interface IPaginationContextProps {
   currentPage: number;
   totalPages: number;
@@ -131,6 +137,7 @@ export type {
   ILoginValidate,
   IRegisterValidate,
   ICategory,
+  ICategoryNavbarProps,
   IPaginationContextProps,
   IPaginationProviderProps,
   IEditUserModalProps,

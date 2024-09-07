@@ -7,14 +7,15 @@ const Navbar2 = () => {
   const { searchQuery, setSearchQuery } = useSearch();
 
   return (
-    <Navbar fluid className="bg-[#0e0e11] mb-3">
+    <Navbar fluid className="bg-lightBackground dark:bg-darkBackground mb-3">
       <div className="flex justify-between w-full">
+        {/* Botones de navegación */}
         <div className="flex">
           <Button
             pill
             as={Link}
             href="/movies"
-            className="bg-violet hover:bg-darkviolet mr-3 px-6 py-2 "
+            className="font-bold bg-violet hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-dark"
           >
             Movies
           </Button>
@@ -22,18 +23,19 @@ const Navbar2 = () => {
             pill
             as={Link}
             href="/series"
-            className="bg-violet hover:bg-darkviolet text-center mr-3 px-6 py-2 "
+            className="font-bold bg-violet hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-dark "
           >
             Series
           </Button>
         </div>
+        {/* Buscador y toggle */}
         <div className="flex items-center">
           <input
             type="search"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="block w-48 p-2 text-sm border border-gray-300 rounded-lg bg-black text-white focus:ring-violet focus:border-darkviolet"
+            className="block w-48 p-2 text-sm border border-violet dark:border-violet rounded-lg bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText focus:ring-violet focus:border-darkviolet"
           />
           <NavbarToggle />
         </div>

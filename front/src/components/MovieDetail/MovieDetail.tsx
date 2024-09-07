@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { IMovieCard } from "@/interfaces";
 
 interface MovieDetailProps {
@@ -18,12 +18,12 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
-      <div className="bg-black bg-opacity-80 border-violet p-6 rounded-lg shadow-lg max-w-lg w-full">
+    <div className="fixed inset-0 flex items-center justify-center bg-darkBackground bg-opacity-70">
+      <div className="bg-darkBackground border-violet p-6 rounded-lg shadow-lg max-w-lg w-full">
         <div className="flex justify-end">
           <button
             onClick={onClose}
-            className="h-8 w-8 text-white text-2xl rounded-full bg-red-800 hover:bg-red-900"
+            className="h-8 w-8 text-darkText text-2xl rounded-full bg-red-800 hover:bg-red-900"
           >
             &times;
           </button>
@@ -33,9 +33,13 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
           src={movie.image}
           alt={movie.title}
         />
-        <h2 className="text-2xl font-bold mb-2">{movie.title}</h2>
-        <p className="mb-4">{movie.description}</p>
-        <p className="mb-4 font-semibold">Duration: {movie.duration}</p>
+        <h2 className="text-2xl font-bold mb-2 text-lightText">
+          {movie.title}
+        </h2>
+        <p className="mb-4 text-lightText">{movie.description}</p>
+        <p className="mb-4 font-semibold text-lightText">
+          Duration: {movie.duration}
+        </p>
         <div className="flex justify-between">
           <button
             onClick={handlePlay}

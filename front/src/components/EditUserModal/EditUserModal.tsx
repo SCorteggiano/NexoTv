@@ -68,7 +68,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
+      <div className="bg-lightBackground dark:bg-darkBackground p-8 rounded-lg shadow-lg text-lightText dark:text-darkText">
         <h2 className="text-2xl mb-4">Edit User</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -78,7 +78,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, firstName: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -87,7 +87,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, lastName: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="email"
@@ -96,13 +96,13 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <div className="flex justify-between">
             <Button
               pill
               type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded-lg"
+              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
             >
               Save Changes
             </Button>
@@ -110,7 +110,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
               pill
               type="button"
               onClick={onClose}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg"
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
             >
               Cancel
             </Button>

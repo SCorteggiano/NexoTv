@@ -1,17 +1,7 @@
 import React from "react";
+import { ICategory, ICategoryNavbarProps } from "@/interfaces";
 
-interface Category {
-  id: number;
-  name: string;
-}
-
-interface CategoryNavbarProps {
-  categories: Category[];
-  selectedCategories: number[];
-  onSelectCategory: (id: number | null) => void;
-}
-
-const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
+const CategoryNavbar: React.FC<ICategoryNavbarProps> = ({
   categories,
   selectedCategories,
   onSelectCategory,
@@ -20,7 +10,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
     <div className="h-12 flex items-center justify-around mt-4">
       <h1
         className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
-          selectedCategories.length === 0 ? "text-blue-500" : ""
+          selectedCategories.length === 0 ? "text-violet" : ""
         }`}
         onClick={() => onSelectCategory(null)}
       >
@@ -30,7 +20,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({
         <h1
           key={category.id}
           className={`cursor-pointer hover:text-violet hover:border-b-2 transition-all ${
-            selectedCategories.includes(category.id) ? "text-blue-500" : ""
+            selectedCategories.includes(category.id) ? "text-violet" : ""
           }`}
           onClick={() => onSelectCategory(category.id)}
         >

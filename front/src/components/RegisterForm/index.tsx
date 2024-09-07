@@ -78,7 +78,10 @@ const RegisterForm: React.FC = () => {
         if (loginResult.data?.login?.token) {
           setIsLogged(true);
           localStorage.setItem("token", loginResult.data.login.token);
-          localStorage.setItem("user", JSON.stringify(loginResult.data.login.user));
+          localStorage.setItem(
+            "user",
+            JSON.stringify(loginResult.data.login.user)
+          );
           router.push("/thanks");
         }
       }
@@ -93,18 +96,19 @@ const RegisterForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">
+      {/* Email */}
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
           name="email"
           id="email"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
+          className="block pt-3 px-0 w-full text-sm text-darkText bg-transparent border-0 border-b-2 border-darkBorder appearance-none focus:outline-none focus:ring-0 focus:border-lightViolet peer"
           required
           onChange={handleChange}
         />
         <label
           htmlFor="email"
-          className="peer-focus:font-medium absolute text-lg text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-lg text-darkText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-lightViolet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Email
         </label>
@@ -112,18 +116,20 @@ const RegisterForm: React.FC = () => {
           <span className="text-red-500 text-xs mt-1">{errors.email}</span>
         )}
       </div>
+
+      {/* Password */}
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="password"
           name="password"
           id="password"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
+          className="block pt-3 px-0 w-full text-sm text-darkText bg-transparent border-0 border-b-2 border-darkBorder appearance-none focus:outline-none focus:ring-0 focus:border-lightViolet peer"
           required
           onChange={handleChange}
         />
         <label
           htmlFor="password"
-          className="peer-focus:font-medium absolute text-lg text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-lg text-darkText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-lightViolet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Password
         </label>
@@ -133,18 +139,19 @@ const RegisterForm: React.FC = () => {
       </div>
 
       <div className="grid md:grid-cols-2 md:gap-6">
+        {/* First Name */}
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
             name="firstName"
             id="firstName"
-            className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
+            className="block pt-3 px-0 w-full text-sm text-darkText bg-transparent border-0 border-b-2 border-darkBorder appearance-none focus:outline-none focus:ring-0 focus:border-lightViolet peer"
             required
             onChange={handleChange}
           />
           <label
             htmlFor="firstName"
-            className="peer-focus:font-medium absolute text-lg text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-lg text-darkText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-lightViolet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             First Name
           </label>
@@ -155,18 +162,19 @@ const RegisterForm: React.FC = () => {
           )}
         </div>
 
+        {/* Last Name */}
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
             name="lastName"
             id="lastName"
-            className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer"
+            className="block pt-3 px-0 w-full text-sm text-darkText bg-transparent border-0 border-b-2 border-darkBorder appearance-none focus:outline-none focus:ring-0 focus:border-lightViolet peer"
             required
             onChange={handleChange}
           />
           <label
             htmlFor="lastName"
-            className="peer-focus:font-medium absolute text-lg text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-lg text-darkText duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-lightViolet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Last Name
           </label>
@@ -180,13 +188,13 @@ const RegisterForm: React.FC = () => {
         <button
           type="submit"
           disabled={Object.keys(errors).length > 0}
-          className="text-white bg-violet hover:bg-darkviolet focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          className="text-white bg-lightViolet hover:bg-darkViolet focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
         >
           Register
         </button>
 
         <Link href="/login">
-          <p className="text-violet hover:underline ml-4">
+          <p className="text-lightViolet hover:underline ml-4">
             Already have an account? Sign in
           </p>
         </Link>
