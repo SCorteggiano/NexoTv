@@ -1,3 +1,4 @@
+/*
 import { createSlice, PayloadAction, createAsyncThunk  } from "@reduxjs/toolkit";
 import { IUser } from "@/interfaces/index";
 
@@ -91,6 +92,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+/*
 // Slice para el manejo del estado de autenticación
 export const userReducer = createSlice({
   name: "users",
@@ -146,4 +148,4 @@ export const userReducer = createSlice({
 });
 
 export const { logout, setSubscription } = userReducer.actions;
-export default userReducer.reducer;
+export default userReducer.reducer;*/

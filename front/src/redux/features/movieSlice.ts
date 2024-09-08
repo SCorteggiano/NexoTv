@@ -1,3 +1,4 @@
+/*
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { IMovie, ISeries } from "@/interfaces";
 import { fetchMovies, fetchSeries   } from "@/fetching/fetchMovies";
@@ -63,3 +64,4 @@ export const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
+*/

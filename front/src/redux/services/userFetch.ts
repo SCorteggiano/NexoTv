@@ -1,3 +1,4 @@
+/*
 import { IUser } from "@/interfaces";
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
@@ -15,4 +16,4 @@ export const userFetch = createApi({
     }),
 })
 
-export const {useGetUserQuery, useGetUserByIdQuery} = userFetch
+export const {useGetUserQuery, useGetUserByIdQuery} = userFetch*/

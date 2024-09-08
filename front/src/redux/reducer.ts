@@ -1,3 +1,4 @@
+/*
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IRegisterUser, ILoginUser, IUser } from '../interfaces';
 
@@ -13,6 +14,7 @@ const initialState: AuthState = {
   isLogged: false,
 };
 
+/*
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -50,3 +52,4 @@ const authSlice = createSlice({
 
 export const { registerSuccess, loginSuccess, logout, setSubscription, checkIsLogged } = authSlice.actions;
 export default authSlice.reducer;
+*/
