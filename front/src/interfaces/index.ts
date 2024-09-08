@@ -19,6 +19,7 @@ interface IUser {
   lastName: string;
   email: string;
   password: string;
+  profilePicture?: string
   subscription?: {
     tipo: string;
     id: string;

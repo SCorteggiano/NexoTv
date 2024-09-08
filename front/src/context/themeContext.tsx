@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextProps {
@@ -15,15 +16,19 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Lee el modo del localStorage o usa el modo por defecto (claro)
-    const storedTheme = localStorage.getItem('theme');
-    setIsDarkMode(storedTheme === 'dark');
+    // Verifica si el código se está ejecutando en el cliente (navegador)
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme');
+      setIsDarkMode(storedTheme === 'dark');
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+    }
   }, []);
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark', !isDarkMode);
-    localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light');
+    const newTheme = !isDarkMode;
+    setIsDarkMode(newTheme);
+    document.documentElement.classList.toggle('dark', newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
   };
 
   return (

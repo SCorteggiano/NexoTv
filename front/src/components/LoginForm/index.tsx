@@ -72,65 +72,66 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36 ">
-      {/* Email */}
-      <div className="relative z-0 w-full mb-5 group">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer dark:text-lightText dark:border-gray-600 dark:focus:border-violet"
-          required
-          onChange={handleChange}
-        />
-        <label
-          htmlFor="email"
-          className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
-        >
-          Email
-        </label>
-        {errors.email && (
-          <span className="text-red-500 text-sm">{errors.email}</span>
-        )}
-      </div>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">
+  {/* Email */}
+  <div className="relative z-0 w-full mb-5 group">
+    <input
+      type="email"
+      name="email"
+      id="email"
+      className="block pt-3 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none peer focus:outline-none focus:ring-0 dark:bg-transparent dark:border-gray-600 dark:focus:border-violet text-lightText dark:text-lightText border-gray-300 focus:border-violet dark:focus:border-violet"
+      required
+      onChange={handleChange}
+    />
+    <label
+      htmlFor="email"
+      className="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
+    >
+      Email
+    </label>
+    {errors.email && (
+      <span className="text-red-500 text-sm">{errors.email}</span>
+    )}
+  </div>
 
-      {/* Password */}
-      <div className="relative z-0 w-full mb-5 group">
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer dark:text-lightText dark:border-gray-600 dark:focus:border-violet"
-          required
-          onChange={handleChange}
-        />
-        <label
-          htmlFor="password"
-          className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
-        >
-          Password
-        </label>
-        {errors.password && (
-          <span className="text-red-500 text-sm">{errors.password}</span>
-        )}
-      </div>
+  {/* Password */}
+  <div className="relative z-0 w-full mb-5 group">
+    <input
+      type="password"
+      name="password"
+      id="password"
+      className="block pt-3 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none peer focus:outline-none focus:ring-0 dark:bg-transparent dark:border-gray-600 dark:focus:border-violet text-lightText dark:text-lightText border-gray-300 focus:border-violet dark:focus:border-violet"
+      required
+      onChange={handleChange}
+    />
+    <label
+      htmlFor="password"
+      className="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
+    >
+      Password
+    </label>
+    {errors.password && (
+      <span className="text-red-500 text-sm">{errors.password}</span>
+    )}
+  </div>
 
-      <div className="flex justify-between items-center">
-        <button
-          type="submit"
-          disabled={Object.keys(errors).length > 0}
-          className="text-white bg-violet hover:bg-darkviolet focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-50 dark:bg-violet dark:hover:bg-darkviolet"
-        >
-          Sign In
-        </button>
+  <div className="flex justify-between items-center">
+    <button
+      type="submit"
+      disabled={Object.keys(errors).length > 0}
+      className="text-white bg-violet hover:bg-darkviolet focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center disabled:opacity-50 dark:bg-violet dark:hover:bg-darkviolet"
+    >
+      Sign In
+    </button>
 
-        <Link href="/register">
-          <p className="text-violet hover:underline ml-4 dark:text-lightText dark:hover:underline">
-            Dont have an account? Create one
-          </p>
-        </Link>
-      </div>
-    </form>
+    <Link href="/register">
+      <p className="text-violet hover:underline ml-4 dark:text-lightText dark:hover:underline">
+        Dont have an account? Create one
+      </p>
+    </Link>
+  </div>
+</form>
+
   );
 };
 

@@ -1,20 +1,45 @@
 "use client";
-import React from "react";
-// import { useUserData } from "@/helpers/hooks";
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const UserCard = () => {
-  // const { user, loading, error } = useUserData();
   const { data: session } = useSession();
+  const { user, setUser } = useContext(UserContext);
 
-  const { user } = useContext(UserContext);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
-  console.log(user?.user);
+  useEffect(() => {
+    if (user?.user?.profilePicture) {
+      setProfilePicture(user?.user?.profilePicture);
+      localStorage.setItem("profilePicture", user?.user?.profilePicture);
+    }
+  }, [user]);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading user data.</p>;
+  const handleProfilePictureUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+
+    try {
+      const formData = new FormData();
+      formData.append("profilePicture", file);
+
+      const response = await fetch("https://nest-demo-zyb9.onrender.com/graphql/cloudinary/upload/fd2cf660-7743-430b-aa74-6718ea87f25b", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setProfilePicture(data.url);
+      localStorage.setItem("profilePicture", data.url);
+      setUser((prevUser) => ({ ...prevUser, profilePicture: data.url }));
+    } catch (error) {
+      console.error("Error uploading profile picture:", error);
+    }
+  };
 
   return (
     <div
@@ -24,6 +49,41 @@ const UserCard = () => {
       <div id="userCardContainer" className="flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-6 text-white">My Account</h2>
         <div id="userCardInfo" className="w-full">
+          <div className="mb-4">
+            <p className="text-gray-400 font-semibold">Profile Picture:</p>
+            <div className="relative">
+              {profilePicture ? (
+  <Image
+    src={profilePicture}
+    alt="Profile Picture"
+    width={80}
+    height={80}
+    className="rounded-full"
+    style={{ aspectRatio: "80/80", objectFit: "cover" }}
+  />
+) : (
+  <div className="relative">
+    <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold">
+      {user?.user?.firstName?.charAt(0)}
+    </div>
+    <label
+      htmlFor="profile-picture"
+      className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer"
+    >
+      <CameraIcon className="h-5 w-5" />
+      <input
+        id="profile-picture"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleProfilePictureUpload}
+      />
+    </label>
+  </div>
+)}
+
+            </div>
+          </div>
           <div className="mb-4">
             <p className="text-gray-400 font-semibold">Name:</p>
             <p className="text-xl text-white">
@@ -39,13 +99,7 @@ const UserCard = () => {
           </div>
           <div className="mb-4">
             <p className="text-gray-400 font-semibold">Subscription:</p>
-            {/* <p
-            className={`text-xl ${
-              user.suscription === "Free" ? "text-green-400" : "text-blue-400"
-            }`}
-          >
-            {user.suscription}
-          </p> */}
+            {/* Suscription info */}
           </div>
           <div className="flex justify-center">
             <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -59,3 +113,23 @@ const UserCard = () => {
 };
 
 export default UserCard;
+
+function CameraIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+      <circle cx="12" cy="13" r="3" />
+    </svg>
+  );
+}
