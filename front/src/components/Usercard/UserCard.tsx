@@ -12,8 +12,8 @@ const UserCard = () => {
 
   useEffect(() => {
     if (user?.user?.userImage) {
-      setProfilePicture(user?.user?.userImage);
-      localStorage.setItem("profilePicture", user?.user?.userImage);
+      setProfilePicture(user?.user?.userImage[0]);
+      localStorage.setItem("profilePicture", user?.user?.userImage[0]);
     }
   }, [user]);
 
