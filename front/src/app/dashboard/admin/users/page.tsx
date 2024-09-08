@@ -37,8 +37,21 @@ const Users: React.FC = () => {
   });
   console.log("Users data:", data);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading users</p>;
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-white text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-red-500 text-2xl">Error loading content</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex">

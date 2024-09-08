@@ -66,9 +66,22 @@ const Products: React.FC = () => {
     });
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading content</p>;
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className=" text-2xl">Loading...</p>
+      </div>
+    );
+  }
 
+  if (error) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-red-500 text-2xl">Error loading content</p>
+      </div>
+    );
+  }
+  
   return (
     <div className="flex">
       <AdminNavbar />
@@ -80,7 +93,6 @@ const Products: React.FC = () => {
               <tr>
                 <th className="px-6 py-3 text-left">Title</th>
                 <th className="px-6 py-3 text-left">Description</th>
-                <th className="px-6 py-3 text-left">Category</th>
                 <th className="px-6 py-3 text-left">Actions</th>
               </tr>
             </thead>
@@ -93,24 +105,25 @@ const Products: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.description}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {content.category}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <Button
-                      pill
-                      className="bg-violet hover:bg-darkviolet text-center mr-3 px-6 py-2 ml-4"
+          
+                  <td className="py-4 whitespace-nowrap">
+                    <button
+                      
+                      className="bg-violet hover:bg-darkviolet text-[#efefef]  rounded-full text-center mr-3 px-6 py-2 ml-4"
                       onClick={() => setSelectedContent(content.id)}
                     >
                       Edit
-                    </Button>
-                    <Button
-                      pill
-                      className="bg-red-500 hover:bg-red-700 text-center px-6 py-2 ml-4"
+                    </button>
+                  </td>
+                  <td className="py-4 whitespace-nowrap">
+
+                    <button
+                      
+                      className=" bg-red-600 hover:bg-red-900  text-[#efefef] rounded-full text-center mr-3 px-6 py-2 ml-4"
                       onClick={() => handleDelete(content.id)}
                     >
                       Delete
-                    </Button>
+                    </button>
                   </td>
                 </tr>
               ))}
