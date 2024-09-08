@@ -63,13 +63,26 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading user data</p>;
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-white text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-red-500 text-2xl">Error loading content</p>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl mb-4">Edit User</h2>
+      <div className="bg-[#0e0e11] p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl mb-4 text-[#efefef]">Edit User</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -78,7 +91,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, firstName: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
           />
           <input
             type="text"
@@ -87,7 +100,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, lastName: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
           />
           <input
             type="email"
@@ -96,24 +109,22 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-            className="mb-2"
+            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
           />
           <div className="flex justify-between">
-            <Button
-              pill
+            <button
               type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded-lg"
+              className="px-6 py-4  bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
             >
               Save Changes
-            </Button>
-            <Button
-              pill
+            </button>
+            <button
               type="button"
               onClick={onClose}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg"
+              className="px-6 py-4  bg-red-600 hover:bg-red-900 rounded-full font-bold text-[#efefef]"
             >
               Cancel
-            </Button>
+            </button>
           </div>
         </form>
       </div>

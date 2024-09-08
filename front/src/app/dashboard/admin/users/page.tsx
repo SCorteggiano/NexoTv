@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import EditUserModal from "@/components/EditUserModal/EditUserModal";
 import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
 import { Button } from "flowbite-react";
 
+// Definir la consulta para obtener usuarios con paginación y roles válidos
 const GET_USERS = gql`
   query Users(
     $paginationArgs: PaginationArgs!
@@ -29,10 +30,12 @@ const GET_USERS = gql`
 const Users: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null); // Nuevo estado para manejar la suscripción
+  
+  // Ejecutar la consulta con las variables de paginación y roles
   const { data, loading, error } = useQuery(GET_USERS, {
     variables: {
       paginationArgs: { limit: 10, offset: 0 },
-      validRolesArgs: { roles: ["admin", "user"] },
+      validRolesArgs: { roles: ["user", "admin"] },
     },
   });
   console.log("Users data:", data);
@@ -40,18 +43,11 @@ const Users: React.FC = () => {
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
-        <p className="text-white text-2xl">Loading...</p>
+        <p className=" text-2xl">Loading...</p>
       </div>
     );
   }
-
-  if (error) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <p className="text-red-500 text-2xl">Error loading content</p>
-      </div>
-    );
-  }
+  if (error) return <p>Error loading users</p>;
 
   return (
     <div className="flex">
