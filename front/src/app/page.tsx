@@ -50,18 +50,8 @@ export default function Home() {
         <div></div>
         {/* <SeriesList enableFiltering={false}/> */}
       </div>
-<<<<<<< HEAD
-
-      <div
-        id="allContentContainer"
-        className="bg-lightBackground dark:bg-darkBackground"
-      >
-        <div id="contentCardsContainer">
-        </div>
-=======
       <div id="allContentContainer">
         <MoviesList enableFiltering={false} />
->>>>>>> d0111e0f8ef39d65451dd002241b4ef67bc52024
       </div>
 
       {selectedItem && "episodes" in selectedItem ? (
