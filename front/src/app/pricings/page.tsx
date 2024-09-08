@@ -5,7 +5,7 @@ import { tipo } from "@/interfaces";
 
 const Pricings = () => {
   const storedUser = localStorage.getItem("user");
-  const userId = storedUser ? JSON.parse(storedUser).id : null;
+  const userId = storedUser ? JSON.parse(storedUser).user.id : null;
 
   const monthly = "price_1PswZlDxc1HrUJzd32gljNEt";
   const annual = "price_1PswaaDxc1HrUJzd0EFNFdos";
