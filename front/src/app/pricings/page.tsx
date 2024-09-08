@@ -1,7 +1,12 @@
+"use client"
 import React from "react";
 import CheckoutButton from "@/components/CheckoutButton/CheckoutButton";
+import { tipo } from "@/interfaces";
 
 const Pricings = () => {
+  const storedUser = localStorage.getItem("user");
+  const userId = storedUser ? JSON.parse(storedUser).user.id : null;
+
   const monthly = "price_1PswZlDxc1HrUJzd32gljNEt";
   const annual = "price_1PswaaDxc1HrUJzd0EFNFdos";
 
@@ -37,21 +42,21 @@ const Pricings = () => {
             <li className="p-4">More content to enjoy</li>
           </ul>
           <div className="mt-8">
-            <CheckoutButton priceId={monthly} />
+            <CheckoutButton priceId={monthly} tipo={tipo.Monthly} price={10} userId={userId}/>
           </div>
         </div>
 
         {/* Family Plan */}
         <div className="bg-gray-800 bg-opacity-80 border border-gray-700 rounded-2xl text-center p-8 w-80 shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h1 className="font-bold text-4xl text-white">Annual</h1>
-          <hr className="my-4 border-gray-600" />
-          <h2 className="mt-8 mb-8 text-5xl text-white">$100/m</h2>
-          <ul className="text-lg text-gray-300">
+          <hr className="my-4 border-gray-300" />
+          <h2 className="mt-8 mb-8 text-5xl text-white">$100/y</h2>
+          <ul className="text-lg text-gray-200">
             <li className="p-4">Ad-free</li>
             <li className="p-4">Save up to $20</li>
           </ul>
           <div className="mt-8">
-            <CheckoutButton priceId={annual} />
+            <CheckoutButton priceId={annual} tipo={tipo.Annual} price={100} userId={userId}/>
           </div>
         </div>
       </div>

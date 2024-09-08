@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/redux/providers";
 import Navbar1 from "@/components/Navbar1/Navbar1";
 import ApolloProvider from "@/queries/apolloProvider";
 import SessionProvider from "@/queries/sessionProvider";
@@ -34,14 +33,14 @@ export default function RootLayout({
             <UserProvider>
               <SearchProvider>
                 <ApolloProvider client={client}>
-                  <Providers>
+                  
                     <PaginationProvider totalPages={10}>
                       <Navbar1 />
                       <ConditionalNavbar>{children}</ConditionalNavbar>
                       <ChatButton />
                       <Footer />
                     </PaginationProvider>
-                  </Providers>
+                  
                 </ApolloProvider>
               </SearchProvider>
             </UserProvider>

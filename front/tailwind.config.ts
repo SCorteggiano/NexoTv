@@ -17,7 +17,7 @@ const config: Config = {
         darkviolet: "#481f93",
         darkBackground: "#0e0e11", // fondo oscuro
         darkText: "#e2e8f0", // text claro para el modo oscuro
-        lightBackground: "#f7fafc", // fondo claro
+        lightBackground: "#e3e3e3", // fondo claro
         lightText: "#0e0e11", // texto oscuro para el modo claro
       },
       backgroundImage: {

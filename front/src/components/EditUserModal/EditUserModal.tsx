@@ -63,8 +63,21 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading user data</p>;
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-white text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <p className="text-red-500 text-2xl">Error loading content</p>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
@@ -99,21 +112,19 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <div className="flex justify-between">
-            <Button
-              pill
+            <button
               type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+              className="px-6 py-4  bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
             >
               Save Changes
-            </Button>
-            <Button
-              pill
+            </button>
+            <button
               type="button"
               onClick={onClose}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+              className="px-6 py-4  bg-red-600 hover:bg-red-900 rounded-full font-bold text-[#efefef]"
             >
               Cancel
-            </Button>
+            </button>
           </div>
         </form>
       </div>

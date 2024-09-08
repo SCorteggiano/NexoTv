@@ -54,8 +54,8 @@ const HelpForm = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
-          rows="4"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black"
+          rows={4}
           required
         ></textarea>
       </div>

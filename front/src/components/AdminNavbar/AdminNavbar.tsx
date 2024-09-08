@@ -5,7 +5,7 @@ import { HiChartPie, HiShoppingBag, HiUser } from "react-icons/hi";
 
 const AdminNavbar = () => {
   return (
-    <div className="h-screen bg-lightBackground dark:bg-darkBackground">
+  
   <Sidebar aria-label="Default sidebar example">
     <Sidebar.Items className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
       <Sidebar.ItemGroup>
@@ -33,7 +33,7 @@ const AdminNavbar = () => {
       </Sidebar.ItemGroup>
     </Sidebar.Items>
   </Sidebar>
-</div>
+
 
   );
 };
