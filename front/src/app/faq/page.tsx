@@ -4,14 +4,17 @@ import Link from "next/link";
 
 const Faq = () => {
   return (
-    <div id="wholeContainer" className="h-screen">
+    <div
+      id="wholeContainer"
+      className="h-screen bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
+    >
       <div id="faqTitleContainer" className="m-12 text-center">
         <h1 className="text-6xl font-bold">Frequently Asked Questions</h1>
         <p className="text-2xl m-2">Any questions? We got the answers.</p>
       </div>
 
       <div id="faqQAcontainer" className="m-6 space-y-8">
-        <div className="border-b pb-4">
+        <div className="border-b pb-4 border-gray-300 dark:border-gray-700">
           <p className="text-4xl font-semibold">What is NexoTV?</p>
           <p className="text-lg mt-2">
             NexoTV is an online entertainment platform that offers a wide
@@ -23,8 +26,10 @@ const Faq = () => {
           </p>
         </div>
 
-        <div className="border-b pb-4">
-          <p className="text-4xl font-semibold">What are the benefits of the Premium plan?</p>
+        <div className="border-b pb-4 border-gray-300 dark:border-gray-700">
+          <p className="text-4xl font-semibold">
+            What are the benefits of the Premium plan?
+          </p>
           <p className="text-lg mt-2">
             By subscribing to the NexoTV Premium plan, you gain unlimited access
             to a wider variety of content, including exclusive movies and series
@@ -33,8 +38,10 @@ const Faq = () => {
           </p>
         </div>
 
-        <div className="border-b pb-4">
-          <p className="text-4xl font-semibold">How can I cancel my subscription?</p>
+        <div className="border-b pb-4 border-gray-300 dark:border-gray-700">
+          <p className="text-4xl font-semibold">
+            How can I cancel my subscription?
+          </p>
           <p className="text-lg mt-2">
             You can cancel your subscription at any time from your NexoTV
             dashboard. Simply log in to your account, go to the "My Account" or
@@ -55,11 +62,10 @@ const Faq = () => {
             contact our support team in several ways. You can use the contact
             form available in the{" "}
             <Link href="/help">
-              <p className="text-blue-500 hover:underline inline">Help</p>
+              <span className="text-blue-500 hover:underline inline">Help</span>
             </Link>{" "}
             section on our website to send your inquiry directly. You can also
             email us at{" "}
-            {/* Cambiar Mail */}
             <a
               href="mailto:nexotv@mail.com"
               className="text-blue-500 hover:underline"

@@ -37,7 +37,7 @@ const Chatbot: React.FC = () => {
   }, [fullAnswer]);
 
   return (
-    <div className="shadow-md rounded-lg p-6 w-full max-w-md mx-auto mt-10">
+    <div className="shadow-md rounded-lg p-6 w-full max-w-md mx-auto mt-10 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText transition-colors duration-300">
       <h1 className="text-xl font-bold mb-4 text-center">Chatbot</h1>
       {selectedQuestion === null ? (
         <div>
@@ -45,7 +45,7 @@ const Chatbot: React.FC = () => {
             <button
               key={index}
               onClick={() => handleQuestionClick(item.question)}
-              className="w-full text-left bg-blue-500 p-3 my-2 rounded-md hover:bg-blue-600 transition"
+              className="w-full text-left bg-violet dark:bg-darkviolet text-white p-3 my-2 rounded-md hover:bg-darkviolet dark:hover:bg-violet transition-colors duration-300"
             >
               {item.question}
             </button>
@@ -56,7 +56,7 @@ const Chatbot: React.FC = () => {
           <p className="mb-4">{displayedAnswer}</p>
           <button
             onClick={handleBackClick}
-            className="bg-gray-500 p-2 rounded-md hover:bg-gray-600 transition"
+            className="bg-gray-500 dark:bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition-colors duration-300"
           >
             Go Back
           </button>

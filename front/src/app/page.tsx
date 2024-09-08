@@ -18,37 +18,42 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
           <img
             src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
             alt="Texto alternativo"
+            className="dark:filter dark:brightness-75"
           />
           <img
             src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
             alt="Texto alternativo"
+            className="dark:filter dark:brightness-75"
           />
           <img
             src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
             alt="Texto alternativo"
+            className="dark:filter dark:brightness-75"
           />
           <img
             src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
             alt="Texto alternativo"
+            className="dark:filter dark:brightness-75"
           />
           <img
             src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
             alt="Texto alternativo"
+            className="dark:filter dark:brightness-75"
           />
         </Carousel>
-        <MoviesList enableFiltering={false} />
+        <div></div>
         {/* <SeriesList enableFiltering={false}/> */}
       </div>
       <div id="allContentContainer">
-        <div id="contentCardsContainer">
-        </div>
+        <MoviesList enableFiltering={false} />
       </div>
+
       {selectedItem && "episodes" in selectedItem ? (
         <SeriesDetail
           serie={selectedItem as ISeriesCard}

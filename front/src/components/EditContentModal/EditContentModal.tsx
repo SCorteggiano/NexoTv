@@ -99,36 +99,44 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-[#0e0e11] p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl mb-4 font-bold text-[#efefef]">Edit Content</h2>
+      <div className="bg-lightBackground dark:bg-darkBackground p-8 rounded-lg shadow-lg text-lightText dark:text-darkText">
+        <h2 className="text-2xl mb-4">Edit Content</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Title"
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
             placeholder="Description"
             value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
             placeholder="Image URL"
             value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            onChange={(e) =>
+              setFormData({ ...formData, image: e.target.value })
+            }
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
             placeholder="Duration"
             value={formData.duration}
-            onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            onChange={(e) =>
+              setFormData({ ...formData, duration: e.target.value })
+            }
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -144,9 +152,8 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
             onChange={(e) => setFormData({ ...formData, contentUrl: e.target.value })}
             className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
           />
-          <div className="flex justify-between pt-2">
+          <div className="flex justify-between">
             <button
-           
               type="submit"
               className="px-6 py-4  bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
             >

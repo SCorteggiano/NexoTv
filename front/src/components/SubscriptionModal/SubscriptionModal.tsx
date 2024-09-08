@@ -34,17 +34,19 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl mb-4">Manage Subscription</h2>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+      <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-2xl mb-4 text-white">Manage Subscription</h2>
         <div className="mb-4">
-          <label className="block mb-2">Subscription Type:</label>
+          <label className="block mb-2 text-gray-300">Subscription Type:</label>
           <select
             value={subscriptionId}
             onChange={(e) => setSubscriptionId(e.target.value)}
-            className="border p-2 rounded-md w-full"
+            className="border-gray-600 text-gray-200 bg-gray-800 border p-2 rounded-md w-full"
           >
-            <option value="">Select Subscription</option>
+            <option value="" className="text-gray-500">
+              Select Subscription
+            </option>
             <option value="subscription_basic">Free</option>
             <option value="subscription_premium">Monthly</option>
             <option value="subscription_pro">Annual</option>
@@ -54,14 +56,14 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
           <Button
             pill
             onClick={handleSubmit}
-            className="bg-green-500  px-4 py-2 rounded-lg"
+            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
           >
             Save
           </Button>
           <Button
             pill
             onClick={onClose}
-            className="bg-red-500  px-4 py-2 rounded-lg"
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
           >
             Cancel
           </Button>

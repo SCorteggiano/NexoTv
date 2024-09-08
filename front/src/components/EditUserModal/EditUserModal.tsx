@@ -81,8 +81,8 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
-      <div className="bg-[#0e0e11] p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl mb-4 text-[#efefef]">Edit User</h2>
+      <div className="bg-lightBackground dark:bg-darkBackground p-8 rounded-lg shadow-lg text-lightText dark:text-darkText">
+        <h2 className="text-2xl mb-4">Edit User</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -91,7 +91,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, firstName: e.target.value })
             }
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="text"
@@ -100,7 +100,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, lastName: e.target.value })
             }
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <input
             type="email"
@@ -109,7 +109,7 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-            className="mb-2 w-full p-2 bg-[#1a1a1d] text-[#efefef] rounded-lg border border-gray-500"
+            className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
           <div className="flex justify-between">
             <button

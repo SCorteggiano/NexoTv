@@ -5,7 +5,9 @@ const Series = () => {
   return (
     <>
       <div className="text-center">
-        <h1 className="text-4xl font-extrabold">SERIES</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+          SERIES
+        </h1>
       </div>
       <SeriesList enableFiltering={true} />
     </>

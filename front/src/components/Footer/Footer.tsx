@@ -13,24 +13,24 @@ const Footer = () => {
   return (
     <div
       id="footerContainer"
-      className="border-t p-4 w-full mt-auto"
+      className=" p-4 w-full mt-auto bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
     >
       <div>
         <p className="text-center text-xl">NexoTV 2024</p>
         <div>
           <p
             onClick={scrollToTop}
-            className="text-end cursor-pointer text-blue-600"
+            className="text-end cursor-pointer text-violet dark:text-violet"
           >
             Back To Top
           </p>
         </div>
         <div className="flex justify-center">
-          <Link href="/help" className="m-2 text-blue-600">
+          <Link href="/help" className="m-2 text-violet dark:text-violet">
             Help
           </Link>
           <p className="m-2">|</p>
-          <Link href="/about" className="m-2 text-blue-600">
+          <Link href="/about" className="m-2 text-violet dark:text-violet">
             About
           </Link>
         </div>

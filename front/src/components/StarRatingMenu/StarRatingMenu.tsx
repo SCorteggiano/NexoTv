@@ -17,7 +17,7 @@ const StarRatingMenu = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 border rounded-xl shadow-md w-64 m-2">
+    <div className="flex flex-col fixed bg-gray-600 items-center p-4 rounded-xl shadow-md w-64 m-2">
       <div className="flex">
         {[1, 2, 3, 4, 5].map((star) => (
           <FontAwesomeIcon
