@@ -17,13 +17,15 @@ const UserCard = () => {
     }
   }, [user]);
 
-  const handleProfilePictureUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProfilePictureUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
-    const id = user?.user?.id
+    const id = user?.user?.id;
 
-    console.log(id)
+    console.log(id);
 
     const file = files[0];
 
@@ -31,12 +33,15 @@ const UserCard = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(`https://nest-demo-zyb9.onrender.com/cloudinary/upload/${id}`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `https://nest-demo-zyb9.onrender.com/cloudinary/upload/${id}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-      console.log("This is response:" + response)
+      console.log("This is response:" + response);
 
       const data = await response.json();
       setProfilePicture(data.url);
@@ -59,35 +64,34 @@ const UserCard = () => {
             <p className="text-gray-400 font-semibold">Profile Picture:</p>
             <div className="relative">
               {user?.user?.userImage[0] ? (
-  <Image
-    src={user?.user?.userImage[0]}
-    alt="Profile Picture"
-    width={80}
-    height={80}
-    className="rounded-full"
-    style={{ aspectRatio: "80/80", objectFit: "cover" }}
-  />
-) : (
-  <div className="relative">
-    <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold border">
-      {user?.user?.firstName?.charAt(0)}
-    </div>
-    <label
-      htmlFor="profile-picture"
-      className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer"
-    >
-      <CameraIcon className="h-5 w-5" />
-      <input
-        id="profile-picture"
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleProfilePictureUpload}
-      />
-    </label>
-  </div>
-)}
-
+                <Image
+                  src={user?.user?.userImage[0]}
+                  alt="Profile Picture"
+                  width={80}
+                  height={80}
+                  className="rounded-full m-auto"
+                  style={{ aspectRatio: "80/80", objectFit: "cover" }}
+                />
+              ) : (
+                <div className="relative">
+                  <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold border">
+                    {user?.user?.firstName?.charAt(0)}
+                  </div>
+                </div>
+              )}
+              <label
+                htmlFor="profile-picture"
+                className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer"
+              >
+                <CameraIcon className="h-5 w-5" />
+                <input
+                  id="profile-picture"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleProfilePictureUpload}
+                />
+              </label>
             </div>
           </div>
           <div className="mb-4">

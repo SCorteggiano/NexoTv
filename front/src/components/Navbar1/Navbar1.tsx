@@ -41,10 +41,9 @@ const Navbar1 = () => {
           Pricings
         </Link>
       </div>
-
+      <ThemeButton/>
       {isLogged || session ? (
         <div className="flex md:order-2 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
-          <ThemeButton />
           <Dropdown
             className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
             arrowIcon={false}
