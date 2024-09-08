@@ -16,6 +16,7 @@ const CREATE_USER = gql`
         firstName
         lastName
         email
+        userImage
       }
     }
   }
@@ -30,6 +31,7 @@ const LOGIN_USER = gql`
         email
         firstName
         lastName
+        userImage
       }
     }
   }

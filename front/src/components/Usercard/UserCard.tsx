@@ -11,9 +11,9 @@ const UserCard = () => {
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user?.user?.profilePicture) {
-      setProfilePicture(user?.user?.profilePicture);
-      localStorage.setItem("profilePicture", user?.user?.profilePicture);
+    if (user?.user?.userImage) {
+      setProfilePicture(user?.user?.userImage);
+      localStorage.setItem("profilePicture", user?.user?.userImage);
     }
   }, [user]);
 
@@ -21,16 +21,22 @@ const UserCard = () => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
+    const id = user?.user?.id
+
+    console.log(id)
+
     const file = files[0];
 
     try {
       const formData = new FormData();
-      formData.append("profilePicture", file);
+      formData.append("file", file);
 
-      const response = await fetch("https://nest-demo-zyb9.onrender.com/graphql/cloudinary/upload/fd2cf660-7743-430b-aa74-6718ea87f25b", {
+      const response = await fetch(`https://nest-demo-zyb9.onrender.com/cloudinary/upload/${id}`, {
         method: "POST",
         body: formData,
       });
+
+      console.log("This is response:" + response)
 
       const data = await response.json();
       setProfilePicture(data.url);
@@ -52,9 +58,9 @@ const UserCard = () => {
           <div className="mb-4">
             <p className="text-gray-400 font-semibold">Profile Picture:</p>
             <div className="relative">
-              {profilePicture ? (
+              {user?.user?.userImage[0] ? (
   <Image
-    src={profilePicture}
+    src={user?.user?.userImage[0]}
     alt="Profile Picture"
     width={80}
     height={80}
@@ -63,7 +69,7 @@ const UserCard = () => {
   />
 ) : (
   <div className="relative">
-    <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold">
+    <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold border">
       {user?.user?.firstName?.charAt(0)}
     </div>
     <label
