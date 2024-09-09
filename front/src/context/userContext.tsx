@@ -23,13 +23,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-const userRole = user?.user?.roles
-if (userRole && userRole.length > 0 && userRole[0] === 'admin') {
-  setIsAdmin(true);
-} else {
-  setIsAdmin(false);
-}
-
+  useEffect(() => {
+    const userRole = user?.user?.roles;
+    if (userRole && userRole.length > 0 && userRole[0] === 'admin') {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]); 
+  
   const login = async (credentials: ILoginUser) => {
     try {
       const data = await postLogin(credentials);

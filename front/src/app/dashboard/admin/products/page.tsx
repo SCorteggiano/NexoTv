@@ -69,11 +69,6 @@ const Products: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    if (!isLogged || !isAdmin) {
-      router.push("/not-authorized");
-    }
-  }, [isLogged, isAdmin, router]);
 
   if (loading) {
     return (
@@ -90,7 +85,7 @@ const Products: React.FC = () => {
       </div>
     );
   }
-  return isLogged && isAdmin ? (
+  return  (
     <div className="flex">
       <AdminNavbar />
       <div className="p-6 flex-1">
@@ -140,7 +135,7 @@ const Products: React.FC = () => {
         )}
       </div>
     </div>
-  ) : null;
+  ) ;
 };
 
 export default Products;

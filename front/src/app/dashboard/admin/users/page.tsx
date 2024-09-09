@@ -35,11 +35,7 @@ const Users: React.FC = () => {
   const { isLogged, isAdmin } = useContext(UserContext);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isLogged || !isAdmin) {
-      router.push("/not-authorized");
-    }
-  }, [isLogged, isAdmin, router]);
+
 
   // Ejecutar la consulta para obtener usuarios y sus suscripciones
   const { data, loading, error } = useQuery(GET_SUBSCRIPTIONS);
@@ -54,7 +50,7 @@ const Users: React.FC = () => {
   if (error) return <p>Error loading users</p>;
 
   // Renderiza solo si el usuario está logueado y es admin
-  return isLogged && isAdmin ? (
+  return (
     <div className="flex">
       <AdminNavbar />
       <div className="p-6 flex-1">
@@ -122,6 +118,6 @@ const Users: React.FC = () => {
         )}
       </div>
     </div>
-  ) : null;
+  ) ;
 };
 export default Users;
