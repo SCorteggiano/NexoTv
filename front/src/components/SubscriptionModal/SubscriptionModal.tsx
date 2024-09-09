@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { ISubscriptionModalProps } from "@/interfaces";
-import { Button } from "flowbite-react";
 
 const UPDATE_USER_SUBSCRIPTION = gql`
   mutation UpdateUserSubscription($userId: String!, $subscriptionId: String!) {
@@ -53,20 +52,18 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
           </select>
         </div>
         <div className="flex justify-between">
-          <Button
-            pill
+          <button
             onClick={handleSubmit}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+            className="px-6 py-4 bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
           >
             Save
-          </Button>
-          <Button
-            pill
+          </button>
+          <button
             onClick={onClose}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+            className="px-6 py-4 bg-red-600 hover:bg-red-900 rounded-full font-bold text-[#efefef]"
           >
             Cancel
-          </Button>
+          </button>
         </div>
       </div>
     </div>
