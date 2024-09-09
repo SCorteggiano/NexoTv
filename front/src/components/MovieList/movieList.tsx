@@ -7,18 +7,19 @@ import { IMovie, ICategory } from "@/interfaces";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import { usePagination } from "@/context/pageContext";
 import { Pagination } from "flowbite-react";
-import { useSearch } from "@/context/searchContext"; // Importar el contexto
+import { useSearch } from "@/context/searchContext";
 
-const MoviesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering }) => {
+const MoviesList: React.FC<{ enableFiltering: boolean }> = ({
+  enableFiltering,
+}) => {
   const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
   const { movies } = useMovies();
 
-  console.log(movies)
   const { currentPage, handlePageChange } = usePagination();
   const itemsPerPage = 10;
-  const { searchQuery } = useSearch(); // Obtener la búsqueda global
+  const { searchQuery } = useSearch();
 
   const handleCardClick = (movie: IMovie) => {
     setSelectedMovie(movie);
@@ -122,4 +123,3 @@ const MoviesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering })
 };
 
 export default MoviesList;
-

@@ -1,9 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery } from "@apollo/client";
 import EditUserModal from "@/components/EditUserModal/EditUserModal";
 import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
+<<<<<<< HEAD
+import { Button } from "flowbite-react";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
+=======
+>>>>>>> f75f4574e3f569c8da10d0bca29dbe0b0ba88d74
 
 // Definir la consulta para obtener usuarios con paginación y roles válidos
 const GET_SUBSCRIPTIONS = gql`
@@ -27,10 +33,32 @@ const GET_SUBSCRIPTIONS = gql`
 
 const Users: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
+<<<<<<< HEAD
+  const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null);
+  
+  const { isLogged, isAdmin } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLogged || !isAdmin) {
+      router.push("/not-authorized");
+    }
+  }, [isLogged, isAdmin, router]);
+
+  const { data, loading, error } = useQuery(GET_USERS, {
+    variables: {
+      paginationArgs: { limit: 10, offset: 0 },
+      validRolesArgs: { roles: ["user", "admin"] },
+    },
+  });
+
+  console.log("Users data:", data);
+=======
   const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null); // Nuevo estado para manejar la suscripción
 
   // Ejecutar la consulta para obtener usuarios y sus suscripciones
   const { data, loading, error } = useQuery(GET_SUBSCRIPTIONS);
+>>>>>>> f75f4574e3f569c8da10d0bca29dbe0b0ba88d74
 
   if (loading) {
     return (
@@ -41,7 +69,8 @@ const Users: React.FC = () => {
   }
   if (error) return <p>Error loading users</p>;
 
-  return (
+  // Renderiza solo si el usuario está logueado y es admin
+  return isLogged && isAdmin ? (
     <div className="flex">
       <AdminNavbar />
       <div className="p-6 flex-1">
@@ -109,7 +138,6 @@ const Users: React.FC = () => {
         )}
       </div>
     </div>
-  );
+  ) : null;
 };
-
 export default Users;

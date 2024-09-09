@@ -1,6 +1,13 @@
+import { IMovie, ISeries } from "@/interfaces";
 import { gql, useQuery } from "@apollo/client";
 
-const GET_MOVIES = gql`
+export enum Type {
+  channel = 'channel',
+  movie = 'movie',
+  series = 'series',
+}
+
+const GET_CONTENT = gql`
   query ContentAll($paginationContentArgs: PaginationContentArgs!) {
     contentAll(paginationContentArgs: $paginationContentArgs) {
       id
@@ -10,19 +17,7 @@ const GET_MOVIES = gql`
       duration
       category
       contentUrl
-    }
-  }
-`;
-
-const GET_SERIES = gql`
-  query SeriesAll($paginationSeriesArgs: PaginationSeriesArgs!) {
-    seriesAll(paginationSeriesArgs: $paginationSeriesArgs) {
-      id
-      title
-      description
-      image
-      caps
-      category
+      type
     }
   }
 `;
@@ -35,45 +30,47 @@ const GET_USER_DATA = gql`
       firstName
       lastName
       isActive
+      userImage
+      roles
     }
   }
 `;
 
 export const useMovies = () => {
-  const { data, loading, error } = useQuery(GET_MOVIES, {
+  const { data, loading, error } = useQuery(GET_CONTENT, {
     variables: {
       paginationContentArgs: {
-        limit: 12,
+        limit: 100,
         offset: 0,
       },
     },
   });
+
   return {
-    movies: data?.contentAll || [],
-    categories: data?.category || [],
+    movies: data?.contentAll?.filter((item: IMovie) => item.type === Type.movie) || [],
     loading,
     error,
   };
-
 };
 
 export const useSeries = () => {
-  const { data, loading, error } = useQuery(GET_SERIES, {
+  const { data, loading, error } = useQuery(GET_CONTENT, {
     variables: {
-      paginationSeriesArgs: {
-        limit: 12,
+      paginationContentArgs: {
+        limit: 100,
         offset: 0,
       },
     },
   });
 
   return {
-    series: data?.seriesAll || [],
-    categories: data?.category || [],
+    series: data?.contentAll?.filter((item: any) => item.type === Type.series) || [],
     loading,
     error,
   };
 };
+
+
 
 export const useUserData = (userId: string) => {
   const { data, loading, error } = useQuery(GET_USER_DATA, {

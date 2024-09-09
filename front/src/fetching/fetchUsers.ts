@@ -42,6 +42,7 @@ export const postLogin = async (credentials: ILoginUser) => {
               id
               name
               email
+              userImage
             }
           }
         }

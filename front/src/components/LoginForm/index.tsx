@@ -8,7 +8,6 @@ import { validateLogin } from "@/helpers/validations";
 import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 
-// En caso de error chekear que LOGIN_USER reciba el parametro de password
 const LOGIN_USER = gql`
   mutation Login($loginInput: LoginInput!) {
     login(loginInput: $loginInput) {
@@ -18,6 +17,8 @@ const LOGIN_USER = gql`
         email
         firstName
         lastName
+        userImage
+        roles
       }
     }
   }
@@ -35,8 +36,6 @@ const LoginForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-
-  console.log(data);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -57,7 +56,6 @@ const LoginForm: React.FC = () => {
         const userData = result.data.login;
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
-        // Guarda el token en el contexto global o localStorage
         localStorage.setItem("token", userData.token);
         setIsLogged(true);
         router.push("/");
@@ -72,20 +70,21 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36 ">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">
       {/* Email */}
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
           name="email"
           id="email"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer dark:text-lightText dark:border-gray-600 dark:focus:border-violet"
+          className="block pt-3 px-0 w-full text-lg bg-transparent p-2 border-lightText dark:border-darkText border-0 border-b-2 appearance-none peer focus:outline-none focus:ring-0 dark:bg-transparent dark:border-darkBorder border-darkBorder focus:border-violet dark:focus:border-violet"
           required
+          placeholder=" "
           onChange={handleChange}
         />
         <label
           htmlFor="email"
-          className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
+          className="absolute text-xl text-gray-600 duration-300 transform scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:peer-focus:text-violet peer-valid:scale-75 peer-valid:-translate-y-6"
         >
           Email
         </label>
@@ -100,13 +99,14 @@ const LoginForm: React.FC = () => {
           type="password"
           name="password"
           id="password"
-          className="block pt-3 px-0 w-full text-sm text-gray-400 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-violet peer dark:text-lightText dark:border-gray-600 dark:focus:border-violet"
+          className="block pt-3 px-0 w-full text-lg bg-transparent p-2 border-lightText dark:border-darkText border-0 border-b-2 appearance-none peer focus:outline-none focus:ring-0 dark:bg-transparent dark:border-darkBorder border-darkBorder focus:border-violet dark:focus:border-violet"
           required
+          placeholder=" "
           onChange={handleChange}
         />
         <label
           htmlFor="password"
-          className="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:text-lightText dark:peer-focus:text-violet"
+          className="absolute text-xl text-gray-600 duration-300 transform scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-violet peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 dark:peer-focus:text-violet peer-valid:scale-75 peer-valid:-translate-y-6"
         >
           Password
         </label>
@@ -125,7 +125,7 @@ const LoginForm: React.FC = () => {
         </button>
 
         <Link href="/register">
-          <p className="text-violet hover:underline ml-4 dark:text-lightText dark:hover:underline">
+          <p className="text-blue-600 hover:underline ml-4 dark:text-blue-600 dark:hover:underline">
             Dont have an account? Create one
           </p>
         </Link>
