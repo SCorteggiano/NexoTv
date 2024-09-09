@@ -18,8 +18,12 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
   userId,
   onClose,
 }) => {
+
+  const storedUser = localStorage.getItem("user");
+  const userId1 = storedUser ? JSON.parse(storedUser).user?.id : null;
+
   const [formData, setFormData] = useState({
-    subscriptionId: "", // Inicializamos con el `userId` o puedes manejarlo de forma diferente
+    userId: userId1, // Inicializamos con el `userId` o puedes manejarlo de forma diferente
     price: "",
     stripeId: "",
     tipo: "",
@@ -43,6 +47,7 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
 
     setFormData({
       ...formData,
+      userId: userId,
       tipo: selectedType,
       price: updatedPrice,
       stripeId: updatedStripeId,
@@ -52,7 +57,7 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
   const handleSubmit = async () => {
     try {
       // Verificar que no esté vacío el `subscriptionId` y los campos relevantes
-      if (!formData.subscriptionId || !formData.tipo || !formData.price || !formData.stripeId) {
+      if (!formData.userId || !formData.tipo || !formData.price || !formData.stripeId) {
         throw new Error("Missing required fields");
       }
 
@@ -60,7 +65,7 @@ const ManageSubscriptionModal: React.FC<ISubscriptionModalProps> = ({
       await updateSubscription({
         variables: {
           updateSubscriptionInput: {
-            id: formData.subscriptionId,
+            userId: userId,
             price: parseFloat(formData.price),
             stripeId: formData.stripeId,
             tipo: formData.tipo,
