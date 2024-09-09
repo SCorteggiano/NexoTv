@@ -8,6 +8,8 @@ import { validateRegister } from "@/helpers/validations";
 import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 
+
+// En caso de error chekear que esta query reciba el parametro de ROLES
 const CREATE_USER = gql`
   mutation Signup($signupInput: SignupInput!) {
     signup(signupInput: $signupInput) {
