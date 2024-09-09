@@ -1,35 +1,11 @@
-<<<<<<< HEAD
-'use client'
-import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
-import { UserContext } from "@/context/userContext";
-import { useRouter } from "next/navigation";
-
-import React, { useContext, useEffect } from "react";
-
-const AdminDashboard = () => {
-
-  const { isLogged, isAdmin } = useContext(UserContext);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLogged || !isAdmin) {
-      router.push("/not-authorized");
-    }
-  }, [isLogged, isAdmin, router]);
-
-  return isLogged && isAdmin ? (
-    <div>
-      <AdminNavbar/>
-    </div>
-  ) : null;
-=======
 "use client";
-
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -50,6 +26,15 @@ const GET_SUBSCRIPTION_COUNTS = gql`
 `;
 
 const Dashboard: React.FC = () => {
+  const { isLogged, isAdmin } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLogged || !isAdmin) {
+      router.push("/not-authorized");
+    }
+  }, [isLogged, isAdmin, router]);
+
   const {
     data: usersData,
     loading: usersLoading,
@@ -127,7 +112,8 @@ const Dashboard: React.FC = () => {
     typeof subscriptionCounts.Annual === "number" ? subscriptionCounts.Annual : 0,
   ];
 
-  return (
+
+  return isLogged && isAdmin ? (
     <>
       <AdminNavbar />
       <div className="flex flex-col items-center">
@@ -160,8 +146,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
     </>
-  );
->>>>>>> f75f4574e3f569c8da10d0bca29dbe0b0ba88d74
+  ): null;
 };
 
 export default Dashboard;

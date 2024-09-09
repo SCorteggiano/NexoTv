@@ -109,15 +109,6 @@ const Products: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.title}
                   </td>
-<<<<<<< HEAD
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {content.description}
-                  </td>
-
-=======
-                  
-          
->>>>>>> f75f4574e3f569c8da10d0bca29dbe0b0ba88d74
                   <td className="py-4 whitespace-nowrap">
                     <button
                       className="bg-violet hover:bg-darkviolet text-[#efefef]  rounded-full text-center mr-3 px-6 py-2 ml-4"

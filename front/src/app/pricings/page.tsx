@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import CheckoutButton from "@/components/CheckoutButton/CheckoutButton";
 import { tipo } from "@/interfaces";
 import { UserContext } from "@/context/userContext";
@@ -9,9 +9,18 @@ import { useSession } from "next-auth/react";
 const Pricings = () => {
   const { data: session } = useSession();
   const { isLogged } = useContext(UserContext);
+  const [userId, setUserId] = useState("");
 
-  const storedUser = localStorage.getItem("user");
-  const userId = storedUser ? JSON.parse(storedUser).user?.id : null;
+  useEffect(() => {
+    // Verificamos si estamos en el cliente antes de acceder a localStorage
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      const userId = storedUser ? JSON.parse(storedUser).user?.id : null;
+      setUserId(userId);
+    }
+  }, []); // El array vacío asegura que este efecto solo se ejecute una vez cuando el componente se monta
+
+
 
   const monthly = "price_1PswZlDxc1HrUJzd32gljNEt";
   const annual = "price_1PswaaDxc1HrUJzd0EFNFdos";
