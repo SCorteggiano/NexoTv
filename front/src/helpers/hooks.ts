@@ -40,12 +40,7 @@ export const useMovies = () => {
   });
 
   return {
-    movies:
-      data?.contentAll.filter((item: IMovie) =>
-        Array.isArray(item.category)
-          ? item.category.includes("movie")
-          : item.category === "movie"
-      ) || [],
+    movies: data?.contentAll?.filter((item: IMovie) => item.type === "movie") || [],
     loading,
     error,
   };
@@ -62,12 +57,7 @@ export const useSeries = () => {
   });
 
   return {
-    series:
-      data?.contentAll?.filter((item: ISeries) =>
-        Array.isArray(item.category)
-          ? item.category.includes("series")
-          : item.category === "series"
-      ) || [],
+    series: data?.contentAll?.filter((item: any) => item.type === "series") || [],
     loading,
     error,
   };

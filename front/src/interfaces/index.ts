@@ -36,6 +36,7 @@ interface IMovie {
   description: string;
   image: string;
   contentUrl: string[];
+  type: string
 }
 
 interface IMovieCard {
