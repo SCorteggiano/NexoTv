@@ -5,7 +5,7 @@ const Series = () => {
   return (
     <>
       <div className="text-center">
-        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
+        <h1 className="text-4xl font-extrabold text-lightText dark:text-darkText">
           SERIES
         </h1>
       </div>

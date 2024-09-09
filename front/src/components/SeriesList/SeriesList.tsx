@@ -7,15 +7,17 @@ import { ISeries, ICategory } from "@/interfaces";
 import CategoryNavbar from "../CategoryNavbar/CategoryNavbar";
 import { usePagination } from "@/context/pageContext";
 import { Pagination } from "flowbite-react";
-import { useSearch } from "@/context/searchContext"; // Importar el contexto
+import { useSearch } from "@/context/searchContext";
 
-const SeriesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering }) => {
+const SeriesList: React.FC<{ enableFiltering: boolean }> = ({
+  enableFiltering,
+}) => {
   const [selectedSeries, setSelectedSeries] = useState<ISeries | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const { series } = useSeries();
   const { currentPage, handlePageChange } = usePagination();
-  const itemsPerPage = 20;
-  const { searchQuery } = useSearch(); // Obtener la búsqueda global
+  const itemsPerPage = 10;
+  const { searchQuery } = useSearch();
 
   const handleCardClick = (series: ISeries) => {
     setSelectedSeries(series);
@@ -37,7 +39,6 @@ const SeriesList: React.FC<{ enableFiltering: boolean }> = ({ enableFiltering })
     }
   };
 
-  // Extrae y construye una lista única de categorías
   const categories: ICategory[] = useMemo(() => {
     const allCategories: ICategory[] = [];
 
