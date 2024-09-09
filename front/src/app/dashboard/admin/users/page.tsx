@@ -4,24 +4,22 @@ import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery } from "@apollo/client";
 import EditUserModal from "@/components/EditUserModal/EditUserModal";
 import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
-import { Button } from "flowbite-react";
 
 // Definir la consulta para obtener usuarios con paginación y roles válidos
-const GET_USERS = gql`
-  query Users(
-    $paginationArgs: PaginationArgs!
-    $validRolesArgs: ValidRolesArgs!
-  ) {
-    users(paginationArgs: $paginationArgs, validRolesArgs: $validRolesArgs) {
+const GET_SUBSCRIPTIONS = gql`
+  query GetSubscription {
+    getSubscription {
       id
-      email
-      firstName
-      lastName
-      roles
-      subscription {
+      tipo
+      price
+      user {
         id
-        price
-        tipo
+        email
+        firstName
+        lastName
+        userImage
+        views
+        roles
       }
     }
   }
@@ -30,15 +28,9 @@ const GET_USERS = gql`
 const Users: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null); // Nuevo estado para manejar la suscripción
-  
-  // Ejecutar la consulta con las variables de paginación y roles
-  const { data, loading, error } = useQuery(GET_USERS, {
-    variables: {
-      paginationArgs: { limit: 10, offset: 0 },
-      validRolesArgs: { roles: ["user", "admin"] },
-    },
-  });
-  console.log("Users data:", data);
+
+  // Ejecutar la consulta para obtener usuarios y sus suscripciones
+  const { data, loading, error } = useQuery(GET_SUBSCRIPTIONS);
 
   if (loading) {
     return (
@@ -66,39 +58,38 @@ const Users: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.users?.length > 0 ? (
-                data.users.map((user: any) => (
-                  <tr key={user.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.firstName} {user.lastName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.roles.join(", ")}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {user.subscription?.tipo || "No Subscription"}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <Button
-                        pill
-                        className="bg-violet hover:bg-darkviolet text-center mr-3 px-6 py-2 ml-4"
-                        onClick={() => setSelectedUser(user.id)}
-                      >
-                        Edit
-                      </Button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="text-center py-4">
-                    No users found.
+              {data?.getSubscription?.map((subscription: any) => (
+                <tr key={subscription.user.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {subscription.user.firstName} {subscription.user.lastName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {subscription.user.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {subscription.user.roles.join(", ")}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {subscription.tipo || "Error loading subscription"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button
+                      className="bg-violet hover:bg-darkviolet text-[#efefef] rounded-full text-center mr-3 px-6 py-2 ml-4"
+                      onClick={() => setSelectedUser(subscription.user.id)}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td className="px-2 py-4 whitespace-nowrap">
+                    <button
+                      className="bg-violet hover:bg-darkviolet text-[#efefef] rounded-full text-center mr-3 px-6 py-2 ml-4"
+                      onClick={() => setSelectedSubscriptionUser(subscription.user.id)}
+                    >
+                      Manage Subs
+                    </button>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>

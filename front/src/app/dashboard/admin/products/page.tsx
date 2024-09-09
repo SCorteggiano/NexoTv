@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
-import { Button } from "flowbite-react";
 import EditContentModal from "@/components/EditContentModal/EditContentModal";
 
 const GET_CONTENT = gql`
@@ -92,7 +91,6 @@ const Products: React.FC = () => {
             <thead>
               <tr>
                 <th className="px-6 py-3 text-left">Title</th>
-                <th className="px-6 py-3 text-left">Description</th>
                 <th className="px-6 py-3 text-left">Actions</th>
               </tr>
             </thead>
@@ -102,9 +100,7 @@ const Products: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.title}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {content.description}
-                  </td>
+                  
           
                   <td className="py-4 whitespace-nowrap">
                     <button
