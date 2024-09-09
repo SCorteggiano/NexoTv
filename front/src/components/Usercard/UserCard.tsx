@@ -63,7 +63,7 @@ const UserCard = () => {
           <div className="mb-4">
             <p className="text-gray-400 font-semibold">Profile Picture:</p>
             <div className="relative">
-              {user?.user?.userImage[0] ? (
+              {user?.user?.userImage?.[0] ? (
                 <Image
                   src={user?.user?.userImage[0]}
                   alt="Profile Picture"

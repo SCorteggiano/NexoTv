@@ -1,10 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
 import { Button } from "flowbite-react";
 import EditContentModal from "@/components/EditContentModal/EditContentModal";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
 
 const GET_CONTENT = gql`
   query ContentAll($paginationContentArgs: PaginationContentArgs!) {
@@ -29,6 +31,8 @@ const REMOVE_CONTENT = gql`
 `;
 
 const Products: React.FC = () => {
+  const { isLogged, isAdmin } = useContext(UserContext);
+  const router = useRouter();
   const [selectedContent, setSelectedContent] = useState<string | null>(null);
   const { data, loading, error, refetch } = useQuery(GET_CONTENT, {
     variables: {
@@ -66,6 +70,12 @@ const Products: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (!isLogged || !isAdmin) {
+      router.push("/not-authorized");
+    }
+  }, [isLogged, isAdmin, router]);
+
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
@@ -81,8 +91,7 @@ const Products: React.FC = () => {
       </div>
     );
   }
-  
-  return (
+  return isLogged && isAdmin ? (
     <div className="flex">
       <AdminNavbar />
       <div className="p-6 flex-1">
@@ -105,10 +114,9 @@ const Products: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.description}
                   </td>
-          
+
                   <td className="py-4 whitespace-nowrap">
                     <button
-                      
                       className="bg-violet hover:bg-darkviolet text-[#efefef]  rounded-full text-center mr-3 px-6 py-2 ml-4"
                       onClick={() => setSelectedContent(content.id)}
                     >
@@ -116,9 +124,7 @@ const Products: React.FC = () => {
                     </button>
                   </td>
                   <td className="py-4 whitespace-nowrap">
-
                     <button
-                      
                       className=" bg-red-600 hover:bg-red-900  text-[#efefef] rounded-full text-center mr-3 px-6 py-2 ml-4"
                       onClick={() => handleDelete(content.id)}
                     >
@@ -140,7 +146,7 @@ const Products: React.FC = () => {
         )}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Products;

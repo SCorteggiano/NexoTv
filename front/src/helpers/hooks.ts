@@ -36,6 +36,7 @@ const GET_USER_DATA = gql`
       lastName
       isActive
       userImage
+      roles
     }
   }
 `;

@@ -19,7 +19,8 @@ interface IUser {
   lastName: string;
   email: string;
   password: string;
-  userImage?: string[]
+  userImage?: string[];
+  roles: string;
   subscription?: {
     tipo: string;
     id: string;
@@ -46,9 +47,9 @@ interface IMovieCard {
 }
 
 interface ISeriesCard {
-  id: number,
+  id: number;
   title: string;
-  image: string,
+  image: string;
   description: string;
   episodes?: string;
 }
@@ -69,9 +70,10 @@ interface IUserContext {
   >;
   isLogged: boolean;
   setIsLogged: (isLogged: boolean) => void;
+  setIsAdmin: (isAdmin: boolean) => void;
   login: (credentials: ILoginUser) => Promise<boolean>;
-  register: (user: Omit<IUser, "id">) => Promise<boolean>;
   logout: () => void;
+  isAdmin: boolean;
 }
 
 interface ILoginUserResponse {
@@ -130,7 +132,7 @@ interface IEditContentModalProps {
 }
 
 interface IPrice {
-  	priceId: string;
+  priceId: string;
 }
 
 interface ICheckoutSessionDto {
@@ -141,9 +143,9 @@ interface ICheckoutSessionDto {
 }
 
 export enum tipo {
-  Monthly= "Monthly",
-  Annual= "Annual",
-  Free= "Free",
+  Monthly = "Monthly",
+  Annual = "Annual",
+  Free = "Free",
 }
 
 export type {
@@ -166,5 +168,5 @@ export type {
   ISubscriptionModalProps,
   IEditContentModalProps,
   IPrice,
-  ICheckoutSessionDto
+  ICheckoutSessionDto,
 };

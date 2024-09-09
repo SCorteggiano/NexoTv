@@ -19,6 +19,7 @@ const LOGIN_USER = gql`
         firstName
         lastName
         userImage
+        roles
       }
     }
   }
@@ -36,8 +37,6 @@ const LoginForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-
-  console.log(data);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -70,7 +69,7 @@ const LoginForm: React.FC = () => {
         text: "Invalid credentials!",
       });
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">

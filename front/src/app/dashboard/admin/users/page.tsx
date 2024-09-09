@@ -1,10 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery } from "@apollo/client";
 import EditUserModal from "@/components/EditUserModal/EditUserModal";
 import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
 import { Button } from "flowbite-react";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
 
 // Definir la consulta para obtener usuarios con paginación y roles válidos
 const GET_USERS = gql`
@@ -29,15 +31,24 @@ const GET_USERS = gql`
 
 const Users: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
-  const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null); // Nuevo estado para manejar la suscripción
+  const [selectedSubscriptionUser, setSelectedSubscriptionUser] = useState<string | null>(null);
   
-  // Ejecutar la consulta con las variables de paginación y roles
+  const { isLogged, isAdmin } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLogged || !isAdmin) {
+      router.push("/not-authorized");
+    }
+  }, [isLogged, isAdmin, router]);
+
   const { data, loading, error } = useQuery(GET_USERS, {
     variables: {
       paginationArgs: { limit: 10, offset: 0 },
       validRolesArgs: { roles: ["user", "admin"] },
     },
   });
+
   console.log("Users data:", data);
 
   if (loading) {
@@ -49,7 +60,8 @@ const Users: React.FC = () => {
   }
   if (error) return <p>Error loading users</p>;
 
-  return (
+  // Renderiza solo si el usuario está logueado y es admin
+  return isLogged && isAdmin ? (
     <div className="flex">
       <AdminNavbar />
       <div className="p-6 flex-1">
@@ -118,7 +130,6 @@ const Users: React.FC = () => {
         )}
       </div>
     </div>
-  );
+  ) : null;
 };
-
 export default Users;
