@@ -25,7 +25,7 @@ export default function NotLogged() {
         </div>
         <div className="mt-4">
           <Link
-            href="Register"
+            href="/register"
             className="inline-flex items-center rounded-md border border-input px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             prefetch={false}
           >

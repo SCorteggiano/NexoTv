@@ -4,6 +4,7 @@ import { createContext, useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { IUserContext, ILoginUserResponse, ILoginUser, IUser } from "@/interfaces/index";
 import { postLogin, postRegister } from "@/fetching/fetchUsers";
+import { useUserData } from "@/helpers/hooks";
 
 export const UserContext = createContext<IUserContext>({
   user: null,
@@ -22,6 +23,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+const userRole = user?.user?.roles
+if (userRole && userRole.length > 0 && userRole[0] === 'admin') {
+  setIsAdmin(true);
+} else {
+  setIsAdmin(false);
+}
+
   const login = async (credentials: ILoginUser) => {
     try {
       const data = await postLogin(credentials);
@@ -29,13 +37,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
       setIsLogged(true);
-
-      // Verifica si el usuario tiene rol de admin
-      if (user?.user?.roles === 'admin') {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
 
       return true;
     } catch (error) {
@@ -53,7 +54,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("token");
     setUser(null);
     setIsLogged(false);
-    setIsAdmin(false); // Resetea el estado de admin al hacer logout
+    setIsAdmin(false);
   };
 
   useEffect(() => {
@@ -61,13 +62,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (user) {
       const parsedUser = JSON.parse(user);
       setUser(parsedUser);
-
-      // Verifica el rol en el almacenamiento local
-      if (parsedUser.roles && parsedUser.roles.includes("admin")) {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
 
       return;
     }

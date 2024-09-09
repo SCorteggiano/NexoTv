@@ -16,7 +16,7 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import ThemeButton from "../ThemeButton";
 
 const Navbar1 = () => {
-  const { isLogged, logout } = useContext(UserContext);
+  const { isLogged, logout, isAdmin } = useContext(UserContext);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -55,7 +55,7 @@ const Navbar1 = () => {
           >
             <DropdownItem
               as={Link}
-              href="/dashboard/user"
+              href={isAdmin ? "/dashboard/admin" : "/dashboard/user"}
               className="text-lightText dark:text-darkText"
             >
               Dashboard
