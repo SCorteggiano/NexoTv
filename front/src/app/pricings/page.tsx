@@ -4,8 +4,10 @@ import CheckoutButton from "@/components/CheckoutButton/CheckoutButton";
 import { tipo } from "@/interfaces";
 import { UserContext } from "@/context/userContext";
 import NotLogged from "@/components/NotLogged";
+import { useSession } from "next-auth/react";
 
 const Pricings = () => {
+  const { data: session } = useSession();
   const { isLogged } = useContext(UserContext);
 
   const storedUser = localStorage.getItem("user");
@@ -16,8 +18,8 @@ const Pricings = () => {
 
   return (
     <>
-      {!isLogged ? (
-        <NotLogged/>
+      {!isLogged || !session ? (
+        <NotLogged />
       ) : (
         <div className="flex flex-col items-center py-16 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
           <div className="m-4">

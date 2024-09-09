@@ -27,7 +27,10 @@ const Navbar1 = () => {
   }
 
   return (
-    <Navbar fluid className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
+    <Navbar
+      fluid
+      className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
+    >
       <Link href="/">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
           NexoTV
@@ -41,9 +44,9 @@ const Navbar1 = () => {
           Pricings
         </Link>
       </div>
-      <ThemeButton/>
       {isLogged || session ? (
         <div className="flex md:order-2 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
+          <ThemeButton />
           <Dropdown
             className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
             arrowIcon={false}
@@ -57,7 +60,10 @@ const Navbar1 = () => {
             >
               Dashboard
             </DropdownItem>
-            <DropdownItem className="text-lightText dark:text-darkText" onClick={handleLogout}>
+            <DropdownItem
+              className="text-lightText dark:text-darkText"
+              onClick={handleLogout}
+            >
               Logout
             </DropdownItem>
           </Dropdown>
@@ -65,17 +71,18 @@ const Navbar1 = () => {
         </div>
       ) : (
         <div className="flex md:order-2">
+          <ThemeButton />
           <Button
             as={Link}
             href="/register"
-            className="text-lightText dark:text-darkText bg-transparent border-violet hover:bg-darkviolet text-center mr-3"
+            className=" bg-transparent text-lightText dark:bg-transparent dark:text-darkText border-violet hover:bg-darkviolet text-center mr-3"
           >
             Register
           </Button>
           <Button
             as={Link}
             href="/login"
-            className="text-lightText dark:text-darkText bg-transparent border-violet hover:bg-darkviolet text-center mr-3"
+            className=" bg-transparent text-lightText dark:bg-transparent dark:text-darkText border-violet hover:bg-darkviolet text-center mr-3"
           >
             Login
           </Button>

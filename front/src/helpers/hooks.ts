@@ -40,7 +40,7 @@ export const useMovies = () => {
   const { data, loading, error } = useQuery(GET_CONTENT, {
     variables: {
       paginationContentArgs: {
-        limit: 12,
+        limit: 100,
         offset: 0,
       },
     },
@@ -57,7 +57,7 @@ export const useSeries = () => {
   const { data, loading, error } = useQuery(GET_CONTENT, {
     variables: {
       paginationContentArgs: {
-        limit: 50,
+        limit: 100,
         offset: 0,
       },
     },

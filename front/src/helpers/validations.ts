@@ -11,6 +11,8 @@ export const validateLogin = (loginValues: ILoginValidate) => {
 
   if (!loginValues.password) {
     errors.password = "Password is required";
+  }else if (loginValues.password.length < 10) {
+    errors.password = "Password must be at least 10 characters long";
   } else if (loginValues.password.length < 8) {
     errors.password = "Password must be at least 8 characters long";
   } else if (!/[A-Z]/.test(loginValues.password)) {
@@ -33,12 +35,14 @@ export const validateRegister = (registerValues: IRegisterValidate) => {
 
   if (!registerValues.password) {
     errors.password = "Password is required";
-  } else if (registerValues.password.length < 8) {
-    errors.password = "Password must be at least 8 characters long";
+  } else if (registerValues.password.length < 10) {
+    errors.password = "Password must be at least 10 characters long";
   } else if (!/[A-Z]/.test(registerValues.password)) {
     errors.password = "Password must contain at least one uppercase letter";
   } else if (!/[0-9]/.test(registerValues.password)) {
     errors.password = "Password must contain at least one number";
+  } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(registerValues.password)) {
+    errors.password = "Password must contain at least one special character";
   }
 
   if (!registerValues.firstName) {
