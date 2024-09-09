@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { IEditUserModalProps } from "@/interfaces";
-import { Button } from "flowbite-react";
 
 const GET_USER = gql`
   query User($userId: String!) {
@@ -27,6 +26,7 @@ const UPDATE_USER = gql`
       firstName
       lastName
       email
+      roles
     }
   }
 `;
@@ -36,23 +36,27 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
     variables: { userId },
   });
   const [updateUser] = useMutation(UPDATE_USER);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    roles: ["user"],
   });
 
   useEffect(() => {
     if (data) {
       setFormData({
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-        email: data.user.email,
+        firstName: data.user.firstName || "",
+        lastName: data.user.lastName || "",
+        email: data.user.email || "",
+        roles: data.user.roles || ["user"],
       });
     }
   }, [data]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Evitar el comportamiento por defecto del formulario
     try {
       await updateUser({
         variables: { updateUserInput: { ...formData, id: userId } },
@@ -111,17 +115,33 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             }
             className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
+
+          {/* Select para cambiar roles */}
+          <label className="block text-lightText dark:text-darkText mb-2">
+            Role
+          </label>
+          <select
+            value={formData.roles[0]}
+            onChange={(e) =>
+              setFormData({ ...formData, roles: [e.target.value] })
+            }
+            className="mb-4 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+
           <div className="flex justify-between">
             <button
               type="submit"
-              className="px-6 py-4  bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
+              className="px-6 py-4 bg-green-600 hover:bg-green-900 rounded-full font-bold text-[#efefef]"
             >
               Save Changes
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-4  bg-red-600 hover:bg-red-900 rounded-full font-bold text-[#efefef]"
+              className="px-6 py-4 bg-red-600 hover:bg-red-900 rounded-full font-bold text-[#efefef]"
             >
               Cancel
             </button>
