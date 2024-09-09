@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import { IEditContentModalProps } from "@/interfaces";
-import { Button } from "flowbite-react";
 import Swal from "sweetalert2";
 
 const GET_CONTENT = gql`
@@ -85,6 +84,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({
       const { data: mutationData } = await updateContent({
         variables: { updateContentInput: { ...updatedData, id: contentId } },
       });
+      console.log("Mutation data:", mutationData);
 
       if (mutationData) {
         Swal.fire("Success", "Content updated successfully", "success");

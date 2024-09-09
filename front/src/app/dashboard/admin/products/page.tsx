@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
-import { Button } from "flowbite-react";
 import EditContentModal from "@/components/EditContentModal/EditContentModal";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
@@ -101,7 +100,6 @@ const Products: React.FC = () => {
             <thead>
               <tr>
                 <th className="px-6 py-3 text-left">Title</th>
-                <th className="px-6 py-3 text-left">Description</th>
                 <th className="px-6 py-3 text-left">Actions</th>
               </tr>
             </thead>
@@ -111,10 +109,15 @@ const Products: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.title}
                   </td>
+<<<<<<< HEAD
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.description}
                   </td>
 
+=======
+                  
+          
+>>>>>>> f75f4574e3f569c8da10d0bca29dbe0b0ba88d74
                   <td className="py-4 whitespace-nowrap">
                     <button
                       className="bg-violet hover:bg-darkviolet text-[#efefef]  rounded-full text-center mr-3 px-6 py-2 ml-4"
