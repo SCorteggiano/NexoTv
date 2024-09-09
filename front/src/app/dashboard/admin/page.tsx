@@ -14,9 +14,13 @@ const COUNT_USERS = gql`
   }
 `;
 
-const COUNT_SUBSCRIPTIONS = gql`
-  query {
-    countSubscriptions
+const GET_SUBSCRIPTION_COUNTS = gql`
+  query GetSubscriptionCounts {
+    getSubscriptionCounts {
+      Free
+      Monthly
+      Annual
+    }
   }
 `;
 
@@ -26,37 +30,53 @@ const Dashboard: React.FC = () => {
     loading: usersLoading,
     error: usersError,
   } = useQuery(COUNT_USERS);
-  const {
-    data: subscriptionsData,
-    loading: subscriptionsLoading,
-    error: subscriptionsError,
-  } = useQuery(COUNT_SUBSCRIPTIONS);
 
-  if (usersLoading || subscriptionsLoading)
+  const {
+    data: subscriptionCountsData,
+    loading: subscriptionCountsLoading,
+    error: subscriptionCountsError,
+  } = useQuery(GET_SUBSCRIPTION_COUNTS);
+
+  if (usersLoading || subscriptionCountsLoading)
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <p className="text-center text-2xl">Loading metrics...</p>
       </div>
     );
-  if (usersError || subscriptionsError)
+
+  if (usersError || subscriptionCountsError)
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <p className="text-center text-2xl">Error loading metrics</p>
       </div>
     );
 
-  // Asegurarse de que los datos sean válidos
+  // Obtener datos de la query
   const totalUsers = usersData?.countUser || 0;
-  const totalSubscriptions = subscriptionsData?.countSubscriptions || 0;
-  const nonSubscribers = Math.max(0, totalUsers - totalSubscriptions); // Evitar valores negativos
+  const subscriptionCounts = subscriptionCountsData?.getSubscriptionCounts || {
+    Free: 0,
+    Monthly: 0,
+    Annual: 0,
+  };
+
+  // Evitar valores indefinidos o no numéricos
+  const totalSubscriptions =
+    typeof subscriptionCounts.Monthly === "number"
+      ? subscriptionCounts.Monthly
+      : 0 +
+    typeof subscriptionCounts.Annual === "number"
+      ? subscriptionCounts.Annual
+      : 0;
+  
+  const nonSubscribers = typeof subscriptionCounts.Free === "number" ? subscriptionCounts.Free : 0; // Usuarios Free
 
   // Configuración del gráfico
   const chartOptions: ApexOptions = {
     chart: {
       type: "donut",
     },
-    labels: ["Subscribers", "Non-Subscribers"],
-    colors: ["#00E396", "#FF4560"],
+    labels: ["Free", "Monthly", "Annual"],
+    colors: ["#00E396", "#FEB019", "#FF4560"],
     legend: {
       position: "bottom",
     },
@@ -77,8 +97,9 @@ const Dashboard: React.FC = () => {
 
   // Validar que las series sean números y no estén indefinidas
   const chartSeries = [
-    typeof totalSubscriptions === "number" ? totalSubscriptions : 0,
-    typeof nonSubscribers === "number" ? nonSubscribers : 0,
+    typeof subscriptionCounts.Free === "number" ? subscriptionCounts.Free : 0,
+    typeof subscriptionCounts.Monthly === "number" ? subscriptionCounts.Monthly : 0,
+    typeof subscriptionCounts.Annual === "number" ? subscriptionCounts.Annual : 0,
   ];
 
   return (
@@ -102,10 +123,13 @@ const Dashboard: React.FC = () => {
               Total Users: <strong>{totalUsers}</strong>
             </p>
             <p>
-              Subscribed Users: <strong>{totalSubscriptions}</strong>
+              Free Users: <strong>{subscriptionCounts.Free}</strong>
             </p>
             <p>
-              Non-Subscribed Users: <strong>{nonSubscribers}</strong>
+              Monthly Subscribers: <strong>{subscriptionCounts.Monthly}</strong>
+            </p>
+            <p>
+              Annual Subscribers: <strong>{subscriptionCounts.Annual}</strong>
             </p>
           </div>
         </div>

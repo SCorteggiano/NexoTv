@@ -37,25 +37,26 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
   });
   const [updateUser] = useMutation(UPDATE_USER);
 
-  const [formData, setFormData] = useState({ 
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    roles: "user", // Rol por defecto, será un dropdown.
+    roles: ["user"],
   });
 
   useEffect(() => {
     if (data) {
       setFormData({
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-        email: data.user.email,
-        roles: data.user.roles[0], // El rol está en un array, tomamos el primero.
+        firstName: data.user.firstName || "",
+        lastName: data.user.lastName || "",
+        email: data.user.email || "",
+        roles: data.user.roles || ["user"],
       });
     }
   }, [data]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Evitar el comportamiento por defecto del formulario
     try {
       await updateUser({
         variables: { updateUserInput: { ...formData, id: userId } },
@@ -120,8 +121,10 @@ const EditUserModal: React.FC<IEditUserModalProps> = ({ userId, onClose }) => {
             Role
           </label>
           <select
-            value={formData.roles}
-            onChange={(e) => setFormData({ ...formData, roles: e.target.value })}
+            value={formData.roles[0]}
+            onChange={(e) =>
+              setFormData({ ...formData, roles: [e.target.value] })
+            }
             className="mb-4 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           >
             <option value="user">User</option>
