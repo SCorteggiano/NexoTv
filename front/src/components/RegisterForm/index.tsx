@@ -46,7 +46,6 @@ const RegisterForm: React.FC = () => {
     password: "",
     firstName: "",
     lastName: "",
-    roles: ["user"],
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
