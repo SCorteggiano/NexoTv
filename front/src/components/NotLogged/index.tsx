@@ -12,7 +12,7 @@ export default function NotLogged() {
           Restricted Access
         </h1>
         <p className="mt-4 text-muted-foreground">
-          You must be logged in to access the dashboard.
+        You must be logged in to access to this content.
         </p>
         <div className="mt-6">
           <Link

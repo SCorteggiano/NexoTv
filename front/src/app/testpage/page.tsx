@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/Loading/Loading";
 import MainCarousel from "@/components/MainCarousel/MainCarousel";
 import Rating from "@/components/Rating/Rating";
 import RatingButton from "@/components/RatingButton/RatingButton";
@@ -10,7 +11,7 @@ const Testpage = () => {
     <div id="wholeContainer" className="m-6">
       <h1 className="m-4 text-5xl text-center">Test Page</h1>
       <div>
-        <MainCarousel/>
+        <LoadingSpinner/>
       </div>
     </div>
   );

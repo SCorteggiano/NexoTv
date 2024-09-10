@@ -41,8 +41,6 @@ const UserCard = () => {
         }
       );
 
-      console.log("This is response:" + response);
-
       const data = await response.json();
       setProfilePicture(data.url);
       localStorage.setItem("profilePicture", data.url);
@@ -108,7 +106,7 @@ const UserCard = () => {
             </p>
           </div>
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Subscription:</p>
+            <p className="text-gray-400 font-semibold">Subscription: {user?.user?.subscription?.tipo}</p>
             {/* Suscription info */}
           </div>
           <div className="flex justify-center">

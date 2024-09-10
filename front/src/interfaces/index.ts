@@ -52,14 +52,14 @@ interface ISeriesCard {
   title: string;
   image: string;
   description: string;
-  episodes?: string;
+  duration: string;
 }
 
 interface ISeries {
   id: number;
   category: string[];
   title: string;
-  episodes: string;
+  duration: string;
   description: string;
   image: string;
 }

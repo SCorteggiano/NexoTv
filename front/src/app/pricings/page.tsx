@@ -27,7 +27,7 @@ const Pricings = () => {
 
   return (
     <>
-      {!isLogged || !session ? (
+      {!isLogged ? (
         <NotLogged />
       ) : (
         <div className="flex flex-col items-center py-16 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
@@ -90,7 +90,7 @@ const Pricings = () => {
             </div>
           </div>
         </div>
-      )}{" "}
+      )}
     </>
   );
 };
