@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { validateRegister } from "@/helpers/validations";
 import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
+import LoadingSpinner from "@/components/Loading/Loading";
 
 
 // En caso de error chekear que esta query reciba el parametro de ROLES
@@ -40,7 +41,7 @@ const LOGIN_USER = gql`
 `;
 
 const RegisterForm: React.FC = () => {
-  const { setIsLogged, login } = useContext(UserContext);
+  const { setIsLogged, setUser } = useContext(UserContext);
   const router = useRouter();
 
   const [registerValues, setRegisterValues] = useState({
@@ -79,13 +80,17 @@ const RegisterForm: React.FC = () => {
             },
           },
         });
+
         if (loginResult.data?.login?.token) {
+          const userData = loginResult.data.login.user;
+          const token = loginResult.data.login.token;
+
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(userData));
+
+          setUser(userData);          
           setIsLogged(true);
-          localStorage.setItem("token", loginResult.data.login.token);
-          localStorage.setItem(
-            "user",
-            JSON.stringify(loginResult.data.login.user)
-          );
+          
           router.push("/thanks");
         }
       }
@@ -97,6 +102,15 @@ const RegisterForm: React.FC = () => {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center pt-5">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-16 mb-36">
