@@ -19,6 +19,8 @@ const SeriesList: React.FC<{ enableFiltering: boolean }> = ({
   const itemsPerPage = 10;
   const { searchQuery } = useSearch();
 
+  console.log(series)
+
   const handleCardClick = (series: ISeries) => {
     setSelectedSeries(series);
   };
@@ -96,6 +98,7 @@ const SeriesList: React.FC<{ enableFiltering: boolean }> = ({
               id={serie.id}
               image={serie.image}
               title={serie.title}
+              duration={serie.duration}
               description={serie.description}
               onClick={() => handleCardClick(serie)}
             />
