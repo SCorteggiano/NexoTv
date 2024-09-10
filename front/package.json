@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.4",
+    "@formspree/react": "^2.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.1.5",

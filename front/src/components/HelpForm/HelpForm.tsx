@@ -1,28 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import Swal from "sweetalert2";
+import { useForm, ValidationError } from "@formspree/react";
 
 const HelpForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    message: "",
-  });
+  const [state, handleSub] = useForm("mpwaeapw");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Form data submitted:", formData);
-  };
+  if (state.succeeded) {
+    Swal.fire("Message Sent Successfully!");
+    if (emailRef.current) emailRef.current.value = "";
+    if (messageRef.current) messageRef.current.value = "";
+  }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSub}
       className="p-6 rounded-lg shadow-md bg-lightBackground dark:bg-darkBackground"
     >
       <div className="mb-4">
@@ -36,11 +30,11 @@ const HelpForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          ref={emailRef}
           className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
           required
         />
+        <ValidationError prefix="Email" field="email" errors={state.errors} />
       </div>
       <div className="mb-4">
         <label
@@ -52,18 +46,19 @@ const HelpForm = () => {
         <textarea
           id="message"
           name="message"
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black"
+          ref={messageRef}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
           rows={4}
           required
         ></textarea>
+        <ValidationError prefix="Message" field="message" errors={state.errors} />
       </div>
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+        disabled={state.submitting}
       >
-        Send Message
+        {state.submitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );
