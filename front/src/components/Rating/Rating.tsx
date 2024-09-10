@@ -1,14 +1,22 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface RatingProps {
-  rating: string;
+  movieId: string; // Identificador único de la película
 }
 
-const Rating: React.FC<RatingProps> = ({ rating }) => {
-  const numericRating = parseFloat(rating);
+const Rating: React.FC<RatingProps> = ({ movieId }) => {
+  const [rating, setRating] = useState<number>(0);
+
+  useEffect(() => {
+    // Cargar el rating desde localStorage usando el movieId
+    const storedRating = localStorage.getItem(`rating_${movieId}`);
+    if (storedRating) {
+      setRating(parseInt(storedRating, 10));
+    }
+  }, [movieId]);
 
   return (
     <div className="flex items-center space-x-1">
@@ -17,7 +25,7 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
           key={star}
           icon={faStar}
           size="lg"
-          className={`${star <= numericRating ? "text-yellow-400" : "text-gray-800"}`}
+          className={`${star <= rating ? "text-yellow-400" : "text-gray-800"}`}
         />
       ))}
     </div>

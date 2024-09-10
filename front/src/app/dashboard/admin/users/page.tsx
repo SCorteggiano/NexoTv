@@ -6,7 +6,7 @@ import EditUserModal from "@/components/EditUserModal/EditUserModal";
 import ManageSubscriptionModal from "@/components/SubscriptionModal/SubscriptionModal";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
-
+import LoadingSpinner from "@/components/Loading/Loading";
 
 // Definir la consulta para obtener usuarios con paginación y roles válidos
 const GET_SUBSCRIPTIONS = gql`
@@ -43,7 +43,7 @@ const Users: React.FC = () => {
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
-        <p className=" text-2xl">Loading...</p>
+        <LoadingSpinner />
       </div>
     );
   }

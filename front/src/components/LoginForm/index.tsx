@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { validateLogin } from "@/helpers/validations";
 import { gql, useMutation } from "@apollo/client";
 import Swal from "sweetalert2";
+import LoadingSpinner from "@/components/Loading/Loading";
 
 const LOGIN_USER = gql`
   mutation Login($loginInput: LoginInput!) {
@@ -68,6 +69,15 @@ const LoginForm: React.FC = () => {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center pt-5">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">

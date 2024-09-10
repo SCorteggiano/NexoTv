@@ -12,10 +12,6 @@ interface MovieDetailProps {
 
 const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
   const router = useRouter();
-  
-  const handleRate = () => {
-    alert("Button Clicked")
-  }
 
   if (!movie) return null;
 
@@ -40,7 +36,10 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
           alt={movie.title}
         />
         <h2 className="text-2xl font-bold">{movie.title}</h2>
-        <Rating rating={"5"}/>
+        
+        {/* Convertir movie.id a string */}
+        <Rating movieId={movie.id.toString()} />
+
         <p className="mb-4">{movie.description}</p>
         <p className="mb-4 font-semibold">
           Duration: {movie.duration}
@@ -52,7 +51,9 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie, onClose }) => {
           >
             Play
           </button>
-          <RatingButton/>
+
+          {/* Convertir movie.id a string */}
+          <RatingButton movieId={movie.id.toString()} />
         </div>
       </div>
     </div>
