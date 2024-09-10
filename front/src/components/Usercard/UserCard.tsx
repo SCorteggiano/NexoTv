@@ -7,13 +7,15 @@ import Image from "next/image";
 const UserCard = () => {
   const { data: session } = useSession();
   const { user, setUser } = useContext(UserContext);
-
-  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [profilePicture, setProfilePicture] = useState('');
+  const suscription = user?.user?.subscription?.tipo
 
   useEffect(() => {
-    if (user?.user?.userImage) {
-      setProfilePicture(user?.user?.userImage[0]);
-      localStorage.setItem("profilePicture", user?.user?.userImage[0]);
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    } else if (user?.user?.userImage?.[0]) {
+      setProfilePicture(user.user.userImage[0]);
     }
   }, [user]);
 
@@ -24,8 +26,6 @@ const UserCard = () => {
     if (!files || files.length === 0) return;
 
     const id = user?.user?.id;
-
-    console.log(id);
 
     const file = files[0];
 
@@ -41,7 +41,6 @@ const UserCard = () => {
         }
       );
 
-      console.log("This is response:" + response);
 
       const data = await response.json();
       setProfilePicture(data.url);
@@ -55,17 +54,16 @@ const UserCard = () => {
   return (
     <div
       id="wholeContainer"
-      className="border rounded-lg p-6 bg-gray-800 border-gray-700 max-w-md mx-auto mt-10 text-center"
+      className="rounded-lg p-6 bg-transparent dark:bg-transparent text-lightText dark:text-darkText max-w-md mx-auto mt-10 text-center"
     >
       <div id="userCardContainer" className="flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-6 text-white">My Account</h2>
+        <h2 className="text-3xl font-bold mb-6 text-lightText dark:text-darkText">My Account</h2>
         <div id="userCardInfo" className="w-full">
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Profile Picture:</p>
             <div className="relative">
               {user?.user?.userImage?.[0] ? (
                 <Image
-                  src={user?.user?.userImage[0]}
+                  src={profilePicture}
                   alt="Profile Picture"
                   width={80}
                   height={80}
@@ -74,7 +72,7 @@ const UserCard = () => {
                 />
               ) : (
                 <div className="relative">
-                  <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold border">
+                  <div className="flex items-center justify-center w-20 h-20 mx-auto text-center bg-muted rounded-full text-4xl font-bold border text-lightText dark:text-darkText">
                     {user?.user?.firstName?.charAt(0)}
                   </div>
                 </div>
@@ -83,7 +81,7 @@ const UserCard = () => {
                 htmlFor="profile-picture"
                 className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer"
               >
-                <CameraIcon className="h-5 w-5" />
+                <CameraIcon className="h-5 w-5 mr-20 text-lightText dark:text-darkText" />
                 <input
                   id="profile-picture"
                   type="file"
@@ -95,24 +93,26 @@ const UserCard = () => {
             </div>
           </div>
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Name:</p>
-            <p className="text-xl text-white">
+            <p className="text-lightText dark:text-darkText font-semibold">Name:</p>
+            <p className="text-xl text-lightText dark:text-darkText">
               {user?.user?.firstName} {user?.user?.lastName}{" "}
               {session?.user?.name}
             </p>
           </div>
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Email:</p>
-            <p className="text-xl text-white">
+            <p className="text-lightText dark:text-darkText font-semibold">Email:</p>
+            <p className="text-xl text-lightText dark:text-darkText">
               {user?.user?.email} {session?.user?.email}
             </p>
           </div>
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Subscription:</p>
-            {/* Suscription info */}
+            <p className="text-lightText dark:text-darkText font-semibold">Subscription:</p>
+            <p className="text-xl text-lightText dark:text-darkText">
+              {suscription}
+            </p>
           </div>
           <div className="flex justify-center">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            <button className="bg transparent dark:bg-transparent border border-red-600 dark:border-red-600 black:hover:bg-red-700 hover:bg-red-700 ttext-lightText dark:text-darkText font-bold py-2 px-4 rounded">
               Cancel Subscription
             </button>
           </div>
