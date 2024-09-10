@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/Loading/Loading";
 import { useMovies } from "@/helpers/hooks";
 import { useEffect, useState } from "react";
 
@@ -25,7 +26,7 @@ const Movie = ({ params }: any) => {
     }
   }, [movies, movieId]);
 
-  if (!movie) return <p className="text-center text-8xl m-12">Loading...</p>;
+  if (!movie) return <LoadingSpinner/>;
 
   return (
     <div style={{ margin: "auto" }} className="h-auto w-10/12">

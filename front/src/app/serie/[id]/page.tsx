@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/Loading/Loading";
 import { useSeries } from "@/helpers/hooks";
 import { useEffect, useState } from "react";
 
@@ -25,7 +26,7 @@ const Serie = ({ params }: any) => {
     }
   }, [series, serieId]);
 
-  if (!serie) return <p className="text-center text-8xl m-12">Loading...</p>;
+  if (!serie) return <LoadingSpinner/>;
 
   return (
     <div style={{ margin: "auto" }} className="h-auto w-10/12">
