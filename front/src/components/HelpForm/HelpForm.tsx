@@ -31,7 +31,7 @@ const HelpForm = () => {
           id="email"
           name="email"
           ref={emailRef}
-          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
+          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800"
           required
         />
         <ValidationError prefix="Email" field="email" errors={state.errors} />
@@ -47,7 +47,7 @@ const HelpForm = () => {
           id="message"
           name="message"
           ref={messageRef}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800"
           rows={4}
           required
         ></textarea>
