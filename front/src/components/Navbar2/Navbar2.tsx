@@ -15,7 +15,7 @@ const Navbar2 = () => {
             pill
             as={Link}
             href="/movies"
-            className="font-bold bg-violet hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-dark"
+            className="font-extrabold bg-violet hover:bg-darkviolet dark:hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-darkText"
           >
             Movies
           </Button>
@@ -23,7 +23,7 @@ const Navbar2 = () => {
             pill
             as={Link}
             href="/series"
-            className="font-bold bg-violet hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-dark "
+            className="font-extrabold bg-violet hover:bg-darkviolet dark:hover:bg-darkviolet dark:bg-violet mr-3 px-6 py-2 text-lightText dark:text-darkText"
           >
             Series
           </Button>

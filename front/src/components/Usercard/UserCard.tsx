@@ -10,10 +10,13 @@ const UserCard = () => {
 
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
+  // Obtener la imagen de perfil desde el localStorage o el contexto
   useEffect(() => {
-    if (user?.user?.userImage) {
-      setProfilePicture(user?.user?.userImage[0]);
-      localStorage.setItem("profilePicture", user?.user?.userImage[0]);
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    } else if (user?.user?.userImage?.[0]) {
+      setProfilePicture(user.user.userImage[0]);
     }
   }, [user]);
 
@@ -63,7 +66,7 @@ const UserCard = () => {
             <div className="relative">
               {user?.user?.userImage?.[0] ? (
                 <Image
-                  src={user?.user?.userImage[0]}
+                  src={profilePicture || user?.user?.userImage[0]}
                   alt="Profile Picture"
                   width={80}
                   height={80}

@@ -32,6 +32,7 @@ const GET_USER_DATA = gql`
       isActive
       userImage
       roles
+      suscription
     }
   }
 `;

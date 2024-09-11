@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Avatar,
@@ -12,13 +12,25 @@ import {
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import ThemeButton from "../ThemeButton";
+import Image from "next/image";
 
 const Navbar1 = () => {
   const { isLogged, logout, isAdmin } = useContext(UserContext);
   const router = useRouter();
   const { data: session } = useSession();
+  const { user } = useContext(UserContext);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+
+  // Obtener la imagen de perfil desde el localStorage o el contexto
+  useEffect(() => {
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    } else if (user?.user?.userImage?.[0]) {
+      setProfilePicture(user.user.userImage[0]);
+    }
+  }, [user]);
 
   function handleLogout() {
     logout();
@@ -48,11 +60,26 @@ const Navbar1 = () => {
         <div className="flex md:order-2 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText">
           <ThemeButton />
           <Dropdown
-            className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
-            arrowIcon={false}
-            inline
-            label={<Avatar alt="User settings" rounded />}
-          >
+        className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText"
+        arrowIcon={false}
+        inline
+        label={
+          profilePicture ? (
+            <Image
+              src={profilePicture}
+              alt="User settings"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          ) : (
+            // Si no hay imagen, muestra iniciales o avatar predeterminado
+            <div className="w-10 h-10 flex items-center justify-center bg-gray-500 rounded-full text-white font-bold">
+              {user?.user?.firstName?.charAt(0) || "U"}
+            </div>
+          )
+        }
+      >
             <DropdownItem
               as={Link}
               href={isAdmin ? "/dashboard/admin" : "/dashboard/user"}
@@ -75,14 +102,14 @@ const Navbar1 = () => {
           <Button
             as={Link}
             href="/register"
-            className=" bg-transparent text-lightText dark:bg-transparent dark:text-darkText border-violet hover:bg-darkviolet text-center mr-3"
+            className="font-bold bg-violet text-lightText dark:bg-violet dark:text-darkText border-violet hover:bg-darkviolet text-center mr-3"
           >
             Register
           </Button>
           <Button
             as={Link}
             href="/login"
-            className=" bg-transparent text-lightText dark:bg-transparent dark:text-darkText border-violet hover:bg-darkviolet text-center mr-3"
+            className="font-bold bg-transparent text-lightText dark:bg-transparent dark:text-darkText border-violet hover:bg-violet text-center mr-3"
           >
             Login
           </Button>

@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 import LoadingSpinner from "@/components/Loading/Loading";
 
 
-// En caso de error chekear que esta query reciba el parametro de ROLES
 const CREATE_USER = gql`
   mutation Signup($signupInput: SignupInput!) {
     signup(signupInput: $signupInput) {
@@ -35,6 +34,7 @@ const LOGIN_USER = gql`
         firstName
         lastName
         userImage
+        roles
       }
     }
   }
@@ -71,7 +71,7 @@ const RegisterForm: React.FC = () => {
         },
       });
 
-      if (result.data?.signup?.token) {
+      if (result && result.data) {
         const loginResult = await loginUser({
           variables: {
             loginInput: {
@@ -84,13 +84,12 @@ const RegisterForm: React.FC = () => {
         if (loginResult.data?.login?.token) {
           const userData = loginResult.data.login.user;
           const token = loginResult.data.login.token;
-
+          setUser(userData);          
           localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(userData));
-
-          setUser(userData);          
           setIsLogged(true);
-          
+
+          console.log('UserContext after login:', userData);
           router.push("/thanks");
         }
       }

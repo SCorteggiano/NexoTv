@@ -6,7 +6,7 @@ import ApolloProvider from "@/queries/apolloProvider";
 import SessionProvider from "@/queries/sessionProvider";
 import client from "@/queries/apolloClient";
 import { UserProvider } from "@/context/userContext";
-import ConditionalNavbar from "@/components/Pricings";
+import ConditionalNavbar from "@/components/ConditionalNavbar";
 import { PaginationProvider } from "@/context/pageContext";
 import Footer from "@/components/Footer/Footer";
 import ChatButton from "@/components/ChatButton/ChatButton";
@@ -27,20 +27,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} flex flex-col min-h-screen bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText`}>
+      <body
+        className={`${montserrat.className} flex flex-col min-h-screen bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText`}
+      >
         <ThemeProvider>
           <SessionProvider>
             <UserProvider>
               <SearchProvider>
                 <ApolloProvider client={client}>
-                  
-                    <PaginationProvider totalPages={10}>
-                      <Navbar1 />
-                      <ConditionalNavbar>{children}</ConditionalNavbar>
-                      <ChatButton />
-                      <Footer />
-                    </PaginationProvider>
-                  
+                  <PaginationProvider totalPages={10}>
+                    <Navbar1 />
+                    <ConditionalNavbar>{children}</ConditionalNavbar>
+                    <ChatButton />
+                    <Footer />
+                  </PaginationProvider>
                 </ApolloProvider>
               </SearchProvider>
             </UserProvider>
