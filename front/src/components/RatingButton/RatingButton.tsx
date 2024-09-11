@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 import StarRatingMenu from "../StarRatingMenu/StarRatingMenu";
 
-const RatingButton = () => {
+interface RatingButtonProps {
+  movieId: string; // Identificador único de la película
+}
+
+const RatingButton: React.FC<RatingButtonProps> = ({ movieId }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -17,7 +21,7 @@ const RatingButton = () => {
         </p>
       </button>
 
-      {showMenu && <StarRatingMenu />}
+      {showMenu && <StarRatingMenu movieId={movieId} />}
     </div>
   );
 };

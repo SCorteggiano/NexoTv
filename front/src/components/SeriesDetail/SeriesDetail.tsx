@@ -35,7 +35,8 @@ const SeriesDetail: React.FC<SeriesDetailProps> = ({ serie, onClose }) => {
           alt={serie.title}
         />
         <h2 className="text-2xl font-bold mb-2 text-white">{serie.title}</h2>
-        <Rating rating={"5"} />
+        <Rating movieId={serie.id.toString()} />
+
         <p className="mb-4 text-gray-300">{serie.description}</p>
         <p className="mb-4 font-semibold text-gray-400">
           Episodes: {serie.duration}
@@ -47,7 +48,8 @@ const SeriesDetail: React.FC<SeriesDetailProps> = ({ serie, onClose }) => {
           >
             Play
           </button>
-          <RatingButton />
+          
+          <RatingButton movieId={serie.id.toString()} />
         </div>
       </div>
     </div>

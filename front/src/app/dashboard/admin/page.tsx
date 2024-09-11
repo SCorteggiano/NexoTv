@@ -6,6 +6,7 @@ import { ApexOptions } from "apexcharts";
 import AdminNavbar from "@/components/AdminNavbar/AdminNavbar";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/Loading/Loading";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -50,7 +51,7 @@ const Dashboard: React.FC = () => {
   if (usersLoading || subscriptionCountsLoading)
     return (
       <div className="fixed inset-0 flex items-center justify-center">
-        <p className="text-center text-2xl">Loading metrics...</p>
+        <LoadingSpinner />
       </div>
     );
 

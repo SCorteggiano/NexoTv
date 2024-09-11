@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import EditContentModal from "@/components/EditContentModal/EditContentModal";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/Loading/Loading";
 
 const GET_CONTENT = gql`
   query ContentAll($paginationContentArgs: PaginationContentArgs!) {
@@ -73,7 +74,7 @@ const Products: React.FC = () => {
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
-        <p className=" text-2xl">Loading...</p>
+        <LoadingSpinner />
       </div>
     );
   }
