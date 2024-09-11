@@ -16,8 +16,8 @@ interface FormData {
   description: string;
   image: string;
   duration: string;
-  category: string;
-  contentUrl: string;
+  category: string[];
+  contentUrl: string[];
   status: Status; 
 }
 
@@ -64,9 +64,9 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({ contentId, onClose
     description: "",
     image: "",
     duration: "",
-    category: "",
-    contentUrl: "",
-    status: Status.active, 
+    category: [""],
+    contentUrl: [""],
+    status: Status.inactive || Status.active, 
   });
 
   
@@ -77,8 +77,8 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({ contentId, onClose
         description: data.contentOne.description || "",
         image: data.contentOne.image || "",
         duration: data.contentOne.duration || "", 
-        category: data.contentOne.category || "",
-        contentUrl: data.contentOne.contentUrl || "",
+        category: data.contentOne.category || [""],
+        contentUrl: data.contentOne.contentUrl || [""],
         status: data.contentOne.status || Status.active, 
       });
     }
@@ -160,7 +160,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({ contentId, onClose
             placeholder="Category"
             value={formData.category}
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData({ ...formData, category: [e.target.value] })
             }
             className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
@@ -169,7 +169,7 @@ const EditContentModal: React.FC<IEditContentModalProps> = ({ contentId, onClose
             placeholder="Content URL"
             value={formData.contentUrl}
             onChange={(e) =>
-              setFormData({ ...formData, contentUrl: e.target.value })
+              setFormData({ ...formData, contentUrl: [e.target.value] })
             }
             className="mb-2 w-full p-2 border border-gray-300 rounded-lg text-lightText dark:text-darkText bg-lightBackground dark:bg-darkBackground"
           />
