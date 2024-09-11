@@ -2,6 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { gql, useQuery } from "@apollo/client";
+
+const GET_RATE = gql`
+  query GetRate($contentId: String!) {
+    getRate(contentId: $contentId)
+  }
+`;
 
 interface RatingProps {
   movieId: string; // Identificador único de la película
@@ -10,13 +17,16 @@ interface RatingProps {
 const Rating: React.FC<RatingProps> = ({ movieId }) => {
   const [rating, setRating] = useState<number>(0);
 
+  // Obtener el rating promedio desde el backend
+  const { data: rateData } = useQuery(GET_RATE, {
+    variables: { contentId: movieId },
+  });
+
   useEffect(() => {
-    // Cargar el rating desde localStorage usando el movieId
-    const storedRating = localStorage.getItem(`rating_${movieId}`);
-    if (storedRating) {
-      setRating(parseInt(storedRating, 10));
+    if (rateData?.getRate) {
+      setRating(rateData.getRate);
     }
-  }, [movieId]);
+  }, [rateData]);
 
   return (
     <div className="flex items-center space-x-1">

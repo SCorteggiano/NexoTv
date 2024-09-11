@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import StarRatingMenu from "../StarRatingMenu/StarRatingMenu";
 
 interface RatingButtonProps {
-  movieId: string; // Identificador único de la película
+  movieId: string; 
 }
 
 const RatingButton: React.FC<RatingButtonProps> = ({ movieId }) => {
