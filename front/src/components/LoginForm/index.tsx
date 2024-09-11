@@ -20,7 +20,6 @@ const LOGIN_USER = gql`
         lastName
         userImage
         roles
-        suscription
       }
     }
   }
