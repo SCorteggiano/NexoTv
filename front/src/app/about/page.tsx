@@ -73,8 +73,7 @@ const About = () => {
             <h1 className="text-center text-2xl p-2">Mauricio Tognoli</h1>
             <hr className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText" />
             <p className="text-lightText dark:text-darkText text-wrap">
-              Soy una persona que no existo, esto solamente es una descripcion
-              generica para corroborar que los estilos funcionen correctamente.
+              Soy un desarrollador Fullstack especializado en Frontend con fuerte experiencia en JavaScript, HTML, CSS, React y NextJS.
             </p>
             <div id="frontSocial" className="flex justify-around mt-4">
               <Link
