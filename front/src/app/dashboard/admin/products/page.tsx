@@ -9,17 +9,19 @@ import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/Loading/Loading";
 
 const GET_CONTENT = gql`
-  query ContentAll($paginationContentArgs: PaginationContentArgs!) {
-    contentAll(paginationContentArgs: $paginationContentArgs) {
-      id
-      title
-      description
-      image
-      duration
-      category
-      contentUrl
-    }
+ query ContentAllDashboard {
+  contentAllDashboard {
+    id
+    title
+    description
+    image
+    duration
+    category
+    type
+    status
+    contentUrl
   }
+}
 `;
 
 const REMOVE_CONTENT = gql`
@@ -34,13 +36,10 @@ const Products: React.FC = () => {
   const { isLogged, isAdmin } = useContext(UserContext);
   const router = useRouter();
   const [selectedContent, setSelectedContent] = useState<string | null>(null);
-  const { data, loading, error, refetch } = useQuery(GET_CONTENT, {
-    variables: {
-      paginationContentArgs: { limit: 10, offset: 0 },
-    },
-  });
+  const { data, loading, error, refetch } = useQuery(GET_CONTENT);
 
   const [removeContent] = useMutation(REMOVE_CONTENT);
+
 
   const handleDelete = async (contentId: string) => {
     Swal.fire({
@@ -70,7 +69,7 @@ const Products: React.FC = () => {
     });
   };
 
-
+  console.log("data",data);
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center">
@@ -96,14 +95,18 @@ const Products: React.FC = () => {
             <thead>
               <tr>
                 <th className="px-6 py-3 text-left">Title</th>
+                <th className="px-6 py-3 text-left">Status</th>
                 <th className="px-6 py-3 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {data?.contentAll.map((content: any) => (
+              {data?.contentAllDashboard?.map((content: any) => (
                 <tr key={content.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.title}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {content?.status}
                   </td>
                   <td className="py-4 whitespace-nowrap">
                     <button
