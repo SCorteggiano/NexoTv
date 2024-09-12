@@ -20,6 +20,9 @@ const LOGIN_USER = gql`
         lastName
         userImage
         roles
+        subscription {
+          tipo
+        }
       }
     }
   }
@@ -77,7 +80,6 @@ const LoginForm: React.FC = () => {
       </div>
     );
   }
-
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-20 mb-36">

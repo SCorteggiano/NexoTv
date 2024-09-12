@@ -31,7 +31,7 @@ const HelpForm = () => {
           id="email"
           name="email"
           ref={emailRef}
-          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
+          className="w-1/2 px-3 py-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800"
           required
         />
         <ValidationError prefix="Email" field="email" errors={state.errors} />
@@ -47,7 +47,7 @@ const HelpForm = () => {
           id="message"
           name="message"
           ref={messageRef}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-black bg-white dark:bg-gray-800 dark:text-lightText"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800"
           rows={4}
           required
         ></textarea>
@@ -55,7 +55,7 @@ const HelpForm = () => {
       </div>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+        className="bg-violet text-white px-4 py-2 rounded-md hover:bg-darkviolet dark:bg-violet dark:hover:bg-darkviolet"
         disabled={state.submitting}
       >
         {state.submitting ? "Sending..." : "Send Message"}

@@ -2,9 +2,9 @@ import { IMovie, ISeries } from "@/interfaces";
 import { gql, useQuery } from "@apollo/client";
 
 export enum Type {
-  channel = 'channel',
-  movie = 'movie',
-  series = 'series',
+  channel = "channel",
+  movie = "movie",
+  series = "series",
 }
 
 const GET_CONTENT = gql`
@@ -32,7 +32,9 @@ const GET_USER_DATA = gql`
       isActive
       userImage
       roles
-      suscription
+      subscription {
+        tipo
+      }
     }
   }
 `;
@@ -48,7 +50,9 @@ export const useMovies = () => {
   });
 
   return {
-    movies: data?.contentAll?.filter((item: IMovie) => item.type === Type.movie) || [],
+    movies:
+      data?.contentAll?.filter((item: IMovie) => item.type === Type.movie) ||
+      [],
     loading,
     error,
   };
@@ -65,13 +69,12 @@ export const useSeries = () => {
   });
 
   return {
-    series: data?.contentAll?.filter((item: any) => item.type === Type.series) || [],
+    series:
+      data?.contentAll?.filter((item: any) => item.type === Type.series) || [],
     loading,
     error,
   };
 };
-
-
 
 export const useUserData = (userId: string) => {
   const { data, loading, error } = useQuery(GET_USER_DATA, {

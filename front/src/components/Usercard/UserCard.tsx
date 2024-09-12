@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const UserCard = () => {
   const { data: session } = useSession();
@@ -28,8 +29,6 @@ const UserCard = () => {
 
     const id = user?.user?.id;
 
-    console.log(id);
-
     const file = files[0];
 
     try {
@@ -52,6 +51,13 @@ const UserCard = () => {
       console.error("Error uploading profile picture:", error);
     }
   };
+
+  const handleCancelSubscription = () => {
+    alert("Subscription Cancelled");
+  };
+
+  const isUserSubscribed =
+    user?.user?.subscription && user.user.subscription.tipo;
 
   return (
     <div
@@ -109,13 +115,29 @@ const UserCard = () => {
             </p>
           </div>
           <div className="mb-4">
-            <p className="text-gray-400 font-semibold">Subscription: {user?.user?.subscription?.tipo}</p>
+            <p className="text-gray-400 font-semibold">Subscription:</p>
+            <p className="text-xl text-white">
+              {user?.user?.subscription ? user.user.subscription.tipo : "Free"}
+            </p>
             {/* Suscription info */}
           </div>
           <div className="flex justify-center">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-              Cancel Subscription
-            </button>
+            {isUserSubscribed ? (
+              <button
+                onClick={handleCancelSubscription}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Cancel Subscription
+              </button>
+            ) : (
+              <Link href='/pricings'>
+                <button
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Get Premium
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
