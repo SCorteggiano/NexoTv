@@ -37,8 +37,10 @@ const Users: React.FC = () => {
 
 
 
+
   // Ejecutar la consulta para obtener usuarios y sus suscripciones
   const { data, loading, error } = useQuery(GET_SUBSCRIPTIONS);
+  console.log(data);
 
   if (loading) {
     return (

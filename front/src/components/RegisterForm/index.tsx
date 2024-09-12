@@ -74,27 +74,10 @@ const RegisterForm: React.FC = () => {
       });
 
       if (result && result.data) {
-        const loginResult = await loginUser({
-          variables: {
-            loginInput: {
-              email: registerValues.email,
-              password: registerValues.password,
-            },
-          },
-        });
+        Swal.fire("Success", "User created successfully", "success");
+        router.push("/login");
+        };
 
-        if (loginResult.data?.login?.token) {
-          const userData = loginResult.data.login.user;
-          const token = loginResult.data.login.token;
-          setUser(userData);
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(userData));
-          setIsLogged(true);
-
-          console.log("UserContext after login:", userData);
-          router.push("/thanks");
-        }
-      }
     } catch (error) {
       Swal.fire({
         icon: "error",

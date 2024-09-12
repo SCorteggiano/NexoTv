@@ -13,13 +13,22 @@ const UserCard = () => {
 
   // Obtener la imagen de perfil desde el localStorage o el contexto
   useEffect(() => {
+    if (!user) {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
     const storedProfilePicture = localStorage.getItem("profilePicture");
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
     } else if (user?.user?.userImage?.[0]) {
       setProfilePicture(user.user.userImage[0]);
     }
-  }, [user]);
+  }, [user, setUser]);
+
+  console.log("datos de usuario:", user);
+  console.log("pictur:", profilePicture);
 
   const handleProfilePictureUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -70,9 +79,9 @@ const UserCard = () => {
           <div className="mb-4">
             <p className="text-gray-400 font-semibold">Profile Picture:</p>
             <div className="relative">
-              {user?.user?.userImage?.[0] ? (
+              {profilePicture  ? (
                 <Image
-                  src={profilePicture || user?.user?.userImage[0]}
+                  src={profilePicture}
                   alt="Profile Picture"
                   width={80}
                   height={80}
@@ -81,7 +90,7 @@ const UserCard = () => {
                 />
               ) : (
                 <div className="relative">
-                  <div className="flex items-center justify-center w-20 h-20 bg-muted rounded-full text-4xl font-bold border">
+                  <div className="flex items-center justify-center w-20 h-20 mx-auto text-center bg-muted rounded-full text-4xl font-bold border text-lightText dark:text-darkText">
                     {user?.user?.firstName?.charAt(0)}
                   </div>
                 </div>
@@ -90,7 +99,7 @@ const UserCard = () => {
                 htmlFor="profile-picture"
                 className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer"
               >
-                <CameraIcon className="h-5 w-5" />
+                <CameraIcon className="h-5 w-5 mr-6" />
                 <input
                   id="profile-picture"
                   type="file"
