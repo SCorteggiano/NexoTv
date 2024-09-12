@@ -55,7 +55,7 @@ const HelpForm = () => {
       </div>
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800"
+        className="bg-violet text-white px-4 py-2 rounded-md hover:bg-darkviolet dark:bg-violet dark:hover:bg-darkviolet"
         disabled={state.submitting}
       >
         {state.submitting ? "Sending..." : "Send Message"}
