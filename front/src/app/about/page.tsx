@@ -66,15 +66,14 @@ const About = () => {
             className="w-full md:w-64 p-4 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText rounded-xl"
           >
             <img
-              src="https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
+              src="/img/pfp/mauri.jpg"
               alt="profilePicture"
               className="h-72 w-full md:w-64 object-cover m-auto rounded-xl"
             />
             <h1 className="text-center text-2xl p-2">Mauricio Tognoli</h1>
             <hr className="bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText" />
             <p className="text-lightText dark:text-darkText text-wrap">
-              Soy una persona que no existo, esto solamente es una descripcion
-              generica para corroborar que los estilos funcionen correctamente.
+              Soy un desarrollador Fullstack especializado en Frontend con fuerte experiencia en JavaScript, HTML, CSS, React y NextJS.
             </p>
             <div id="frontSocial" className="flex justify-around mt-4">
               <Link
@@ -107,7 +106,7 @@ const About = () => {
             className="w-full md:w-64 p-4 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText rounded-xl"
           >
             <img
-              src="/img/pfp/diego.jpeg"
+              src="/img/pfp/diego.JPEG"
               alt="profilePicture"
               className="h-72 w-full md:w-64 object-cover m-auto rounded-xl"
             />
