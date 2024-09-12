@@ -66,7 +66,7 @@ const About = () => {
             className="w-full md:w-64 p-4 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText rounded-xl"
           >
             <img
-              src="https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"
+              src="/img/pfp/mauri.jpg"
               alt="profilePicture"
               className="h-72 w-full md:w-64 object-cover m-auto rounded-xl"
             />
@@ -106,7 +106,7 @@ const About = () => {
             className="w-full md:w-64 p-4 bg-lightBackground dark:bg-darkBackground text-lightText dark:text-darkText rounded-xl"
           >
             <img
-              src="/img/pfp/diego.jpeg"
+              src="/img/pfp/diego.JPEG"
               alt="profilePicture"
               className="h-72 w-full md:w-64 object-cover m-auto rounded-xl"
             />
