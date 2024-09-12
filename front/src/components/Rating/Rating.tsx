@@ -5,9 +5,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { gql, useQuery } from "@apollo/client";
 
 const GET_RATE = gql`
-  query GetRate($contentId: String!) {
-    getRate(contentId: $contentId)
-  }
+ query Query($contentId: String!) {
+  getRate(contentId: $contentId)
+}
 `;
 
 interface RatingProps {

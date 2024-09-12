@@ -6,16 +6,15 @@ import Swal from "sweetalert2";
 import { gql, useMutation, useQuery } from "@apollo/client";
 
 const GET_RATE = gql`
-  query GetRate($contentId: String!) {
-    getRate(contentId: $contentId)
-  }
+  query Query($contentId: String!) {
+  getRate(contentId: $contentId)
+}
 `;
 
 const UPDATE_CONTENT = gql`
   mutation UpdateContent($updateContentInput: UpdateContentInput!) {
     updateContent(updateContentInput: $updateContentInput) {
       id
-      rate
     }
   }
 `;
@@ -51,7 +50,7 @@ const StarRatingMenu: React.FC<StarRatingMenuProps> = ({ movieId }) => {
         variables: {
           updateContentInput: {
             id: movieId,
-            rate: rating,
+            amount: rating,
           },
         },
       });

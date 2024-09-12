@@ -20,7 +20,6 @@ const GET_CONTENT = gql`
     type
     status
     contentUrl
-    rate
   }
 }
 `;
@@ -101,7 +100,7 @@ const Products: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.contentAllDashboard.map((content: any) => (
+              {data?.contentAllDashboard?.map((content: any) => (
                 <tr key={content.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {content.title}
